@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../components/general/flash-app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlashRoutingModule } from './flash-routing.module';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -25,9 +25,9 @@ import { TemplatesPageComponent } from '../components/pages/templates/templates.
     TemplatesPageComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    FlashRoutingModule,
     MatButtonModule,
   ],
   providers: [],
