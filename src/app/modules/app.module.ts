@@ -13,21 +13,21 @@ import { FlashButtonComponent } from '../components/general/flash-button/flash-b
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 
 // Pages
-import { DecksComponent } from '../components/pages/decks/decks.component';
-import { CardsComponent } from '../components/pages/cards/cards.component';
+import { DecksPageComponent } from '../components/pages/decks/decks.component.page';
+import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DecksComponent,
-    CardsComponent,
-    FlashHeaderComponent,
+    DecksPageComponent,
     FlashButtonComponent,
+    FlashHeaderComponent,
+    TemplatesPageComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserModule,
     MatButtonModule,
   ],
   providers: [],
