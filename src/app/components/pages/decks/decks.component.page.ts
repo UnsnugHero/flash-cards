@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Deck } from 'src/app/models/deck.model';
+import { DeckService } from 'src/app/services/deck.service';
 
 @Component({
   selector: 'app-decks',
@@ -6,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./decks.component.page.less'],
 })
 export class DecksPageComponent {
-  constructor() {}
+  public decks$: Observable<Deck[]>;
 
-  ngOnInit() {}
+  constructor(public deckService: DeckService) {}
+
+  ngOnInit() {
+    this.decks$ = this.deckService.getDecks();
+  }
 }

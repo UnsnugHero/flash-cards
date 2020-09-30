@@ -1,3 +1,7 @@
 <div class="decks-page-container">
-  <h1 class="decks-header">Decks View!</h1>
+  <div class="decks-grid">
+    <ng-container *ngFor="let deck of decks$ | async">
+      <flash-deck [deckTitle]="deck.title"></flash-deck>
+    </ng-container>
+  </div>
 </div>

@@ -17,6 +17,9 @@ import { FlashHeaderComponent } from '../components/general/flash-header/flash-h
 import { DecksPageComponent } from '../components/pages/decks/decks.component.page';
 import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
+// Services
+import { DeckService } from '../services/deck.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,7 @@ import { TemplatesPageComponent } from '../components/pages/templates/templates.
     FlashRoutingModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [DeckService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
