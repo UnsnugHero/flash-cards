@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
 import { MOCK_DECKS } from '../mocks/deck.mocks';
 import { Deck } from '../models/deck.model';
 
@@ -7,9 +9,11 @@ import { Deck } from '../models/deck.model';
   providedIn: 'root',
 })
 export class DeckService {
-  constructor() {}
+  private decksUrl = 'api/decks';
+
+  constructor(private http: HttpClient) {}
 
   public getDecks(): Observable<Deck[]> {
-    return of(MOCK_DECKS);
+    return this.http.get<Deck[]>(this.decksUrl);
   }
 }
