@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 // Custom Components
 import { FlashButtonComponent } from '../components/general/flash-button/flash-button.component';
+import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.component';
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 
 // Pages
@@ -21,6 +22,7 @@ import { TemplatesPageComponent } from '../components/pages/templates/templates.
     AppComponent,
     DecksPageComponent,
     FlashButtonComponent,
+    FlashDeckComponent,
     FlashHeaderComponent,
     TemplatesPageComponent,
   ],

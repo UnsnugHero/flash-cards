@@ -4,6 +4,7 @@ import { DecksPageComponent } from '../components/pages/decks/decks.component.pa
 import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'decks' },
   { path: 'decks', component: DecksPageComponent },
   { path: 'templates', component: TemplatesPageComponent },
 ];

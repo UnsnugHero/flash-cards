@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './decks.component.page.html',
   styleUrls: ['./decks.component.page.less'],
 })
-export class DecksPageComponent implements OnInit {
+export class DecksPageComponent {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }
