@@ -6,8 +6,8 @@ import { DeckService } from 'src/app/services/deck.service';
 
 @Component({
   selector: 'app-decks',
-  templateUrl: './decks.component.page.html',
-  styleUrls: ['./decks.component.page.less'],
+  templateUrl: './decks.page.html',
+  styleUrls: ['./decks.page.less'],
 })
 export class DecksPageComponent {
   public decks$: Observable<Deck[]>;

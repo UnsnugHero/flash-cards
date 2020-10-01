@@ -1,0 +1,9 @@
+<div class="decks-page">
+  <div class="decks-grid">
+    <ng-container *ngFor="let deck of decks$ | async">
+      <div class="deck-grid-item">
+        <flash-deck [deckTitle]="deck.title"></flash-deck>
+      </div>
+    </ng-container>
+  </div>
+</div>

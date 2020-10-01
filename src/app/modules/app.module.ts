@@ -16,7 +16,7 @@ import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 
 // Pages
-import { DecksPageComponent } from '../components/pages/decks/decks.component.page';
+import { DecksPageComponent } from '../components/pages/decks/decks.page';
 import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
 // Services
