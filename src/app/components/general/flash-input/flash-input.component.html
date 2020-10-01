@@ -1,0 +1,12 @@
+<div class="input-container">
+  <input
+    matInput
+    type="text"
+    [formControl]="formCtrl"
+    [placeholder]="placeholder"
+  />
+  <button
+    *ngIf="clearable && formCtrl.value"
+    (click)="onClearClicked()"
+  ></button>
+</div>

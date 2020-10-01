@@ -1,9 +1,16 @@
 <div class="decks-page">
   <div class="decks-grid">
+    <flash-input
+      name="name"
+      [clearable]="true"
+      [formCtrl]="deckSearchForm.controls['name']"
+      [placeholder]="'test'"
+    ></flash-input>
     <ng-container *ngFor="let deck of decks$ | async">
       <div class="deck-grid-item">
         <flash-deck [deckTitle]="deck.title"></flash-deck>
       </div>
     </ng-container>
   </div>
+  <button (click)="onPrintFormClick()">print form group</button>
 </div>
