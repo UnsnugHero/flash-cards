@@ -8,7 +8,7 @@
   />
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
     <mat-option *ngFor="let option of options" [value]="option">
-      {{ option | json }}
+      {{ option }}
     </mat-option>
   </mat-autocomplete>
 </div>
