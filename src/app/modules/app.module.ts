@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlashRoutingModule } from './flash-routing.module';
 
 // Material
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
 // Custom Components
+import { FlashAutocompleteComponent } from '../components/general/flash-autocomplete/flash-autocomplete.component';
 import { FlashButtonComponent } from '../components/general/flash-button/flash-button.component';
 import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.component';
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
@@ -30,6 +32,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
   declarations: [
     AppComponent,
     DecksPageComponent,
+    FlashAutocompleteComponent,
     FlashButtonComponent,
     FlashDeckComponent,
     FlashHeaderComponent,
@@ -48,6 +51,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
     }),
+    MatAutocompleteModule,
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
