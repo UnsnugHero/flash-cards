@@ -13,7 +13,5 @@ export class FlashAutocompleteComponent {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.options);
-  }
+  ngOnInit() {}
 }

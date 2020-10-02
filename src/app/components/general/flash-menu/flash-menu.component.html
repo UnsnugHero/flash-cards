@@ -1,0 +1,8 @@
+<div class="flash-menu-container">
+  <button mat-button [matMenuTriggerFor]="menu">{{ menuText }}</button>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let menuOption of menuOptions">
+      <button mat-menu-item>{{ menuOption.text }}</button>
+    </ng-container>
+  </mat-menu>
+</div>

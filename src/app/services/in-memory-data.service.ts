@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { MOCK_CATEGORIES, MOCK_DECKS_JAPANESE } from '../mocks/mock-data';
-import { Deck } from '../models/deck.model';
+import { Category, Deck } from '../models/deck.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,9 @@ export class InMemoryDataService implements InMemoryDbService {
     return { categories, decks };
   }
 
-  genId(decks: Deck[]): number {
-    return decks.length > 0 ? Math.max(...decks.map((deck) => deck.id)) + 1 : 1;
+  genId<T extends Deck | Category>(collection: T[]): number {
+    return collection.length > 0
+      ? Math.max(...collection.map((t) => t.id)) + 1
+      : 11;
   }
 }
