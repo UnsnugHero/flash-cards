@@ -9,9 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class FlashAutocompleteComponent {
   @Input() formCtrl: AbstractControl;
-  @Input() options$: Observable<any>;
+  @Input() options: any[];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.options);
+  }
 }

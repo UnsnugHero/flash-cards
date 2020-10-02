@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
-import { Deck } from 'src/app/models/deck.model';
+// Models
+import { Category, Deck } from 'src/app/models/deck.model';
+
+// Services
+import { CategoryService } from 'src/app/services/category.service';
 import { DeckService } from 'src/app/services/deck.service';
 
 @Component({
@@ -11,18 +16,29 @@ import { DeckService } from 'src/app/services/deck.service';
   styleUrls: ['./decks.page.less'],
 })
 export class DecksPageComponent {
+  public categories$: Observable<any>;
   public decks$: Observable<Deck[]>;
 
   public deckSearchForm: FormGroup;
 
-  constructor(public deckService: DeckService) {}
+  constructor(
+    public categoryService: CategoryService,
+    public deckService: DeckService
+  ) {}
 
   ngOnInit() {
     this.deckSearchForm = new FormGroup({
-      name: new FormControl(null),
       category: new FormControl(null),
+      name: new FormControl(null),
     });
 
+    this.categories$ = this.categoryService
+      .getCategories()
+      .pipe(
+        map((categories: Category[]) =>
+          categories.map((category: Category) => category.name)
+        )
+      );
     this.decks$ = this.deckService.getDecks();
   }
 

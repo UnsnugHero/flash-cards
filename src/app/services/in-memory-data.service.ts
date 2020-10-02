@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { MOCK_DECKS } from '../mocks/deck.mocks';
+import { MOCK_CATEGORIES, MOCK_DECKS_JAPANESE } from '../mocks/mock-data';
 import { Deck } from '../models/deck.model';
 
 @Injectable({
@@ -8,16 +8,9 @@ import { Deck } from '../models/deck.model';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const decks = [
-      { id: 1, title: 'Kanji' },
-      { id: 2, title: 'Onyomi' },
-      { id: 3, title: 'Kunyomi' },
-      { id: 4, title: 'Vocabulary' },
-      { id: 5, title: 'Adjectives' },
-      { id: 6, title: 'Verbs' },
-      { id: 7, title: 'Nouns' },
-    ];
-    return { decks };
+    const categories = MOCK_CATEGORIES;
+    const decks = MOCK_DECKS_JAPANESE;
+    return { categories, decks };
   }
 
   genId(decks: Deck[]): number {

@@ -1,11 +1,16 @@
 <div class="decks-page">
-  <div class="decks-grid">
+  <div class="decks-search-bar">
     <flash-input
-      name="name"
+      placeholder="Search"
       [clearable]="true"
       [formCtrl]="deckSearchForm.controls['name']"
-      [placeholder]="'test'"
     ></flash-input>
+    <flash-autocomplete
+      [formCtrl]="deckSearchForm.controls['category']"
+      [options]="categories$ | async"
+    ></flash-autocomplete>
+  </div>
+  <div class="decks-grid">
     <ng-container *ngFor="let deck of decks$ | async">
       <div class="deck-grid-item">
         <flash-deck [deckTitle]="deck.title"></flash-deck>
