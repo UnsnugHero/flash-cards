@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FlashMenuOption } from 'src/app/models/component.model';
+import { MenuOption } from 'src/app/models/component.model';
 
 @Component({
   selector: 'flash-menu',
@@ -8,7 +8,7 @@ import { FlashMenuOption } from 'src/app/models/component.model';
 })
 export class FlashMenuComponent {
   @Input() menuText: string;
-  @Input() menuOptions: FlashMenuOption[];
+  @Input() menuOptions: MenuOption[];
 
   constructor() {}
 

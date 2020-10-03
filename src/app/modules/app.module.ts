@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 
 // Custom Components
 import { FlashAutocompleteComponent } from '../components/general/flash-autocomplete/flash-autocomplete.component';
@@ -24,7 +25,8 @@ import { FlashInputComponent } from '../components/general/flash-input/flash-inp
 import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.component';
 
 // Pages
-import { DecksPageComponent } from '../components/pages/decks/decks.page';
+import { CategoriesPage } from '../components/pages/categories/categories.page';
+import { DecksPage } from '../components/pages/decks/decks.page';
 import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
 // Services
@@ -34,13 +36,18 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
 @NgModule({
   declarations: [
     AppComponent,
-    DecksPageComponent,
+
+    // Custom Components
     FlashAutocompleteComponent,
     FlashButtonComponent,
     FlashDeckComponent,
     FlashHeaderComponent,
     FlashInputComponent,
     FlashMenuComponent,
+
+    // Pages
+    CategoriesPage,
+    DecksPage,
     TemplatesPageComponent,
   ],
   imports: [
@@ -49,6 +56,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashRoutingModule,
     FormsModule,
     HttpClientModule,
+
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -62,6 +70,9 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatTableModule,
+
+    // else
     ReactiveFormsModule,
   ],
   providers: [DeckService],

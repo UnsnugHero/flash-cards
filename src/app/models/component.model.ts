@@ -1,4 +1,9 @@
-export interface FlashMenuOption {
+export interface HeaderItem {
+  text: string;
+  link?: string;
+}
+
+export interface MenuOption {
   text: string;
   value: string; //string? or something else?
 }

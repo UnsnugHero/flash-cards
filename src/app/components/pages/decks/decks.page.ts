@@ -18,7 +18,7 @@ import { SORT_BY_MENU_OPTIONS } from './decks.constants';
   templateUrl: './decks.page.html',
   styleUrls: ['./decks.page.less'],
 })
-export class DecksPageComponent {
+export class DecksPage {
   public sortOptions = SORT_BY_MENU_OPTIONS;
 
   public categories$: Observable<any>;

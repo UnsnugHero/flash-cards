@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HeaderItem } from 'src/app/models/component.model';
+import { HEADER_LINKS } from './app.constants';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-  title = 'flash-cards';
+  public headerLinks: HeaderItem[] = HEADER_LINKS;
 }

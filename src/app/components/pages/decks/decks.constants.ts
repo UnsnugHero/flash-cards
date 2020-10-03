@@ -1,6 +1,6 @@
-import { FlashMenuOption } from 'src/app/models/component.model';
+import { MenuOption } from 'src/app/models/component.model';
 
-export const SORT_BY_MENU_OPTIONS: FlashMenuOption[] = [
+export const SORT_BY_MENU_OPTIONS: MenuOption[] = [
   {
     text: 'Alphabetical (A-Z)',
     value: '',

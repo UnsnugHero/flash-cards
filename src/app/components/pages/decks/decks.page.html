@@ -2,14 +2,20 @@
   <div class="decks-search-bar">
     <flash-input
       placeholder="Search"
+      class="search-bar-item"
       [clearable]="true"
       [formCtrl]="deckSearchForm.controls['name']"
     ></flash-input>
     <flash-autocomplete
+      class="search-bar-item"
       [formCtrl]="deckSearchForm.controls['category']"
       [options]="categories$ | async"
     ></flash-autocomplete>
-    <flash-menu menuText="Sort" [menuOptions]="sortOptions"></flash-menu>
+    <flash-menu
+      class="search-bar-item"
+      menuText="Sort"
+      [menuOptions]="sortOptions"
+    ></flash-menu>
   </div>
   <div class="decks-grid">
     <ng-container *ngFor="let deck of decks$ | async">
