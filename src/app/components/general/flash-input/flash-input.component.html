@@ -1,4 +1,5 @@
 <div class="input-container">
+  <mat-icon class="search-icon">search</mat-icon>
   <input
     matInput
     type="text"
@@ -7,6 +8,11 @@
   />
   <button
     *ngIf="clearable && formCtrl.value"
+    matSuffix
+    mat-flat-button
+    class="clear-button"
     (click)="onClearClicked()"
-  ></button>
+  >
+    <mat-icon class="clear-icon">close</mat-icon>
+  </button>
 </div>

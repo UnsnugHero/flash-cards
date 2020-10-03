@@ -10,12 +10,17 @@ import { Category, Deck } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { DeckService } from 'src/app/services/deck.service';
 
+// Constants
+import { SORT_BY_MENU_OPTIONS } from './decks.constants';
+
 @Component({
   selector: 'app-decks',
   templateUrl: './decks.page.html',
   styleUrls: ['./decks.page.less'],
 })
 export class DecksPageComponent {
+  public sortOptions = SORT_BY_MENU_OPTIONS;
+
   public categories$: Observable<any>;
   public decks$: Observable<Deck[]>;
 

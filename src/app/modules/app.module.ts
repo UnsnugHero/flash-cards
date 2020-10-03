@@ -11,6 +11,7 @@ import { FlashRoutingModule } from './flash-routing.module';
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -58,6 +59,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Material
     MatAutocompleteModule,
     MatButtonModule,
+    MatIconModule,
     MatInputModule,
     MatMenuModule,
     ReactiveFormsModule,

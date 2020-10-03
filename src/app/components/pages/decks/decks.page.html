@@ -9,6 +9,7 @@
       [formCtrl]="deckSearchForm.controls['category']"
       [options]="categories$ | async"
     ></flash-autocomplete>
+    <flash-menu menuText="Sort" [menuOptions]="sortOptions"></flash-menu>
   </div>
   <div class="decks-grid">
     <ng-container *ngFor="let deck of decks$ | async">
