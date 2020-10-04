@@ -1,10 +1,6 @@
 export interface Category {
   id: number;
-  name: string;
-}
-
-export interface CategoryDisplay {
-  name: string;
+  category: string;
   associatedDecks: number;
 }
 

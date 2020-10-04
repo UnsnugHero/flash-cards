@@ -1,8 +1,9 @@
 <div class="categories-page page">
   <div class="table-container">
     <flash-table
+      *ngIf="categories$ | async as categories"
       tableClass="category-table"
-      [dataSource]="dataSource"
+      [dataSource]="categories"
       [displayedColumns]="displayedColumns"
       [isCentered]="true"
       [isRaised]="true"

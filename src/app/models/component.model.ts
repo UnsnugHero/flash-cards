@@ -7,3 +7,8 @@ export interface MenuOption {
   text: string;
   value: string; //string? or something else?
 }
+
+export interface DisplayedColumn {
+  key: string;
+  columnHeader: string;
+}

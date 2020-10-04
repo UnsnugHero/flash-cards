@@ -1,4 +1,8 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { DisplayedColumn } from 'src/app/models/component.model';
+import { Category } from 'src/app/models/deck.model';
 
 @Component({
   selector: 'flash-table',
@@ -7,8 +11,8 @@ import { Component, Input } from '@angular/core';
 })
 export class FlashTableComponent {
   @Input() tableClass: string;
-  @Input() dataSource: any[];
-  @Input() displayedColumns: string[];
+  @Input() dataSource: any;
+  @Input() displayedColumns: DisplayedColumn[];
   @Input() isCentered: boolean = false;
   @Input() isFlat: boolean = false;
   @Input() isRaised: boolean = false;
@@ -17,4 +21,8 @@ export class FlashTableComponent {
   constructor() {}
 
   ngOnInit() {}
+
+  public mapColumnConfigsToKeys(displayedColumns: DisplayedColumn[]): string[] {
+    return displayedColumns.map((column: DisplayedColumn) => column.key);
+  }
 }

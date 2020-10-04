@@ -1,13 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { CategoryDisplay } from 'src/app/models/deck.model';
-
-const CATEGORIES: CategoryDisplay[] = [
-  { name: 'Japanese', associatedDecks: 3 },
-  { name: 'French', associatedDecks: 2 },
-  { name: 'Mathematics', associatedDecks: 12 },
-  { name: 'Marine Biology', associatedDecks: 8 },
-  { name: 'Computer Science', associatedDecks: 0 },
-];
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { DisplayedColumn } from 'src/app/models/component.model';
+import { Category } from 'src/app/models/deck.model';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'categories-page',
@@ -15,10 +11,15 @@ const CATEGORIES: CategoryDisplay[] = [
   styleUrls: ['./categories.page.less'],
 })
 export class CategoriesPage {
-  dataSource: CategoryDisplay[] = CATEGORIES;
-  displayedColumns: string[] = ['category', 'associatedDecks'];
+  categories$: Observable<Category[]>;
+  displayedColumns: DisplayedColumn[] = [
+    { key: 'category', columnHeader: 'Category' },
+    { key: 'associatedDecks', columnHeader: 'Associated Decks' },
+  ];
 
-  constructor() {}
+  constructor(public categorySerivce: CategoryService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.categories$ = this.categorySerivce.getCategories();
+  }
 }
