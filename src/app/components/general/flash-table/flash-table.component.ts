@@ -6,8 +6,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./flash-table.component.less'],
 })
 export class FlashTableComponent {
+  @Input() tableClass: string;
   @Input() dataSource: any[];
-  @Input() columnConfigs: any[]; // TODO: model for this
+  @Input() displayedColumns: string[];
+  @Input() isCentered: boolean = false;
+  @Input() isFlat: boolean = false;
+  @Input() isRaised: boolean = false;
+  @Input() tableWidth: string;
 
   constructor() {}
 

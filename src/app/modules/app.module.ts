@@ -23,6 +23,7 @@ import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 import { FlashInputComponent } from '../components/general/flash-input/flash-input.component';
 import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.component';
+import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Pages
 import { CategoriesPage } from '../components/pages/categories/categories.page';
@@ -44,6 +45,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashHeaderComponent,
     FlashInputComponent,
     FlashMenuComponent,
+    FlashTableComponent,
 
     // Pages
     CategoriesPage,
