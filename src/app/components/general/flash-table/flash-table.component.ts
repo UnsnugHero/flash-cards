@@ -1,8 +1,5 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { DisplayedColumn } from 'src/app/models/component.model';
-import { Category } from 'src/app/models/deck.model';
 
 @Component({
   selector: 'flash-table',

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { DisplayedColumn } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
-import { TABLE_MENU_OPTIONS } from './categories.constants';
+import { DISPLAYED_COLUMNS } from './categories.constants';
 
 @Component({
   selector: 'categories-page',
@@ -12,11 +12,7 @@ import { TABLE_MENU_OPTIONS } from './categories.constants';
 })
 export class CategoriesPage {
   categories$: Observable<Category[]>;
-  displayedColumns: DisplayedColumn[] = [
-    { key: 'category', columnHeader: 'Category' },
-    { key: 'associatedDecks', columnHeader: 'Associated Decks' },
-    { key: 'menuAction', columnHeader: '', menuOptions: TABLE_MENU_OPTIONS },
-  ];
+  displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
 
   constructor(public categorySerivce: CategoryService) {}
 
