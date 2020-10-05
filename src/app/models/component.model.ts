@@ -11,4 +11,5 @@ export interface MenuOption {
 export interface DisplayedColumn {
   key: string;
   columnHeader: string;
+  menuOptions?: MenuOption[];
 }

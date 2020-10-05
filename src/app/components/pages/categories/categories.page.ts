@@ -1,9 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { DisplayedColumn } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { TABLE_MENU_OPTIONS } from './categories.constants';
 
 @Component({
   selector: 'categories-page',
@@ -15,6 +15,7 @@ export class CategoriesPage {
   displayedColumns: DisplayedColumn[] = [
     { key: 'category', columnHeader: 'Category' },
     { key: 'associatedDecks', columnHeader: 'Associated Decks' },
+    { key: 'menuAction', columnHeader: '', menuOptions: TABLE_MENU_OPTIONS },
   ];
 
   constructor(public categorySerivce: CategoryService) {}

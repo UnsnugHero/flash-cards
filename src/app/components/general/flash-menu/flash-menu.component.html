@@ -1,5 +1,18 @@
 <div class="flash-menu-container">
-  <button mat-button [matMenuTriggerFor]="menu">{{ menuText }}</button>
+  <ng-container [ngSwitch]="menuText">
+    <ng-container *ngSwitchCase="'more_vert'">
+      <flash-button
+        icon="more_vert"
+        type="icon"
+        [matMenuTriggerFor]="menu"
+      ></flash-button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <flash-button mat-button [matMenuTriggerFor]="menu">{{
+        menuText
+      }}</flash-button>
+    </ng-container>
+  </ng-container>
   <mat-menu #menu="matMenu">
     <ng-container *ngFor="let menuOption of menuOptions">
       <button mat-menu-item>{{ menuOption.text }}</button>

@@ -26,6 +26,11 @@ export class DecksPage {
 
   public deckSearchForm: FormGroup;
 
+  public shmenu = [
+    { text: 'Edit', value: '' },
+    { text: 'Delete', value: '' },
+  ];
+
   constructor(
     public categoryService: CategoryService,
     public deckService: DeckService

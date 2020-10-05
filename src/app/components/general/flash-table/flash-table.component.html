@@ -7,22 +7,22 @@
     [dataSource]="dataSource"
     [style.width]="tableWidth"
   >
-    <!-- make columns configured by page component that embedds table -->
-    <!-- <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let category">{{ category.name }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="associatedDecks">
-      <th mat-header-cell *matHeaderCellDef>Associated Decks</th>
-      <td mat-cell *matCellDef="let category">
-        {{ category.associatedDecks }}
-      </td>
-    </ng-container> -->
     <ng-container *ngFor="let column of displayedColumns">
       <ng-container [matColumnDef]="column.key">
         <th mat-header-cell *matHeaderCellDef>{{ column.columnHeader }}</th>
-        <td mat-cell *matCellDef="let data">{{ data[column.key] }}</td>
+        <ng-container [ngSwitch]="column.key">
+          <ng-container *ngSwitchCase="'menuAction'">
+            <td mat-cell *matCellDef="let row">
+              <flash-menu
+                [menuText]="'more_vert'"
+                [menuOptions]="column.menuOptions"
+              ></flash-menu>
+            </td>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <td mat-cell *matCellDef="let data">{{ data[column.key] }}</td>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </ng-container>
     <tr
