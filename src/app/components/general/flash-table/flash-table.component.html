@@ -22,6 +22,7 @@
               <flash-menu
                 [menuText]="column.menuIcon"
                 [menuOptions]="column.menuOptions"
+                (onMenuItemClick)="onActionClicked($event, row.index)"
               ></flash-menu>
             </td>
           </ng-container>

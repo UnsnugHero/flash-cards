@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DisplayedColumn } from 'src/app/models/component.model';
+import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
-import { DISPLAYED_COLUMNS } from './categories.constants';
+import { categoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
 
 @Component({
   selector: 'categories-page',
@@ -18,5 +18,20 @@ export class CategoriesPage {
 
   ngOnInit() {
     this.categories$ = this.categorySerivce.getCategories();
+  }
+
+  public onActionMenuClicked(rowAction: RowAction) {
+    const action = rowAction.value as categoryTableAction;
+    switch (action) {
+      case 'editCategory':
+        console.log(rowAction);
+        break;
+      case 'deleteCategory':
+        console.log(rowAction);
+        break;
+      default:
+        console.warn('Action unsupported. Oh No!!');
+        break;
+    }
   }
 }

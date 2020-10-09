@@ -5,8 +5,12 @@ export interface HeaderItem {
 
 export interface MenuOption {
   text: string;
-  value: string; //string? or something else?
-  action?: Function;
+  value: string;
+}
+
+export interface RowAction {
+  value: string;
+  rowIndex: number;
 }
 
 export interface DisplayedColumn {

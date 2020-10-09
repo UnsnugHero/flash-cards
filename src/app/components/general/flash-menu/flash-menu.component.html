@@ -15,7 +15,9 @@
   </ng-container>
   <mat-menu #menu="matMenu">
     <ng-container *ngFor="let menuOption of menuOptions">
-      <button mat-menu-item>{{ menuOption.text }}</button>
+      <button mat-menu-item (click)="onMenuItemClicked(menuOption.value)">
+        {{ menuOption.text }}
+      </button>
     </ng-container>
   </mat-menu>
 </div>

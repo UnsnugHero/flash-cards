@@ -3,11 +3,12 @@
     <flash-table
       *ngIf="categories$ | async as categories"
       tableClass="category-table"
+      tableWidth="75%"
       [dataSource]="categories"
       [displayedColumns]="displayedColumns"
       [isCentered]="true"
       [isRaised]="true"
-      [tableWidth]="'75%'"
+      (onActionMenuClick)="onActionMenuClicked($event)"
     ></flash-table>
   </div>
 </div>
