@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/dialogs/delete-category/delete-category.dialog';
 import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
 import { categoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
 
 @Component({
@@ -17,6 +19,8 @@ export class CategoriesPage {
   public displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
 
   private _dialogRef: MatDialogRef<any>;
+
+  private _subscriptionManager = new SubscriptionManager();
 
   constructor(
     public dialog: MatDialog,
@@ -44,5 +48,13 @@ export class CategoriesPage {
 
   private _openDeleteCategoryDialog() {
     this._dialogRef = this.dialog.open(DeleteCategoryDialog);
+
+    this._subscriptionManager.addSubscription(this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        mergeMap(() => of('TODO: Delete Category call to backend here'))
+      )
+      .subscribe());
   }
 }

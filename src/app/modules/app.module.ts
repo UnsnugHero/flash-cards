@@ -28,7 +28,7 @@ import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.
 import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Dialogs
-import { DeleteCategoryDialog } from '../dialogs/delete-category/delete-category.dialog';
+import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
 
 // Pages
 import { CategoriesPage } from '../components/pages/categories/categories.page';
