@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { DeleteCategoryDialog } from 'src/app/dialogs/delete-category/delete-category.dialog';
 import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -11,10 +13,15 @@ import { categoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
   styleUrls: ['./categories.page.less'],
 })
 export class CategoriesPage {
-  categories$: Observable<Category[]>;
-  displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
+  public categories$: Observable<Category[]>;
+  public displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
 
-  constructor(public categorySerivce: CategoryService) {}
+  private _dialogRef: MatDialogRef<any>;
+
+  constructor(
+    public dialog: MatDialog,
+    public categorySerivce: CategoryService
+  ) {}
 
   ngOnInit() {
     this.categories$ = this.categorySerivce.getCategories();
@@ -27,11 +34,15 @@ export class CategoriesPage {
         console.log(rowAction);
         break;
       case 'deleteCategory':
-        console.log(rowAction);
+        this._openDeleteCategoryDialog();
         break;
       default:
         console.warn('Action unsupported. Oh No!!');
         break;
     }
+  }
+
+  private _openDeleteCategoryDialog() {
+    this._dialogRef = this.dialog.open(DeleteCategoryDialog);
   }
 }
