@@ -10,6 +10,4 @@ export class DeleteCategoryDialog {
   constructor() {}
 
   ngOnInit() {}
-
-  public closeDialog() {}
 }

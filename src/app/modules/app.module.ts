@@ -29,6 +29,7 @@ import { FlashTableComponent } from '../components/general/flash-table/flash-tab
 
 // Dialogs
 import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
+import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-category.dialog';
 
 // Pages
 import { CategoriesPage } from '../components/pages/categories/categories.page';
@@ -54,6 +55,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
 
     // Dialogs
     DeleteCategoryDialog,
+    EditCategoryDialog,
 
     // Pages
     CategoriesPage,

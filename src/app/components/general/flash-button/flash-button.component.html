@@ -1,13 +1,13 @@
 <div class="button-container">
   <ng-container [ngSwitch]="type">
     <ng-container *ngSwitchCase="'icon'">
-      <button mat-icon-button>
+      <button mat-icon-button class="flash-icon-button">
         <mat-icon>{{ icon }}</mat-icon>
       </button>
     </ng-container>
     <!-- text button as default -->
     <ng-container *ngSwitchDefault>
-      <button>{{ text }}</button>
+      <button mat-button class="flash-button">{{ text }}</button>
     </ng-container>
   </ng-container>
 </div>

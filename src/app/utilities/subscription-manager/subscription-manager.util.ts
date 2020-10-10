@@ -1,8 +1,7 @@
 import { Subscription } from 'rxjs';
 
 export class SubscriptionManager {
-
-  private _subcriptions: Subscription[];
+  private _subcriptions: Subscription[] = [];
 
   constructor() {}
 
@@ -11,6 +10,7 @@ export class SubscriptionManager {
   }
 
   public unsubscribeAll() {
-    this._subcriptions.forEach((subscription) => subscription.unsubscribe())
+    this._subcriptions.forEach((subscription) => subscription.unsubscribe());
+    this._subcriptions = [];
   }
 }

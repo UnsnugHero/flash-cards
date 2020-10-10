@@ -1,7 +1,7 @@
 <div class="categories-page page">
   <div class="table-container">
     <flash-table
-      *ngIf="categories$ | async as categories"
+      *ngIf="categories"
       tableClass="category-table"
       tableWidth="75%"
       [dataSource]="categories"
