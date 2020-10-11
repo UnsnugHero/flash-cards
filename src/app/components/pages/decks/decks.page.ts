@@ -46,7 +46,7 @@ export class DecksPage {
       .getCategories()
       .pipe(
         map((categories: Category[]) =>
-          categories.map((category: Category) => category.category)
+          categories.map((category: Category) => category.categoryName)
         )
       );
     this.decks$ = this.deckService.getDecks();

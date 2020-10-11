@@ -1,6 +1,6 @@
 import { DisplayedColumn, MenuOption } from 'src/app/models/component.model';
 
-export type categoryTableAction = 'editCategory' | 'deleteCategory';
+export type CategoryTableAction = 'editCategory' | 'deleteCategory';
 
 export const TABLE_MENU_OPTIONS: MenuOption[] = [
   { text: 'Edit', value: 'editCategory' },
@@ -8,7 +8,7 @@ export const TABLE_MENU_OPTIONS: MenuOption[] = [
 ];
 
 export const DISPLAYED_COLUMNS: DisplayedColumn[] = [
-  { key: 'category', columnHeader: 'Category', columnWidth: '45%' },
+  { key: 'categoryName', columnHeader: 'Category', columnWidth: '45%' },
   {
     key: 'associatedDecks',
     columnHeader: 'Associated Decks',

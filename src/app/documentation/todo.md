@@ -2,4 +2,6 @@
 
 ## Front End Related To-Do
 
-- In dialogs I currently do not use custom components just for sake of a quicker implementation of the frontend. I can ome back and implement with custom components later on. The problem I didn;t feel like circumnavigating was problem with input needing a form control which I don't want to pass into the dialog to keep as much state out of it as possible. I could probably come up with an implementation for `flash-input` that doesn't require it to have a form control so I can just take whatever was inputted in the input and pas it out on dialog submit. Plan to replace all inputs and actions in dialog with custom components essentially.
+- In dialogs I currently do not use custom components just for sake of a quicker implementation of the frontend. Plan to replace all inputs and actions in dialogs with custom components.
+- in this vein, an input should show an error if its corresponding form control is invalid.
+- edit-category dialog, and future stuff similar to this (basically any form that has required fields), will need this update. Update forms to show each required field as an error, so add a red border to each not filled out required field and a little error underneath too. Or maybe like a red text near the submit button?... But anyway, ill be putting in a snackbar saying theres an error at the very least so thats fine.

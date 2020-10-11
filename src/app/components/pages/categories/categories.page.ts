@@ -8,7 +8,7 @@ import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
 import { EditCategoryDialog } from '../../dialogs/edit-category/edit-category.dialog';
-import { categoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
+import { CategoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
 
 @Component({
   selector: 'categories-page',
@@ -31,10 +31,8 @@ export class CategoriesPage {
   ngOnInit() {
     const categorySubscription = this.categorySerivce
       .getCategories()
-      .subscribe((categories) => {
-        console.log(categories);
-        this.categories = categories;
-      });
+      .pipe(tap((categories) => (this.categories = categories)))
+      .subscribe();
 
     this._subscriptionManager.addSubscription(categorySubscription);
   }
@@ -44,13 +42,13 @@ export class CategoriesPage {
   }
 
   public onActionMenuClicked(rowAction: RowAction) {
-    const action = rowAction.value as categoryTableAction;
+    const action = rowAction.value as CategoryTableAction;
     switch (action) {
       case 'editCategory':
         this._openEditCategoryDialog(this.categories[rowAction.rowIndex]);
         break;
       case 'deleteCategory':
-        this._openDeleteCategoryDialog();
+        this._openDeleteCategoryDialog(this.categories[rowAction.rowIndex]);
         break;
       default:
         console.warn('Action unsupported. Oh No!!');
@@ -60,7 +58,7 @@ export class CategoriesPage {
 
   private _openEditCategoryDialog(category: Category) {
     this._dialogRef = this.dialog.open(EditCategoryDialog, {
-      data: { categoryName: category.category },
+      data: { categoryName: category.categoryName },
     });
 
     const editCategorySubscription = this._dialogRef
@@ -68,14 +66,15 @@ export class CategoriesPage {
       .pipe(
         filter((result) => !!result),
         tap((result) => console.log(`confirming edit action: ${result}`)),
-        mergeMap(() => of('TODO: Edit Category call to backend here'))
+        // TODO: Edit Category call to backend with id and name change
+        mergeMap(() => of(''))
       )
       .subscribe();
 
     this._subscriptionManager.addSubscription(editCategorySubscription);
   }
 
-  private _openDeleteCategoryDialog() {
+  private _openDeleteCategoryDialog(category: Category) {
     this._dialogRef = this.dialog.open(DeleteCategoryDialog);
 
     const deleteCategorySubscription = this._dialogRef
@@ -83,7 +82,8 @@ export class CategoriesPage {
       .pipe(
         filter((result) => !!result),
         tap((result) => console.log(`confirming delete action: ${result}`)),
-        mergeMap(() => of('TODO: Delete Category call to backend here'))
+        // TODO: Delete Category call to backend here with category id
+        mergeMap(() => of(''))
       )
       .subscribe();
 

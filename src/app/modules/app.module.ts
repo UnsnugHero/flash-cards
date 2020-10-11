@@ -15,8 +15,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Custom Components
 import { FlashAutocompleteComponent } from '../components/general/flash-autocomplete/flash-autocomplete.component';
@@ -83,8 +83,8 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatTableModule,
-    MatTooltipModule,
 
     // else
     ReactiveFormsModule,
