@@ -28,7 +28,6 @@ import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.
 import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Dialogs
-import { CategoryManageDecksDialog } from '../components/dialogs/add-decks-to-category/category-manage-decks.dialog';
 import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
 import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-category.dialog';
 
@@ -55,7 +54,6 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashTableComponent,
 
     // Dialogs
-    CategoryManageDecksDialog,
     DeleteCategoryDialog,
     EditCategoryDialog,
 
