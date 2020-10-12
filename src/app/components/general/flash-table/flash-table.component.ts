@@ -12,7 +12,6 @@ export class FlashTableComponent {
   @Input() displayedColumns: DisplayedColumn[];
   @Input() isCentered: boolean = false;
   @Input() isFlat: boolean = false;
-  @Input() isRaised: boolean = false;
   @Input() tableWidth: string;
 
   @Output() onActionMenuClick = new EventEmitter<RowAction>();

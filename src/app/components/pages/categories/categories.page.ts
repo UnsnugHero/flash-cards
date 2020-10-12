@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
 import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
-import { DeckService } from 'src/app/services/deck.service';
 import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
 import { EditCategoryDialog } from '../../dialogs/edit-category/edit-category.dialog';
 import { CategoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
+
+const SNACKBAR_DURATION: number = 5000;
 
 @Component({
   selector: 'categories-page',
@@ -26,7 +28,8 @@ export class CategoriesPage {
 
   constructor(
     public categorySerivce: CategoryService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -84,7 +87,12 @@ export class CategoriesPage {
         filter((result) => !!result),
         tap((result) => console.log(`confirming delete action: ${result}`)),
         // TODO: Delete Category call to backend here with category id
-        mergeMap(() => of(''))
+        mergeMap(() => of('')),
+        tap(() =>
+          this._snackbar.open('Category deleted!', 'Dismiss', {
+            duration: SNACKBAR_DURATION,
+          })
+        )
       )
       .subscribe();
 

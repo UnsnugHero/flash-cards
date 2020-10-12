@@ -18,9 +18,9 @@ export class EditCategoryDialog {
   public editCategoryControl: FormControl;
 
   constructor(
-    private _snackbar: MatSnackBar,
     public dialogRef: MatDialogRef<EditCategoryDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: EditDialogData
+    @Inject(MAT_DIALOG_DATA) public data: EditDialogData,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
