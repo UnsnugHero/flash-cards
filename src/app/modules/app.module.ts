@@ -11,7 +11,6 @@ import { FlashRoutingModule } from './flash-routing.module';
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -82,7 +81,6 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Material
     MatAutocompleteModule,
     MatButtonModule,
-    MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
     MatInputModule,
