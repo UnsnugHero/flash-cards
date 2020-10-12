@@ -11,6 +11,7 @@ import { FlashRoutingModule } from './flash-routing.module';
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +29,7 @@ import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.
 import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Dialogs
-import { AddDecksToCategoryDialog } from '../components/dialogs/add-decks-to-category/add-decks-to-category.dialog';
+import { CategoryManageDecksDialog } from '../components/dialogs/add-decks-to-category/category-manage-decks.dialog';
 import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
 import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-category.dialog';
 
@@ -55,7 +56,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashTableComponent,
 
     // Dialogs
-    AddDecksToCategoryDialog,
+    CategoryManageDecksDialog,
     DeleteCategoryDialog,
     EditCategoryDialog,
 
@@ -81,6 +82,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Material
     MatAutocompleteModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
     MatInputModule,

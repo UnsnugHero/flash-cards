@@ -32,7 +32,7 @@ export class EditCategoryDialog {
 
   public onEditClick() {
     if (this.editCategoryControl.invalid) {
-      this.openSnackBar('Category Name required', 'Dismiss', {
+      this.openSnackBar('Category name required', 'Dismiss', {
         duration: SNACKBAR_DURATION,
       });
       return;

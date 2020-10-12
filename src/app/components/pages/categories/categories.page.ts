@@ -8,7 +8,7 @@ import { Category, Deck } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { DeckService } from 'src/app/services/deck.service';
 import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
-import { AddDecksToCategoryDialog } from '../../dialogs/add-decks-to-category/add-decks-to-category.dialog';
+import { CategoryManageDecksDialog } from '../../dialogs/add-decks-to-category/category-manage-decks.dialog';
 import { EditCategoryDialog } from '../../dialogs/edit-category/edit-category.dialog';
 import { CategoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
 
@@ -70,7 +70,7 @@ export class CategoriesPage {
   }
 
   private _openAddDecksDialog() {
-    this._dialogRef = this.dialog.open(AddDecksToCategoryDialog, {
+    this._dialogRef = this.dialog.open(CategoryManageDecksDialog, {
       data: { decks: this.decks },
     });
 
