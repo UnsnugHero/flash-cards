@@ -9,6 +9,14 @@ export const MOCK_CATEGORIES: Category[] = [
   { id: 7, categoryName: 'Mathematics', associatedDecks: 12 },
   { id: 8, categoryName: 'Marine Biology', associatedDecks: 8 },
   { id: 9, categoryName: 'Computer Science', associatedDecks: 0 },
+  { id: 10, categoryName: 'Swahili', associatedDecks: 3 },
+  { id: 11, categoryName: 'English/Writing', associatedDecks: 15 },
+  { id: 12, categoryName: 'History', associatedDecks: 32 },
+  { id: 13, categoryName: 'Chemistry', associatedDecks: 8 },
+  { id: 14, categoryName: 'European Language', associatedDecks: 5 },
+  { id: 15, categoryName: 'Topology', associatedDecks: 11 },
+  { id: 16, categoryName: 'Linear Algebra', associatedDecks: 9 },
+  { id: 17, categoryName: 'Computer Architecture', associatedDecks: 3 },
 ];
 
 export const MOCK_DECKS_JAPANESE: Deck[] = [

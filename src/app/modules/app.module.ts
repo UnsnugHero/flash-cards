@@ -8,6 +8,8 @@ import { AppComponent } from '../components/general/flash-app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlashRoutingModule } from './flash-routing.module';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 
@@ -69,12 +72,14 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FormsModule,
     HttpClientModule,
 
+    // external
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
     }),
+    InfiniteScrollModule,
 
     // Material
     MatAutocompleteModule,
@@ -83,6 +88,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatSnackBarModule,
     MatTableModule,
 

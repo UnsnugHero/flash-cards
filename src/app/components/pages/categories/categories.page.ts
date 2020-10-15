@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { filter, mergeMap, tap } from 'rxjs/operators';
@@ -45,7 +46,7 @@ export class CategoriesPage {
     this._subscriptionManager.unsubscribeAll();
   }
 
-  public onActionMenuClicked(rowAction: RowAction) {
+  public onActionMenuClick(rowAction: RowAction) {
     const action = rowAction.value as CategoryTableAction;
     switch (action) {
       case 'editCategory':
@@ -58,6 +59,10 @@ export class CategoriesPage {
         console.warn('Action unsupported. Oh No!!');
         break;
     }
+  }
+
+  public onPaginate(pageEvent: PageEvent) {
+    // some search calls here probably, would need to account for search bar and sort by query here too, thatss ez i think
   }
 
   private _openEditCategoryDialog(category: Category) {

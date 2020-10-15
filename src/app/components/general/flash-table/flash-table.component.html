@@ -40,4 +40,11 @@
       *matRowDef="let row; columns: mapColumnConfigsToKeys(displayedColumns)"
     ></tr>
   </table>
+  <mat-paginator
+    pageSize="25"
+    [length]="totalItems"
+    [class.centered]="isCentered"
+    [style.width]="tableWidth"
+    (page)="onPaginated($event)"
+  ></mat-paginator>
 </div>
