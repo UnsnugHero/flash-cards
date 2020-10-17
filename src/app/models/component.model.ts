@@ -1,16 +1,17 @@
 export interface HeaderItem {
-  text: string;
   link?: string;
+  text: string;
 }
 
 export interface MenuOption {
+  sortDir?: string;
   text: string;
   value: string;
 }
 
 export interface RowAction {
-  value: string;
   rowIndex: number;
+  value: string;
 }
 
 export interface DisplayedColumn {

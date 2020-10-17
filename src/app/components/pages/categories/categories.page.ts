@@ -1,16 +1,25 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
-import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
+import {
+  DisplayedColumn,
+  MenuOption,
+  RowAction,
+} from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
 import { EditCategoryDialog } from '../../dialogs/edit-category/edit-category.dialog';
-import { CategoryTableAction, DISPLAYED_COLUMNS } from './categories.constants';
+import {
+  CategoryTableAction,
+  CATEGORY_SEARCH_SORT_MENU_OPTIONS,
+  DISPLAYED_COLUMNS,
+} from './categories.constants';
 
 const SNACKBAR_DURATION: number = 5000;
 
@@ -22,6 +31,9 @@ const SNACKBAR_DURATION: number = 5000;
 export class CategoriesPage {
   public categories: Category[];
   public displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
+  public searchSortMenuOptions: MenuOption[] = CATEGORY_SEARCH_SORT_MENU_OPTIONS;
+
+  public searchForm: FormGroup;
 
   private _dialogRef: MatDialogRef<any>;
 
@@ -34,6 +46,11 @@ export class CategoriesPage {
   ) {}
 
   ngOnInit() {
+    this.searchForm = new FormGroup({
+      name: new FormControl(),
+      sortBy: new FormControl(),
+    });
+
     const categorySubscription = this.categorySerivce
       .getCategories()
       .pipe(tap((categories) => (this.categories = categories)))

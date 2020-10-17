@@ -7,8 +7,15 @@ export const TABLE_MENU_OPTIONS: MenuOption[] = [
   { text: 'Delete', value: 'deleteCategory' },
 ];
 
+export const CATEGORY_SEARCH_SORT_MENU_OPTIONS: MenuOption[] = [
+  { text: 'Category Name (A - Z)', sortDir: 'ASC', value: 'categoryName' },
+  { text: 'Category Name (Z - A)', sortDir: 'DESC', value: 'categoryName' },
+  { text: 'Associated Decks Asc', sortDir: 'ASC', value: 'associatedDecks' },
+  { text: 'Associated Decks Desc', sortDir: 'DESC', value: 'associatedDecks' },
+];
+
 export const DISPLAYED_COLUMNS: DisplayedColumn[] = [
-  { key: 'categoryName', columnHeader: 'Category', columnWidth: '45%' },
+  { key: 'categoryName', columnHeader: 'Category Name', columnWidth: '45%' },
   {
     key: 'associatedDecks',
     columnHeader: 'Associated Decks',

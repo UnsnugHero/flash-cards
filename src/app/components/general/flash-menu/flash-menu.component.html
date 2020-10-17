@@ -8,9 +8,11 @@
       ></flash-button>
     </ng-container>
     <ng-container *ngSwitchDefault>
-      <flash-button mat-button [matMenuTriggerFor]="menu">{{
-        menuText
-      }}</flash-button>
+      <flash-button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        [text]="menuText"
+      ></flash-button>
     </ng-container>
   </ng-container>
   <mat-menu #menu="matMenu">

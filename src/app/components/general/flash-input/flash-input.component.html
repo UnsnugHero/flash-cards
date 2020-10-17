@@ -1,12 +1,13 @@
 <div class="input-container">
   <input
+    #input
     matInput
     type="text"
     [formControl]="formCtrl"
     [placeholder]="placeholder"
   />
   <button
-    *ngIf="clearable && formCtrl.value"
+    *ngIf="clearable && input.value"
     matSuffix
     mat-flat-button
     class="clear-button"
