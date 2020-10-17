@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
-import { filter, mergeMap, tap } from 'rxjs/operators';
+import { debounceTime, filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
 import {
   DisplayedColumn,
@@ -40,8 +40,9 @@ export class CategoriesPage {
   private _subscriptionManager = new SubscriptionManager();
 
   constructor(
-    public categorySerivce: CategoryService,
+    public categoryService: CategoryService,
     public dialog: MatDialog,
+    private _cdRef: ChangeDetectorRef,
     private _snackbar: MatSnackBar
   ) {}
 
@@ -51,7 +52,25 @@ export class CategoriesPage {
       sortBy: new FormControl(),
     });
 
-    const categorySubscription = this.categorySerivce
+    // Subscriptions
+    const searchFormSubscription = this.searchForm.controls['name'].valueChanges
+      .pipe(
+        debounceTime(500),
+        mergeMap((searchValue) => {
+          const searchPayload = {
+            query: searchValue,
+            sortBy: this.searchForm.value.sortBy,
+          };
+          return this.categoryService.search(searchValue);
+        }),
+        tap((searchResults) => {
+          this.categories = searchResults;
+          this._cdRef.detectChanges();
+        })
+      )
+      .subscribe();
+
+    const categorySubscription = this.categoryService
       .getCategories()
       .pipe(tap((categories) => (this.categories = categories)))
       .subscribe();
