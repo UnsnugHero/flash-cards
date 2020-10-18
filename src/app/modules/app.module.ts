@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 
@@ -28,6 +29,7 @@ import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 import { FlashInputComponent } from '../components/general/flash-input/flash-input.component';
 import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.component';
+import { FlashSelectComponent } from '../components/general/flash-select/flash-select.component';
 import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Dialogs
@@ -54,6 +56,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashHeaderComponent,
     FlashInputComponent,
     FlashMenuComponent,
+    FlashSelectComponent,
     FlashTableComponent,
 
     // Dialogs
@@ -89,6 +92,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     MatInputModule,
     MatMenuModule,
     MatPaginatorModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatTableModule,
 

@@ -7,7 +7,7 @@ import { MenuOption } from 'src/app/models/component.model';
   styleUrls: ['./flash-menu.component.less'],
 })
 export class FlashMenuComponent {
-  // determines if menu button is icon or text
+  // Determines if menu button is icon or text
   @Input() buttonType: 'icon' | 'text';
   // If icon type, the icon to display
   @Input() icon: string;

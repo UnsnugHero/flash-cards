@@ -1,4 +1,8 @@
-import { DisplayedColumn, MenuOption } from 'src/app/models/component.model';
+import {
+  DisplayedColumn,
+  MenuOption,
+  SelectOption,
+} from 'src/app/models/component.model';
 
 export type CategoryTableAction = 'editCategory' | 'deleteCategory';
 
@@ -7,7 +11,7 @@ export const TABLE_MENU_OPTIONS: MenuOption[] = [
   { text: 'Delete', value: 'deleteCategory' },
 ];
 
-export const CATEGORY_SEARCH_SORT_MENU_OPTIONS: MenuOption[] = [
+export const CATEGORY_SEARCH_SORT_MENU_OPTIONS: SelectOption[] = [
   { text: 'Category Name (A - Z)', sortDir: 'ASC', value: 'categoryName' },
   { text: 'Category Name (Z - A)', sortDir: 'DESC', value: 'categoryName' },
   { text: 'Associated Decks Asc', sortDir: 'ASC', value: 'associatedDecks' },

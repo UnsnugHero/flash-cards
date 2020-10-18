@@ -10,6 +10,7 @@ import {
   DisplayedColumn,
   MenuOption,
   RowAction,
+  SelectOption,
 } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -31,7 +32,7 @@ const SNACKBAR_DURATION: number = 5000;
 export class CategoriesPage {
   public categories: Category[];
   public displayedColumns: DisplayedColumn[] = DISPLAYED_COLUMNS;
-  public searchSortMenuOptions: MenuOption[] = CATEGORY_SEARCH_SORT_MENU_OPTIONS;
+  public searchSortSelectOptions: SelectOption[] = CATEGORY_SEARCH_SORT_MENU_OPTIONS;
 
   public searchForm: FormGroup;
 

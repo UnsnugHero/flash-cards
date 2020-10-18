@@ -1,0 +1,11 @@
+<div class="flash-select-container">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ selectText }}</mat-label>
+    <mat-select>
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let option of selectOptions" [value]="option">{{
+        option.text
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

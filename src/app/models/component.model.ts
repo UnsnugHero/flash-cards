@@ -4,9 +4,15 @@ export interface HeaderItem {
 }
 
 export interface MenuOption {
-  sortDir?: string;
   text: string;
   value: string;
+}
+
+export interface SelectOption {
+  text: string;
+  value: string;
+
+  sortDir?: string;
 }
 
 export interface RowAction {

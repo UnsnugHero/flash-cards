@@ -6,11 +6,11 @@
       [clearable]="true"
       [formCtrl]="searchForm.controls['name']"
     ></flash-input>
-    <flash-menu
-      class="category-search-menu"
-      menuText="Sort"
-      [menuOptions]="searchSortMenuOptions"
-    ></flash-menu>
+    <flash-select
+      class="category-search-select"
+      selectText="Sort"
+      [selectOptions]="searchSortSelectOptions"
+    ></flash-select>
   </div>
   <div class="table-container">
     <flash-table
