@@ -19,7 +19,8 @@
           <ng-container *ngSwitchCase="'menuAction'">
             <td mat-cell *matCellDef="let row">
               <flash-menu
-                [menuText]="column.menuIcon"
+                [buttonType]="column.menuButtonType"
+                [icon]="column.menuIcon"
                 [menuOptions]="column.menuOptions"
                 (onMenuItemClick)="onActionClicked($event, row.index)"
               ></flash-menu>

@@ -1,11 +1,13 @@
 <div class="categories-page page">
   <div class="table-search">
     <flash-input
+      class="category-search-input"
       placeholder="Search Categories"
       [clearable]="true"
       [formCtrl]="searchForm.controls['name']"
     ></flash-input>
     <flash-menu
+      class="category-search-menu"
       menuText="Sort"
       [menuOptions]="searchSortMenuOptions"
     ></flash-menu>

@@ -42,7 +42,6 @@ export class CategoriesPage {
   constructor(
     public categoryService: CategoryService,
     public dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef,
     private _snackbar: MatSnackBar
   ) {}
 
@@ -65,7 +64,6 @@ export class CategoriesPage {
         }),
         tap((searchResults) => {
           this.categories = searchResults;
-          this._cdRef.detectChanges();
         })
       )
       .subscribe();

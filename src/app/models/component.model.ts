@@ -18,6 +18,7 @@ export interface DisplayedColumn {
   key: string;
   columnHeader: string;
   columnWidth?: string;
+  menuButtonType?: 'icon' | 'text';
   menuIcon?: string;
   menuOptions?: MenuOption[];
 }

@@ -25,6 +25,7 @@ export const DISPLAYED_COLUMNS: DisplayedColumn[] = [
     key: 'menuAction',
     columnHeader: '',
     columnWidth: '10%',
+    menuButtonType: 'icon',
     menuIcon: 'more_vert',
     menuOptions: TABLE_MENU_OPTIONS,
   },

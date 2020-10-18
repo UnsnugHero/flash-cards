@@ -1,20 +1,18 @@
-<div class="flash-menu-container">
-  <ng-container [ngSwitch]="menuText">
-    <ng-container *ngSwitchCase="'more_vert'">
-      <flash-button
-        icon="more_vert"
-        type="icon"
-        [matMenuTriggerFor]="menu"
-      ></flash-button>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <flash-button
-        mat-button
-        [matMenuTriggerFor]="menu"
-        [text]="menuText"
-      ></flash-button>
-    </ng-container>
+<div class="flash-menu-container" [style]="'color'">
+  <ng-container *ngIf="buttonType === 'icon'; else textButton">
+    <flash-button
+      [icon]="icon"
+      [matMenuTriggerFor]="menu"
+      [type]="buttonType"
+    ></flash-button>
   </ng-container>
+  <ng-template #textButton>
+    <flash-button
+      [matMenuTriggerFor]="menu"
+      [text]="menuText"
+      [type]="buttonType"
+    ></flash-button>
+  </ng-template>
   <mat-menu #menu="matMenu">
     <ng-container *ngFor="let menuOption of menuOptions">
       <button mat-menu-item (click)="onMenuItemClicked(menuOption.value)">
