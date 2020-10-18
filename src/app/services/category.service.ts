@@ -19,6 +19,18 @@ export class CategoryService {
       .pipe(catchError(handleError('getCategories', [])));
   }
 
+  public createCategory(payload): Observable<any> {
+    return of('');
+  }
+
+  public editCategory(payload, id): Observable<any> {
+    return of('');
+  }
+
+  public deleteCategory(id): Observable<any> {
+    return of('');
+  }
+
   //TODO: payloads for service functions?
   // this payload will be { name: ???, sortBy { ??? }}
   public search(payload): Observable<Category[]> {

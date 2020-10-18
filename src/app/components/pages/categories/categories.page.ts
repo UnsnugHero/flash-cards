@@ -107,7 +107,9 @@ export class CategoriesPage {
         filter((result) => !!result),
         tap((result) => console.log(`confirming edit action: ${result}`)),
         // TODO: Edit Category call to backend with id and name change
-        mergeMap(() => of(''))
+        mergeMap((result) =>
+          this.categoryService.editCategory(result, category.id)
+        )
       )
       .subscribe();
 
@@ -123,7 +125,7 @@ export class CategoriesPage {
         filter((result) => !!result),
         tap((result) => console.log(`confirming delete action: ${result}`)),
         // TODO: Delete Category call to backend here with category id
-        mergeMap(() => of('')),
+        mergeMap(() => this.categoryService.deleteCategory(category.id)),
         tap(() =>
           this._snackbar.open('Category deleted!', 'Dismiss', {
             duration: SNACKBAR_DURATION,
