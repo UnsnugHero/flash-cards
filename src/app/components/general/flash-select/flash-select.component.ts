@@ -5,6 +5,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { SelectOption } from 'src/app/models/component.model';
 
 @Component({
@@ -14,19 +15,16 @@ import { SelectOption } from 'src/app/models/component.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class FlashSelectComponent {
+  // Enables an option to clear the selection
+  @Input() enableClearSelection: boolean = false;
+  // Form control for this select component
+  @Input() formCtrl: AbstractControl;
   // Text displayed for select menu
-  @Input() selectText;
+  @Input() selectText: string;
   // Select options
   @Input() selectOptions: SelectOption[];
-
-  // Event Emitter for selecting a select option
-  @Output() onOptionClick = new EventEmitter<SelectOption>();
 
   constructor() {}
 
   ngOnInit() {}
-
-  public handleOptionClick(selectEvent: SelectOption) {
-    this.onOptionClick.emit(selectEvent);
-  }
 }

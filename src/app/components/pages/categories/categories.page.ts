@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -8,7 +8,6 @@ import { debounceTime, filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
 import {
   DisplayedColumn,
-  MenuOption,
   RowAction,
   SelectOption,
 } from 'src/app/models/component.model';
@@ -53,15 +52,11 @@ export class CategoriesPage {
     });
 
     // Subscriptions
-    const searchFormSubscription = this.searchForm.controls['name'].valueChanges
+    const searchFormSubscription = this.searchForm.valueChanges
       .pipe(
         debounceTime(500),
-        mergeMap((searchValue) => {
-          const searchPayload = {
-            query: searchValue,
-            sortBy: this.searchForm.value.sortBy,
-          };
-          return this.categoryService.search(searchValue);
+        mergeMap(() => {
+          return this.categoryService.search(this.searchForm.value);
         }),
         tap((searchResults) => {
           this.categories = searchResults;
@@ -74,6 +69,7 @@ export class CategoriesPage {
       .pipe(tap((categories) => (this.categories = categories)))
       .subscribe();
 
+    this._subscriptionManager.addSubscription(searchFormSubscription);
     this._subscriptionManager.addSubscription(categorySubscription);
   }
 

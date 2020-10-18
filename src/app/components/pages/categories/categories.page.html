@@ -9,6 +9,8 @@
     <flash-select
       class="category-search-select"
       selectText="Sort"
+      [enableClearSelection]="true"
+      [formCtrl]="searchForm.controls['sortBy']"
       [selectOptions]="searchSortSelectOptions"
     ></flash-select>
   </div>

@@ -20,8 +20,10 @@ export class CategoryService {
   }
 
   //TODO: payloads for service functions?
+  // this payload will be { name: ???, sortBy { ??? }}
   public search(payload): Observable<Category[]> {
-    if (payload === '') {
+    // wont need this later
+    if (!payload.name) {
       return this.getCategories();
     }
     const mockCategories: Category[] = [
