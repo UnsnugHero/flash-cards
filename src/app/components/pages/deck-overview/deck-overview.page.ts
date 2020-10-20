@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { Deck } from 'src/app/models/deck.model';
 import { DeckService } from 'src/app/services/deck.service';
 import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
@@ -12,6 +12,7 @@ import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subs
 })
 export class DeckOverviewPage {
   public deckId: number;
+  public deck: Deck;
 
   private _subscriptionManager = new SubscriptionManager();
 
@@ -23,9 +24,10 @@ export class DeckOverviewPage {
   ngOnInit() {
     const paramSubscription = this.activatedRoute.params
       .pipe(
-        tap((params: any) => {
-          this.deckId = params.id;
-        })
+        mergeMap((params) => {
+          return this.deckService.getDeck(parseInt(params.id));
+        }),
+        tap((deck: Deck) => (this.deck = deck))
       )
       .subscribe();
 
