@@ -39,6 +39,8 @@ import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-cat
 // Pages
 import { CategoriesPage } from '../components/pages/categories/categories.page';
 import { DecksPage } from '../components/pages/decks/decks.page';
+import { DeckOverviewPage } from '../components/pages/deck-overview/deck-overview.page';
+import { NotFoundPage } from '../components/pages/not-found/not-found.page';
 import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
 
 // Services
@@ -66,6 +68,8 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Pages
     CategoriesPage,
     DecksPage,
+    DeckOverviewPage,
+    NotFoundPage,
     TemplatesPageComponent,
   ],
   imports: [

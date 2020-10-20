@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 // Models
 import { Category, Deck } from 'src/app/models/deck.model';
@@ -33,7 +34,8 @@ export class DecksPage {
 
   constructor(
     public categoryService: CategoryService,
-    public deckService: DeckService
+    public deckService: DeckService,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -54,5 +56,9 @@ export class DecksPage {
 
   public onPrintFormClick() {
     console.log(this.deckSearchForm.value);
+  }
+
+  public onDeckClick(deckId: number) {
+    this.router.navigateByUrl(`/deck/${deckId}`);
   }
 }

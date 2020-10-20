@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'flash-deck',
@@ -6,13 +6,19 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./flash-deck.component.less'],
 })
 export class FlashDeckComponent {
+  // id of this deck to redirect to deck view
+  @Input() deckId: number;
+  // text displayed on the card
   @Input() deckTitle: string;
+
+  // event emitter that emits deckId so decks view can handle url navigation
+  @Output() onDeckClick = new EventEmitter<number>();
 
   constructor() {}
 
   ngOnInit() {}
 
-  public onClick() {
-    console.log(`you have clicked on ${this.deckTitle}`);
+  public handleDeckClick() {
+    this.onDeckClick.emit(this.deckId);
   }
 }
