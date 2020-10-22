@@ -7,7 +7,18 @@
     </ng-container>
     <!-- text button as default -->
     <ng-container *ngSwitchDefault>
-      <button mat-button class="flash-button">{{ text }}</button>
+      <button
+        mat-flat-button
+        class="flash-button"
+        [class.deck-style]="enableDeckStyling"
+        [color]="color"
+        [disableRipple]="disableRipple"
+        [style.height]="height"
+        [style.width]="width"
+        (click)="handleButtonClick($event)"
+      >
+        {{ text }}
+      </button>
     </ng-container>
   </ng-container>
 </div>

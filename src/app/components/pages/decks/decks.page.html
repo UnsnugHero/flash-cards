@@ -20,11 +20,17 @@
   <div class="decks-grid">
     <ng-container *ngFor="let deck of decks$ | async">
       <div class="deck-grid-item">
-        <flash-deck
-          [deckId]="deck.id"
-          [deckTitle]="deck.title"
-          (onDeckClick)="onDeckClick($event)"
-        ></flash-deck>
+        <flash-button
+          class="deck"
+          color="primary"
+          height="100%"
+          type="text"
+          width="100%"
+          [disableRipple]="true"
+          [text]="deck.title"
+          (onButtonClick)="onDeckClick(deck.id)"
+        >
+        </flash-button>
       </div>
     </ng-container>
   </div>

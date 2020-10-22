@@ -27,11 +27,6 @@ export class DecksPage {
 
   public deckSearchForm: FormGroup;
 
-  public shmenu = [
-    { text: 'Edit', value: '' },
-    { text: 'Delete', value: '' },
-  ];
-
   constructor(
     public categoryService: CategoryService,
     public deckService: DeckService,
@@ -52,10 +47,6 @@ export class DecksPage {
         )
       );
     this.decks$ = this.deckService.getDecks();
-  }
-
-  public onPrintFormClick() {
-    console.log(this.deckSearchForm.value);
   }
 
   public onDeckClick(deckId: number) {
