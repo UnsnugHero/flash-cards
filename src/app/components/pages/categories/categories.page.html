@@ -18,10 +18,9 @@
     <flash-table
       *ngIf="categories"
       tableClass="category-table"
-      tableWidth="75%"
+      tableWidth="100%"
       [dataSource]="categories"
       [displayedColumns]="displayedColumns"
-      [isCentered]="true"
       (onActionMenuClick)="onActionMenuClick($event)"
       (onPaginate)="onPaginate($event)"
     ></flash-table>

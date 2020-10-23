@@ -33,6 +33,7 @@ import { FlashSelectComponent } from '../components/general/flash-select/flash-s
 import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
 
 // Dialogs
+import { AddDeckDialog } from '../components/dialogs/add-deck/add-deck.dialog';
 import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
 import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-category.dialog';
 
@@ -62,6 +63,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     FlashTableComponent,
 
     // Dialogs
+    AddDeckDialog,
     DeleteCategoryDialog,
     EditCategoryDialog,
 

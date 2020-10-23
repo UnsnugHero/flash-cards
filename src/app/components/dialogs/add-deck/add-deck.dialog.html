@@ -1,0 +1,31 @@
+<div class="add-deck-dialog dialog">
+  <h1 mat-dialog-title>Add Deck</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Deck Name</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [formControl]="addDeckFormGroup.controls['']"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="text"
+        placeholder="Category"
+        matInput
+        [formControl]="addDeckFormGroup.controls['']"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let category of data.categories" [value]="category">
+          {{category.categoryName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button (click)="onAddClick()">Add</button>
+  </mat-dialog-actions>
+</div>

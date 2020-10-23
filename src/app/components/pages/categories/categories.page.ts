@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { of } from 'rxjs';
 import { debounceTime, filter, mergeMap, tap } from 'rxjs/operators';
 import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
 import {

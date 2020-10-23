@@ -1,11 +1,5 @@
 <div class="table-container">
-  <table
-    mat-table
-    [class]="tableClass"
-    [class.centered]="isCentered"
-    [dataSource]="dataSource"
-    [style.width]="tableWidth"
-  >
+  <table mat-table [dataSource]="dataSource" [style.width]="tableWidth">
     <ng-container *ngFor="let column of displayedColumns">
       <ng-container [matColumnDef]="column.key">
         <th
@@ -44,7 +38,6 @@
   <mat-paginator
     pageSize="25"
     [length]="totalItems"
-    [class.centered]="isCentered"
     [style.width]="tableWidth"
     (page)="onPaginated($event)"
   ></mat-paginator>

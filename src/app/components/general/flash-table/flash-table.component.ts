@@ -8,17 +8,13 @@ import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
   styleUrls: ['./flash-table.component.less'],
 })
 export class FlashTableComponent {
-  // class to add to table
-  @Input() tableClass: string;
   // Data that displays in the table
   @Input() dataSource: any[];
   // controls what columns display in the table
   @Input() displayedColumns: DisplayedColumn[];
   // Enables mat paginator
   @Input() enablePagination: boolean = false;
-  // Adds class modifier to center the table on the page
-  @Input() isCentered: boolean = false;
-  // Desire width of the table
+  // Desired width of the table
   @Input() tableWidth: string;
   // Total items in table, displayed in paginator
   @Input() totalItems: number;
