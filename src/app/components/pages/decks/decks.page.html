@@ -11,6 +11,7 @@
         class="search-bar-item"
         [formCtrl]="deckSearchForm.controls['category']"
         [options]="categories$ | async"
+        (onAutocompleteKeyup)="onCategoryAutocompleteKeyup($event)"
       ></flash-autocomplete>
       <flash-menu
         class="search-bar-item"

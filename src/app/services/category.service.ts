@@ -1,29 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { Category } from '../models/deck.model';
+import { CategorySearchPayload } from '../models/payload.model';
 import { handleError } from './services.helpers';
+
+const DEBOUNCE_TIME = 300;
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
+  public categorySubject$ = new BehaviorSubject<string>('');
+
   private categoriesUrl: string = 'api/categories';
 
   constructor(private http: HttpClient) {}
 
-  public getCategories(): Observable<Category[]> {
-    return this.http
-      .get<Category[]>(this.categoriesUrl)
-      .pipe(catchError(handleError('getCategories', [])));
-  }
-
   public createCategory(payload): Observable<any> {
-    return of('');
-  }
-
-  public editCategory(payload, id): Observable<any> {
     return of('');
   }
 
@@ -31,12 +34,28 @@ export class CategoryService {
     return of('');
   }
 
+  public editCategory(payload, id): Observable<any> {
+    return of('');
+  }
+
+  // used for getting categories based on the value of the categorySubject$
+  public getCategories(): Observable<Category[]> {
+    return this.categorySubject$.pipe(
+      debounceTime(DEBOUNCE_TIME),
+      map((query) => query.trim()),
+      distinctUntilChanged(),
+      switchMap((query) => this.search({ name: query }))
+    );
+  }
+
   //TODO: payloads for service functions?
-  // this payload will be { name: ???, sortBy { ??? }}
-  public search(payload): Observable<Category[]> {
-    // wont need this later
-    if (!payload.name) {
-      return this.getCategories();
+  // this payload will be { name: ???, sortBy?: { ??? }, page?: ???, pageSize?: ??? }
+  public search(payload: CategorySearchPayload): Observable<Category[]> {
+    // wont need this later, also this method should send a post request?
+    if (payload.name === '') {
+      return this.http
+        .get<Category[]>(this.categoriesUrl)
+        .pipe(catchError(handleError('getCategories', [])));
     }
     const mockCategories: Category[] = [
       { id: 1, categoryName: 'mockCategory1', associatedDecks: 0 },

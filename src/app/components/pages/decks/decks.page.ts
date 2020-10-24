@@ -56,4 +56,8 @@ export class DecksPage {
   public onDeckClick(deckId: number) {
     this.router.navigateByUrl(`/deck/${deckId}`);
   }
+
+  public onCategoryAutocompleteKeyup(query: string) {
+    this.categoryService.categorySubject$.next(query);
+  }
 }

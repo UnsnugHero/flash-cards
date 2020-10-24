@@ -6,6 +6,7 @@
     class="flash-input"
     [formControl]="formCtrl"
     [matAutocomplete]="auto"
+    (keyup)="handleAutocompleteKeyup($event)"
   />
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
     <mat-option *ngFor="let option of options" [value]="option">
