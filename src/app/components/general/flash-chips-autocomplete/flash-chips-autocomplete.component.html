@@ -17,6 +17,7 @@
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         [placeholder]="placeholder"
+        (keyup)="handleAutocompleteKeyup($event)"
       />
     </mat-chip-list>
     <mat-autocomplete

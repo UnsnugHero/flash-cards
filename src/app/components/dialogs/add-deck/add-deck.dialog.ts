@@ -31,7 +31,7 @@ export class AddDeckDialog {
       categories: new FormControl(null),
     });
 
-    this.chipsCategories$ = this.categoryService.search({ name: '' }).pipe(
+    this.chipsCategories$ = this.categoryService.getCategories().pipe(
       map((categories: Category[]) => {
         return categories.map((category: Category) => {
           const autocompleteOption: AutocompleteOption = {
@@ -55,6 +55,10 @@ export class AddDeckDialog {
       duration: SNACKBAR_DURATION,
     });
     return this.dialogRef.close(this.addDeckFormGroup.value);
+  }
+
+  public onCategoryChipAutocompleteKeyup(query: string) {
+    this.categoryService.categorySubject$.next(query);
   }
 
   public openSnackBar(

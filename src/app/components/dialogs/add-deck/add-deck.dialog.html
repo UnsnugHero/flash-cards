@@ -13,6 +13,7 @@
       placeholder="Add to Categories"
       [formCtrl]="addDeckFormGroup.controls['categories']"
       [options]="chipsCategories$ | async"
+      (onAutocompleteKeyup)="onCategoryChipAutocompleteKeyup($event)"
     >
     </flash-chips-autocomplete>
   </div>

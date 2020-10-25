@@ -1,10 +1,14 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { COMMA, ENTER, P } from '@angular/cdk/keycodes';
-import { AbstractControl } from '@angular/forms';
 import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete';
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { AbstractControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { AutocompleteOption } from 'src/app/models/component.model';
 
 @Component({
@@ -28,13 +32,34 @@ export class FlashChipsAutocomplete {
   /** Determines if chips are selectable or not */
   @Input() selectable: boolean = false;
 
+  /** Event emitter that fires on input keyup and emits the input value */
+  @Output() onAutocompleteKeyup = new EventEmitter<string>();
+
   @ViewChild('chipsInput') chipInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {}
 
-  remove(option: any) {
-    let removedOption;
+  public handleAutocompleteKeyup(keyupEvent: any) {
+    this.onAutocompleteKeyup.emit(keyupEvent.target.value);
+  }
+
+  /** called when an option is selected from the autocomplete dropdown */
+  public selected(event: MatAutocompleteSelectedEvent) {
+    const chosenOption: AutocompleteOption = event.option.value;
+
+    this.chosenOptions.push(chosenOption);
+    this.chipInput.nativeElement.value = '';
+    this.formCtrl.setValue(this.chosenOptions);
+
+    this.options = [
+      ...this.options.filter((option) => {
+        return option.id !== chosenOption.id;
+      }),
+    ];
+  }
+
+  public remove(option: any) {
+    let removedOption: AutocompleteOption[];
 
     const index = this.chosenOptions.indexOf(option);
 
@@ -45,22 +70,5 @@ export class FlashChipsAutocomplete {
     if (removedOption && removedOption.length) {
       this.options.push(removedOption[0]);
     }
-  }
-
-  /** called when an option is selected from the autocomplete dropdown */
-  selected(event: MatAutocompleteSelectedEvent) {
-    const chosenOption: AutocompleteOption = event.option.value;
-
-    this.chosenOptions.push(chosenOption);
-    this.chipInput.nativeElement.value = '';
-    this.formCtrl.setValue(this.chosenOptions);
-
-    this.options = [
-      ...this.options.filter((option) => {
-        console.log(option);
-        console.log(chosenOption);
-        return option.id !== chosenOption.id;
-      }),
-    ];
   }
 }
