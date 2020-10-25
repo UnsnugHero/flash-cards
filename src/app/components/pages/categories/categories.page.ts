@@ -98,6 +98,7 @@ export class CategoriesPage {
   private _openEditCategoryDialog(category: Category) {
     this._dialogRef = this.dialog.open(EditCategoryDialog, {
       data: { categoryName: category.categoryName },
+      disableClose: true,
     });
 
     const editCategorySubscription = this._dialogRef
@@ -116,7 +117,9 @@ export class CategoriesPage {
   }
 
   private _openDeleteCategoryDialog(category: Category) {
-    this._dialogRef = this.dialog.open(DeleteCategoryDialog);
+    this._dialogRef = this.dialog.open(DeleteCategoryDialog, {
+      disableClose: true,
+    });
 
     const deleteCategorySubscription = this._dialogRef
       .afterClosed()

@@ -1,13 +1,13 @@
-<!-- <div class="chips-autocomplete-container">
+<div class="chips-autocomplete-container">
   <mat-form-field class="chip-list">
     <mat-chip-list #chipList>
       <mat-chip
-        *ngFor="let fruit of fruits"
+        *ngFor="let chosenOption of chosenOptions"
         [selectable]="selectable"
         [removable]="removable"
-        (removed)="remove(fruit)"
+        (removed)="remove(chosenOption)"
       >
-        {{ fruit }}
+        {{ chosenOption.text }}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
       <input
@@ -17,16 +17,15 @@
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         [placeholder]="placeholder"
-        (matChipInputTokenEnd)="add($event)"
       />
     </mat-chip-list>
     <mat-autocomplete
       #auto="matAutocomplete"
       (optionSelected)="selected($event)"
     >
-      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-        {{ fruit }}
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option.text }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</div> -->
+</div>

@@ -1,7 +1,11 @@
 <div class="button-container">
   <ng-container [ngSwitch]="type">
     <ng-container *ngSwitchCase="'icon'">
-      <button mat-icon-button class="flash-icon-button">
+      <button
+        mat-icon-button
+        class="flash-icon-button"
+        (click)="handleButtonClick($event)"
+      >
         <mat-icon>{{ icon }}</mat-icon>
       </button>
     </ng-container>

@@ -19,7 +19,11 @@
         [menuOptions]="sortOptions"
       ></flash-menu>
     </div>
-    <flash-button type="icon" icon="add"> </flash-button>
+    <flash-button
+      type="icon"
+      icon="add"
+      (onButtonClick)="onAddDeckClick()"
+    ></flash-button>
   </div>
 
   <div class="decks-grid">

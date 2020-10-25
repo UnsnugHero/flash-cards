@@ -1,12 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AutocompleteOption } from 'src/app/models/component.model';
 import { Category } from 'src/app/models/deck.model';
-
-interface AddDeckDialogData {
-  categories: Category[];
-}
+import { CategoryService } from 'src/app/services/category.service';
 
 const SNACKBAR_DURATION: number = 5000;
 
@@ -17,18 +17,31 @@ const SNACKBAR_DURATION: number = 5000;
 })
 export class AddDeckDialog {
   public addDeckFormGroup: FormGroup;
+  public chipsCategories$: Observable<AutocompleteOption[]>;
 
   constructor(
+    public categoryService: CategoryService,
     public dialogRef: MatDialogRef<AddDeckDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: AddDeckDialogData,
     private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.addDeckFormGroup = new FormGroup({
       deckName: new FormControl(null, Validators.required),
-      category: new FormControl(null),
+      categories: new FormControl(null),
     });
+
+    this.chipsCategories$ = this.categoryService.search({ name: '' }).pipe(
+      map((categories: Category[]) => {
+        return categories.map((category: Category) => {
+          const autocompleteOption: AutocompleteOption = {
+            text: category.categoryName,
+            id: category.id,
+          };
+          return autocompleteOption;
+        });
+      })
+    );
   }
 
   public onAddClick() {

@@ -1,3 +1,20 @@
+/** Model all options passed to an autocomplete based component
+ * should follow. Will need to map our objects to this model.
+ */
+export interface AutocompleteOption {
+  text: string;
+  id: number;
+}
+
+export interface DisplayedColumn {
+  key: string;
+  columnHeader: string;
+  columnWidth?: string;
+  menuButtonType?: 'icon' | 'text';
+  menuIcon?: string;
+  menuOptions?: MenuOption[];
+}
+
 export interface HeaderItem {
   link?: string;
   text: string;
@@ -18,13 +35,4 @@ export interface SelectOption {
 export interface RowAction {
   rowIndex: number;
   value: string;
-}
-
-export interface DisplayedColumn {
-  key: string;
-  columnHeader: string;
-  columnWidth?: string;
-  menuButtonType?: 'icon' | 'text';
-  menuIcon?: string;
-  menuOptions?: MenuOption[];
 }

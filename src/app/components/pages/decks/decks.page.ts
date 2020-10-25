@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 // Models
 import { Category, Deck } from 'src/app/models/deck.model';
@@ -12,6 +12,8 @@ import { Category, Deck } from 'src/app/models/deck.model';
 // Services
 import { CategoryService } from 'src/app/services/category.service';
 import { DeckService } from 'src/app/services/deck.service';
+import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
+import { AddDeckDialog } from '../../dialogs/add-deck/add-deck.dialog';
 
 // Constants
 import { SORT_BY_MENU_OPTIONS } from './decks.constants';
@@ -28,6 +30,9 @@ export class DecksPage {
   public decks$: Observable<Deck[]>;
 
   public deckSearchForm: FormGroup;
+
+  private _dialogRef: MatDialogRef<any>;
+  private _subscriptionManager = new SubscriptionManager();
 
   constructor(
     public categoryService: CategoryService,
@@ -51,6 +56,20 @@ export class DecksPage {
         )
       );
     this.decks$ = this.deckService.getDecks();
+  }
+
+  public onAddDeckClick() {
+    this._dialogRef = this._dialog.open(AddDeckDialog, { disableClose: true });
+
+    const addDeckSubscription = this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        tap((res) => console.log(res))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(addDeckSubscription);
   }
 
   public onDeckClick(deckId: number) {

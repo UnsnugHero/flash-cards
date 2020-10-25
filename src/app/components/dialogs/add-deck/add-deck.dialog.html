@@ -6,23 +6,15 @@
       <input
         matInput
         autocomplete="off"
-        [formControl]="addDeckFormGroup.controls['']"
+        [formControl]="addDeckFormGroup.controls['deckName']"
       />
     </mat-form-field>
-    <mat-form-field>
-      <input
-        type="text"
-        placeholder="Category"
-        matInput
-        [formControl]="addDeckFormGroup.controls['']"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let category of data.categories" [value]="category">
-          {{category.categoryName}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <flash-chips-autocomplete
+      placeholder="Add to Categories"
+      [formCtrl]="addDeckFormGroup.controls['categories']"
+      [options]="chipsCategories$ | async"
+    >
+    </flash-chips-autocomplete>
   </div>
   <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="false">Cancel</button>
