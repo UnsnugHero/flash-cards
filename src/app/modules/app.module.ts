@@ -13,6 +13,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +27,8 @@ import { MatTableModule } from '@angular/material/table';
 // Custom Components
 import { FlashAutocompleteComponent } from '../components/general/flash-autocomplete/flash-autocomplete.component';
 import { FlashButtonComponent } from '../components/general/flash-button/flash-button.component';
-import { FlashChipsAutocomplete } from '../components/general/flash-chips-autocomplete/flash-chips-autocomplete.component';
+import { FlashCardComponent } from '../components/general/flash-card/flash-card.component';
+import { FlashChipsAutocompleteComponent } from '../components/general/flash-chips-autocomplete/flash-chips-autocomplete.component';
 import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.component';
 import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
 import { FlashInputComponent } from '../components/general/flash-input/flash-input.component';
@@ -57,7 +59,8 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Custom Components
     FlashAutocompleteComponent,
     FlashButtonComponent,
-    FlashChipsAutocomplete,
+    FlashCardComponent,
+    FlashChipsAutocompleteComponent,
     FlashDeckComponent,
     FlashHeaderComponent,
     FlashInputComponent,
@@ -96,6 +99,7 @@ import { InMemoryDataService } from '../services/in-memory-data.service';
     // Material
     MatAutocompleteModule,
     MatButtonModule,
+    MatCardModule,
     MatChipsModule,
     MatDialogModule,
     MatIconModule,

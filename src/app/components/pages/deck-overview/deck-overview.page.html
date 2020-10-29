@@ -1,3 +1,17 @@
-<div *ngIf="deck" class="deck-overview-page">
-  <h1>{{ deck.title }}</h1>
+<div ngIf="deck" class="deck-overview-page page">
+  <div class="deck-overview-left-panel">
+    <div class="deck-title">
+      <h2>{{ deck.title }}</h2>
+    </div>
+    <div class="deck-actions">
+      <!-- buttons/actions for Adding card, practice, test, view all cards to nav to all cards view... -->
+      <!-- list ? -->
+    </div>
+  </div>
+  <div class="deck-overview-card-panel">
+    <!-- Here we want the card with buttons to go back and forth between cards underneath and confidence left to the right of that -->
+  </div>
 </div>
+
+<!-- maybe we change default width of a page to 70vw? Then we can allocate 50vw for card view in middle, 10 for both sides -->
+<!-- or we can override styling for this page -->

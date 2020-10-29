@@ -16,7 +16,7 @@ import { AutocompleteOption } from 'src/app/models/component.model';
   templateUrl: './flash-chips-autocomplete.component.html',
   styleUrls: ['./flash-chips-autocomplete.component.less'],
 })
-export class FlashChipsAutocomplete {
+export class FlashChipsAutocompleteComponent {
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   /** Options chosen that show as chips */
   public chosenOptions: AutocompleteOption[] = [];

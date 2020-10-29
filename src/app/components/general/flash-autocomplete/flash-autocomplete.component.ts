@@ -7,12 +7,12 @@ import { AbstractControl } from '@angular/forms';
   styleUrls: ['./flash-autocomplete.component.less'],
 })
 export class FlashAutocompleteComponent {
-  // Form control for this component
+  /** Form control for this component */
   @Input() formCtrl: AbstractControl;
-  // options to show in the dropdown
+  /** Options to show in the dropdown */
   @Input() options: any[];
 
-  // Emitter that fires when the input has a keyup event
+  /** Emitter that fires when the input has a keyup event */
   @Output() onAutocompleteKeyup = new EventEmitter<string>();
 
   constructor() {}
