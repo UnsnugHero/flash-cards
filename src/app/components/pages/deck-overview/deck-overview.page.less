@@ -1,21 +1,38 @@
 .deck-overview-page {
-  padding-top: 50px;
+  padding-top: 25px;
 
   .columns-container {
     display: flex;
+    padding-top: 25px;
 
     .deck-actions-column {
-      flex: 50%;
+      flex: 30%;
 
-      .deck-title {
-        .deck-title-text {
+      .deck-actions {
+        .actions-list {
           margin: 0;
+          padding: 0;
+
+          .list-item {
+            list-style-type: none;
+            margin-top: 10px;
+
+            &__link {
+              text-decoration: none;
+              color: black; //figure out styling later
+            }
+
+            &__link:hover {
+              text-decoration: none;
+              color: yellow;
+            }
+          }
         }
       }
     }
 
     .deck-cards-column {
-      flex: 50%;
+      flex: 70%;
     }
   }
 }
