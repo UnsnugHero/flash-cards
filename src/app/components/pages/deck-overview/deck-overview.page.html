@@ -1,22 +1,21 @@
 <div *ngIf="deck" class="deck-overview-page page">
-  <div class="deck-overview-left-panel">
-    <div class="deck-title">
-      <h2>{{ deck.title }}</h2>
+  <div class="columns-container">
+    <div class="deck-actions-column column">
+      <div class="deck-title">
+        <h2 class="deck-title-text">{{ deck.title }}</h2>
+      </div>
+      <div class="deck-actions">
+        <!-- buttons/actions for Adding card, practice, test, view all cards to nav to all cards view... -->
+        <!-- list ? -->
+      </div>
     </div>
-    <div class="deck-actions">
-      <!-- buttons/actions for Adding card, practice, test, view all cards to nav to all cards view... -->
-      <!-- list ? -->
+    <!-- All these cards will be lost in time, like tears in rain -->
+    <div class="deck-cards-column">
+      <!-- Here we want the card with buttons to go back and forth between cards underneath and icon buttons to the right -->
+      <flash-card
+        [answer]="'Hi, I am the answer'"
+        [prompt]="'Hi, I am a card'"
+      ></flash-card>
     </div>
-  </div>
-  <div class="deck-overview-card-panel">
-    <!-- Here we want the card with buttons to go back and forth between cards underneath and confidence left to the right of that -->
-    <flash-card
-      [answer]="'Hi, I am the answer'"
-      [prompt]="'Hi, I am a card'"
-      [width]="'20vw'"
-    ></flash-card>
   </div>
 </div>
-
-<!-- maybe we change default width of a page to 70vw? Then we can allocate 50vw for card view in middle, 10 for both sides -->
-<!-- or we can override styling for this page -->

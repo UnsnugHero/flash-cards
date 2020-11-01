@@ -8,7 +8,7 @@ import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subs
 @Component({
   selector: 'deck-overview-page',
   templateUrl: './deck-overview.page.html',
-  styleUrls: [],
+  styleUrls: ['./deck-overview.page.less'],
 })
 export class DeckOverviewPage {
   public deckId: number;
