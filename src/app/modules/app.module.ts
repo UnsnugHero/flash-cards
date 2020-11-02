@@ -23,7 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 
 // Project Self-Definitions
 import { AppComponent } from '@components/flash-app/app.component';
-import { FlashRoutingModule } from './flash-routing.module';
+import { FlashRoutingModule } from '@modules/flash-routing.module';
 
 // Custom Components
 import { FlashAutocompleteComponent } from '@components/flash-autocomplete/flash-autocomplete.component';

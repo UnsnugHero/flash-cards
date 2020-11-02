@@ -29,5 +29,11 @@
   },
   "include": [
     "./src/app/components/general/**/*.ts",
+    "./src/app/components/dialogs/**/*.ts",
+    "./src/app/components/pages/**/*.ts",
+    "./src/app/models/**/*.ts",
+    "./src/app/modules/**/*.ts",
+    "./src/app/services/**/*.ts",
+    "./src/app/utilities/**/*.ts",
   ]
 }
