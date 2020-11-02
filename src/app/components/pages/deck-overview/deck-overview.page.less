@@ -2,19 +2,22 @@
 We'll definitely need to modify this css in the future as its not very
 good when the screensize/window gets smaller
 */
+@import "variables";
+
+@deck-overview-width: 685px;
 
 .deck-overview-page {
   padding-top: 25px;
 
   .deck-title {
-    margin: 0 auto;
-    max-width: 685%;
+    margin-right: auto;
+    max-width: @deck-overview-width;
   }
 
   .columns-container {
     display: flex;
-    margin: 0 auto;
-    max-width: 685px;
+    margin-right: auto;
+    max-width: @deck-overview-width;
     padding-top: 25px;
 
     .deck-actions-column {
@@ -28,6 +31,8 @@ good when the screensize/window gets smaller
           .list-item {
             list-style-type: none;
             margin-top: 10px;
+            width: min-content;
+            white-space: nowrap;
 
             &__link {
               align-items: center;
@@ -46,7 +51,7 @@ good when the screensize/window gets smaller
 
             &__link:hover {
               text-decoration: none;
-              color: yellow;
+              color: @primary-color;
             }
           }
         }
@@ -59,8 +64,9 @@ good when the screensize/window gets smaller
       .card-actions {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         margin-top: 10px;
-        width: calc(100% - 32px);
+        width: 100%;
 
         .card-paginator {
           align-items: center;
@@ -75,6 +81,11 @@ good when the screensize/window gets smaller
         .card-buttons {
           display: flex;
           flex-direction: row;
+
+          // apply style to all children
+          & > * {
+            margin-left: 10px;
+          }
         }
       }
     }

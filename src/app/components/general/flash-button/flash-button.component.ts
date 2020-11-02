@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'flash-button',
   templateUrl: './flash-button.component.html',
   styleUrls: ['./flash-button.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FlashButtonComponent {
   /** Color of button */
@@ -20,6 +27,10 @@ export class FlashButtonComponent {
   @Input() icon: string;
   /** Button text if a text button */
   @Input() text: string;
+  /** tooltip shows on hover */
+  @Input() tooltip: string;
+  /** tooltip color */
+  @Input() tooltipColor: string;
   /** Controls button type */
   @Input() type: 'text' | 'icon'; //can add more if needed. Maybe export as a type in constants
   /** Controls width of button */
@@ -31,6 +42,13 @@ export class FlashButtonComponent {
   constructor() {}
 
   ngOnInit() {}
+
+  // this seems like a stupid/unnecessary method but we'll roll with it lol
+  public constructTooltipClass() {
+    return this.tooltipColor
+      ? `custom-tooltip ${this.tooltipColor}`
+      : 'custom-tooltip primary-color';
+  }
 
   public handleButtonClick(event) {
     this.onButtonClick.emit(event);

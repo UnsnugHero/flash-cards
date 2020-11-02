@@ -4,6 +4,8 @@
       <button
         mat-icon-button
         class="flash-icon-button"
+        [matTooltip]="tooltip"
+        [matTooltipClass]="constructTooltipClass()"
         (click)="handleButtonClick($event)"
       >
         <mat-icon>{{ icon }}</mat-icon>
@@ -17,6 +19,8 @@
         [class.deck-style]="enableDeckStyling"
         [color]="color"
         [disableRipple]="disableRipple"
+        [matTooltip]="tooltip"
+        [matTooltipClass]="constructTooltipClass()"
         [style.height]="height"
         [style.width]="width"
         (click)="handleButtonClick($event)"

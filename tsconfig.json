@@ -23,7 +23,6 @@
       "@modules/*": ["./app/modules/*"],
       "@pages/*": ["./app/components/pages/*"],
       "@services/*": ["./app/services/*"],
-      "@styles/*": ["./app/styles/*"],
       "@utilities/*": ["./app/utilities/*"]
     }
   },

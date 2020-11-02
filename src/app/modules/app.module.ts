@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Project Self-Definitions
 import { AppComponent } from '@components/flash-app/app.component';
@@ -110,6 +111,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     MatSelectModule,
     MatSnackBarModule,
     MatTableModule,
+    MatTooltipModule,
 
     // else
     ReactiveFormsModule,
