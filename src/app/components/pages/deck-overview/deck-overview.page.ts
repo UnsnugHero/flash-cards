@@ -11,8 +11,12 @@ import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subs
   styleUrls: ['./deck-overview.page.less'],
 })
 export class DeckOverviewPage {
+  public cards = [1, 2, 3, 4, 5];
+  public currentCardIndex: number;
   public deckId: number;
   public deck: Deck;
+
+  public showMnemonics: boolean = false;
 
   private _subscriptionManager = new SubscriptionManager();
 
@@ -22,6 +26,10 @@ export class DeckOverviewPage {
   ) {}
 
   ngOnInit() {
+    // maybe with this field, we can set it based on if they've been on this page before?
+    // and then we can have a button as part of the action to go back to the first card
+    this.currentCardIndex = 1;
+
     const paramSubscription = this.activatedRoute.params
       .pipe(
         mergeMap((params) => {

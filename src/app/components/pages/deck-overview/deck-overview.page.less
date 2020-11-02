@@ -1,3 +1,8 @@
+/**
+We'll definitely need to modify this css in the future as its not very
+good when the screensize/window gets smaller
+*/
+
 .deck-overview-page {
   padding-top: 25px;
 
@@ -6,7 +11,7 @@
     padding-top: 25px;
 
     .deck-actions-column {
-      flex: 30%;
+      flex: 25%;
 
       .deck-actions {
         .actions-list {
@@ -18,8 +23,18 @@
             margin-top: 10px;
 
             &__link {
+              align-items: center;
+              color: black;
+              display: flex;
               text-decoration: none;
-              color: black; //figure out styling later
+
+              .action-icon {
+                margin-right: 10px;
+              }
+
+              .action-text {
+                font-weight: bold;
+              }
             }
 
             &__link:hover {
@@ -32,7 +47,23 @@
     }
 
     .deck-cards-column {
-      flex: 70%;
+      flex: 75%;
+
+      .card-actions {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+
+        .card-paginator {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+
+          &__position-numbers {
+            margin: 0 10px 0 10px;
+          }
+        }
+      }
     }
   }
 }

@@ -1,21 +1,33 @@
 <div *ngIf="deck" class="deck-overview-page page">
   <div class="deck-title">
-    <h2 class="deck-title-text custom-header">{{ deck.title }}</h2>
+    <h1 class="deck-title-text custom-header">{{ deck.title }}</h1>
+    <h5 class="sub-header custom-header">
+      This deck is home to {{ cards.length }} cards
+    </h5>
   </div>
   <div class="columns-container">
     <div class="deck-actions-column column">
       <div class="deck-actions">
         <!-- buttons/actions for Adding card, practice, test, view all cards to nav to all cards view... -->
-        <h4 class="actions-list-title custom-header">Deck Actions</h4>
+        <h3 class="actions-list-title custom-header">Deck Actions</h3>
         <ul class="actions-list">
           <li class="add-card-action list-item">
-            <a class="list-item__link" href="">+ Add Card</a>
+            <a class="list-item__link" href="">
+              <mat-icon class="action-icon">add</mat-icon>
+              <span class="action-text">Add Card</span>
+            </a>
           </li>
           <li class="test-action list-item">
-            <a class="list-item__link" href="">Test</a>
+            <a class="list-item__link" href="">
+              <mat-icon class="action-icon">content_paste</mat-icon>
+              <span class="action-text">Test</span></a
+            >
           </li>
           <li class="delete-deck-action list-item">
-            <a class="list-item__link" href="">Delete Deck</a>
+            <a class="list-item__link" href="">
+              <mat-icon class="action-icon">delete</mat-icon>
+              <span class="action-text">Delete Deck</span></a
+            >
           </li>
         </ul>
       </div>
@@ -27,6 +39,17 @@
         [answer]="'Hi, I am the answer'"
         [prompt]="'Hi, I am a card'"
       ></flash-card>
+      <div class="card-actions">
+        <div class="card-paginator">
+          <!-- disable this card if it is the first card of the deck, or cycle to the end of deck? -->
+          <flash-button icon="west" type="icon"></flash-button>
+          <span class="card-paginator__position-numbers">
+            {{ currentCardIndex }} of {{ cards.length }}
+          </span>
+          <flash-button icon="east" type="icon"></flash-button>
+        </div>
+        <div class="card-buttons"></div>
+      </div>
     </div>
   </div>
 </div>
