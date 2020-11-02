@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MenuOption } from 'src/app/models/component.model';
+import { MenuOption } from '@models/component.model';
 
 @Component({
   selector: 'flash-menu',

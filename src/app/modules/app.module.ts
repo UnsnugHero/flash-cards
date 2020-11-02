@@ -4,10 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent } from '../components/general/flash-app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlashRoutingModule } from './flash-routing.module';
-
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Material
@@ -24,33 +21,37 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 
+// Project Self-Definitions
+import { AppComponent } from '@components/flash-app/app.component';
+import { FlashRoutingModule } from './flash-routing.module';
+
 // Custom Components
-import { FlashAutocompleteComponent } from '../components/general/flash-autocomplete/flash-autocomplete.component';
-import { FlashButtonComponent } from '../components/general/flash-button/flash-button.component';
-import { FlashCardComponent } from '../components/general/flash-card/flash-card.component';
-import { FlashChipsAutocompleteComponent } from '../components/general/flash-chips-autocomplete/flash-chips-autocomplete.component';
-import { FlashDeckComponent } from '../components/general/flash-deck/flash-deck.component';
-import { FlashHeaderComponent } from '../components/general/flash-header/flash-header.component';
-import { FlashInputComponent } from '../components/general/flash-input/flash-input.component';
-import { FlashMenuComponent } from '../components/general/flash-menu/flash-menu.component';
-import { FlashSelectComponent } from '../components/general/flash-select/flash-select.component';
-import { FlashTableComponent } from '../components/general/flash-table/flash-table.component';
+import { FlashAutocompleteComponent } from '@components/flash-autocomplete/flash-autocomplete.component';
+import { FlashButtonComponent } from '@components/flash-button/flash-button.component';
+import { FlashCardComponent } from '@components/flash-card/flash-card.component';
+import { FlashChipsAutocompleteComponent } from '@components/flash-chips-autocomplete/flash-chips-autocomplete.component';
+import { FlashDeckComponent } from '@components/flash-deck/flash-deck.component';
+import { FlashHeaderComponent } from '@components/flash-header/flash-header.component';
+import { FlashInputComponent } from '@components/flash-input/flash-input.component';
+import { FlashMenuComponent } from '@components/flash-menu/flash-menu.component';
+import { FlashSelectComponent } from '@components/flash-select/flash-select.component';
+import { FlashTableComponent } from '@components/flash-table/flash-table.component';
 
 // Dialogs
-import { AddDeckDialog } from '../components/dialogs/add-deck/add-deck.dialog';
-import { DeleteCategoryDialog } from '../components/dialogs/delete-category/delete-category.dialog';
-import { EditCategoryDialog } from '../components/dialogs/edit-category/edit-category.dialog';
+import { AddDeckDialog } from '@dialogs/add-deck/add-deck.dialog';
+import { DeleteCategoryDialog } from '@dialogs/delete-category/delete-category.dialog';
+import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
 
 // Pages
-import { CategoriesPage } from '../components/pages/categories/categories.page';
-import { DecksPage } from '../components/pages/decks/decks.page';
-import { DeckOverviewPage } from '../components/pages/deck-overview/deck-overview.page';
-import { NotFoundPage } from '../components/pages/not-found/not-found.page';
-import { TemplatesPageComponent } from '../components/pages/templates/templates.component.page';
+import { CategoriesPage } from '@pages/categories/categories.page';
+import { DecksPage } from '@pages/decks/decks.page';
+import { DeckOverviewPage } from '@pages/deck-overview/deck-overview.page';
+import { NotFoundPage } from '@pages/not-found/not-found.page';
+import { TemplatesPageComponent } from '@pages/templates/templates.component.page';
 
 // Services
-import { DeckService } from '../services/deck.service';
-import { InMemoryDataService } from '../services/in-memory-data.service';
+import { DeckService } from '@services/deck.service';
+import { InMemoryDataService } from '@services/in-memory-data.service';
 
 @NgModule({
   declarations: [

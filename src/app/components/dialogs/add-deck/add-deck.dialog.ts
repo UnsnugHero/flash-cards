@@ -1,12 +1,17 @@
+// external
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AutocompleteOption } from 'src/app/models/component.model';
-import { Category } from 'src/app/models/deck.model';
-import { CategoryService } from 'src/app/services/category.service';
+
+// models
+import { AutocompleteOption } from '@models/component.model';
+import { Category } from '@models/deck.model';
+
+// services
+import { CategoryService } from '@services/category.service';
 
 const SNACKBAR_DURATION: number = 5000;
 

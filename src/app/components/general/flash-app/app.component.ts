@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { HeaderItem } from 'src/app/models/component.model';
+import { HeaderItem } from '@models/component.model';
 import { HEADER_LINKS } from './app.constants';
 
 @Component({

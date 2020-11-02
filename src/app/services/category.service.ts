@@ -6,12 +6,10 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  mergeMap,
   switchMap,
-  tap,
 } from 'rxjs/operators';
-import { Category } from '../models/deck.model';
-import { CategorySearchPayload } from '../models/payload.model';
+import { Category } from '@models/deck.model';
+import { CategorySearchPayload } from '@models/payload.model';
 import { handleError } from './services.helpers';
 
 const DEBOUNCE_TIME = 300;

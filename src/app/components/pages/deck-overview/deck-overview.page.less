@@ -6,8 +6,15 @@ good when the screensize/window gets smaller
 .deck-overview-page {
   padding-top: 25px;
 
+  .deck-title {
+    margin: 0 auto;
+    max-width: 685%;
+  }
+
   .columns-container {
     display: flex;
+    margin: 0 auto;
+    max-width: 685px;
     padding-top: 25px;
 
     .deck-actions-column {
@@ -53,6 +60,7 @@ good when the screensize/window gets smaller
         display: flex;
         flex-direction: row;
         margin-top: 10px;
+        width: calc(100% - 32px);
 
         .card-paginator {
           align-items: center;
@@ -62,6 +70,11 @@ good when the screensize/window gets smaller
           &__position-numbers {
             margin: 0 10px 0 10px;
           }
+        }
+
+        .card-buttons {
+          display: flex;
+          flex-direction: row;
         }
       }
     }

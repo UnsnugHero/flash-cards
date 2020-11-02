@@ -2,7 +2,7 @@ import {
   DisplayedColumn,
   MenuOption,
   SelectOption,
-} from 'src/app/models/component.model';
+} from '@models/component.model';
 
 export type CategoryTableAction = 'editCategory' | 'deleteCategory';
 

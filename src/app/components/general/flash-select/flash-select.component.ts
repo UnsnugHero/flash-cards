@@ -1,12 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { SelectOption } from 'src/app/models/component.model';
+import { SelectOption } from '@models/component.model';
 
 @Component({
   selector: 'flash-select',

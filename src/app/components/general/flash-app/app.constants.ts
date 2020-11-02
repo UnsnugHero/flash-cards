@@ -1,4 +1,4 @@
-import { HeaderItem } from 'src/app/models/component.model';
+import { HeaderItem } from '@models/component.model';
 
 export const HEADER_LINKS: HeaderItem[] = [
   {

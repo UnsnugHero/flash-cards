@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HeaderItem } from 'src/app/models/component.model';
+import { HeaderItem } from '@models/component.model';
 
 @Component({
   selector: 'flash-header',

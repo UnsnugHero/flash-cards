@@ -1,9 +1,16 @@
+// external
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
-import { Deck } from 'src/app/models/deck.model';
-import { DeckService } from 'src/app/services/deck.service';
-import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
+
+// models
+import { Deck } from '@models/deck.model';
+
+// services
+import { DeckService } from '@services/deck.service';
+
+// util
+import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
 
 @Component({
   selector: 'deck-overview-page',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { DisplayedColumn, RowAction } from 'src/app/models/component.model';
+import { DisplayedColumn, RowAction } from '@models/component.model';
 
 @Component({
   selector: 'flash-table',

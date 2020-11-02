@@ -1,24 +1,35 @@
+// external
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, filter, mergeMap, tap } from 'rxjs/operators';
-import { DeleteCategoryDialog } from 'src/app/components/dialogs/delete-category/delete-category.dialog';
-import {
-  DisplayedColumn,
-  RowAction,
-  SelectOption,
-} from 'src/app/models/component.model';
-import { Category } from 'src/app/models/deck.model';
-import { CategoryService } from 'src/app/services/category.service';
-import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
-import { EditCategoryDialog } from '../../dialogs/edit-category/edit-category.dialog';
+
+// constants
 import {
   CategoryTableAction,
   CATEGORY_SEARCH_SORT_MENU_OPTIONS,
   DISPLAYED_COLUMNS,
 } from './categories.constants';
+
+// dialogs
+import { DeleteCategoryDialog } from '@dialogs/delete-category/delete-category.dialog';
+import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
+
+// models
+import {
+  DisplayedColumn,
+  RowAction,
+  SelectOption,
+} from '@models/component.model';
+import { Category } from '@models/deck.model';
+
+// services
+import { CategoryService } from '@services/category.service';
+
+// util
+import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
 
 const SNACKBAR_DURATION: number = 5000;
 

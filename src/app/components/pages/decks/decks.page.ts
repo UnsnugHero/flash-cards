@@ -1,3 +1,4 @@
+// external
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -6,17 +7,21 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-// Models
-import { Category, Deck } from 'src/app/models/deck.model';
-
-// Services
-import { CategoryService } from 'src/app/services/category.service';
-import { DeckService } from 'src/app/services/deck.service';
-import { SubscriptionManager } from 'src/app/utilities/subscription-manager/subscription-manager.util';
-import { AddDeckDialog } from '../../dialogs/add-deck/add-deck.dialog';
-
-// Constants
+// constants
 import { SORT_BY_MENU_OPTIONS } from './decks.constants';
+
+// dialogs
+import { AddDeckDialog } from '@dialogs/add-deck/add-deck.dialog';
+
+// models
+import { Category, Deck } from '@models/deck.model';
+
+// services
+import { CategoryService } from '@services/category.service';
+import { DeckService } from '@services/deck.service';
+
+// util
+import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
 
 @Component({
   selector: 'app-decks',

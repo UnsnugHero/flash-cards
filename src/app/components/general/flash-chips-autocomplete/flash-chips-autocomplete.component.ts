@@ -9,7 +9,7 @@ import {
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AbstractControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { AutocompleteOption } from 'src/app/models/component.model';
+import { AutocompleteOption } from '@models/component.model';
 
 @Component({
   selector: 'flash-chips-autocomplete',

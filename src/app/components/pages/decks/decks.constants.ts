@@ -1,4 +1,4 @@
-import { SelectOption } from 'src/app/models/component.model';
+import { SelectOption } from '@models/component.model';
 
 export const SORT_BY_MENU_OPTIONS: SelectOption[] = [
   {
