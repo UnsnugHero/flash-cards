@@ -1,4 +1,4 @@
-<div class="decks-page">
+<div *ngIf="decks$ | async as decks; else loader" class="decks-page">
   <div class="decks-top-bar">
     <div class="decks-search-bar">
       <flash-input
@@ -27,7 +27,7 @@
   </div>
 
   <div class="decks-grid">
-    <ng-container *ngFor="let deck of decks$ | async">
+    <ng-container *ngFor="let deck of decks">
       <div class="deck-grid-item">
         <flash-button
           class="deck"
@@ -44,3 +44,7 @@
     </ng-container>
   </div>
 </div>
+
+<ng-template #loader>
+  <flash-progress-spinner loadingContent="Decks"></flash-progress-spinner>
+</ng-template>

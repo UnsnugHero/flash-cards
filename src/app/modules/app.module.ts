@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
@@ -35,6 +36,7 @@ import { FlashDeckComponent } from '@components/flash-deck/flash-deck.component'
 import { FlashHeaderComponent } from '@components/flash-header/flash-header.component';
 import { FlashInputComponent } from '@components/flash-input/flash-input.component';
 import { FlashMenuComponent } from '@components/flash-menu/flash-menu.component';
+import { FlashProgressSpinner } from '@components/flash-progress-spinner/flash-progress-spinner.component';
 import { FlashSelectComponent } from '@components/flash-select/flash-select.component';
 import { FlashTableComponent } from '@components/flash-table/flash-table.component';
 
@@ -68,6 +70,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     FlashInputComponent,
     FlashMenuComponent,
     FlashSelectComponent,
+    FlashProgressSpinner,
     FlashTableComponent,
 
     // Dialogs
@@ -110,6 +113,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     MatPaginatorModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
 

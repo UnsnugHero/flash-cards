@@ -1,4 +1,4 @@
-<div class="categories-page page">
+<div *ngIf="categories; else loader" class="categories-page page">
   <div class="table-search">
     <flash-input
       class="category-search-input"
@@ -16,7 +16,6 @@
   </div>
   <div class="table-container">
     <flash-table
-      *ngIf="categories"
       tableClass="category-table"
       tableWidth="100%"
       [dataSource]="categories"
@@ -26,3 +25,7 @@
     ></flash-table>
   </div>
 </div>
+
+<ng-template #loader>
+  <flash-progress-spinner loadingContent="Categories"></flash-progress-spinner>
+</ng-template>

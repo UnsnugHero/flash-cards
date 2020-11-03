@@ -1,4 +1,4 @@
-<div *ngIf="deck" class="deck-overview-page page">
+<div *ngIf="deck; else loader" class="deck-overview-page page">
   <div class="deck-title">
     <h1 class="deck-title-text custom-header">{{ deck.title }}</h1>
     <h5 class="sub-header custom-header">
@@ -70,3 +70,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <flash-progress-spinner loadingContent="Deck"></flash-progress-spinner>
+</ng-template>
