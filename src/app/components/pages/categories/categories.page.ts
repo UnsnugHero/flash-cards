@@ -10,11 +10,12 @@ import { debounceTime, filter, mergeMap, tap } from 'rxjs/operators';
 import {
   CategoryTableAction,
   CATEGORY_SEARCH_SORT_MENU_OPTIONS,
+  DELETE_CATEGORY_DIALOG_CONFIGS_DATA,
   DISPLAYED_COLUMNS,
 } from './categories.constants';
 
 // dialogs
-import { DeleteCategoryDialog } from '@dialogs/delete-category/delete-category.dialog';
+import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
 
 // models
@@ -128,7 +129,8 @@ export class CategoriesPage {
   }
 
   private _openDeleteCategoryDialog(category: Category) {
-    this._dialogRef = this.dialog.open(DeleteCategoryDialog, {
+    this._dialogRef = this.dialog.open(ConfirmDialog, {
+      data: DELETE_CATEGORY_DIALOG_CONFIGS_DATA,
       disableClose: true,
     });
 

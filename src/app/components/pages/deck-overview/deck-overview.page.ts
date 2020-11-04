@@ -1,7 +1,7 @@
 // external
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { mergeMap, tap } from 'rxjs/operators';
+import { filter, mergeMap, tap } from 'rxjs/operators';
 
 // models
 import { Deck } from '@models/deck.model';
@@ -11,6 +11,12 @@ import { DeckService } from '@services/deck.service';
 
 // util
 import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
+import {
+  DELETE_CARD_DIALOG_CONFIG_DATA,
+  DELETE_DECK_DIALOG_CONFIG_DATA,
+} from './deck-overview.constants';
 
 @Component({
   selector: 'deck-overview-page',
@@ -25,11 +31,14 @@ export class DeckOverviewPage {
 
   public showMnemonics: boolean = false;
 
+  private _dialogRef: MatDialogRef<any>;
+
   private _subscriptionManager = new SubscriptionManager();
 
   constructor(
     public activatedRoute: ActivatedRoute,
-    public deckService: DeckService
+    public deckService: DeckService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -47,5 +56,45 @@ export class DeckOverviewPage {
       .subscribe();
 
     this._subscriptionManager.addSubscription(paramSubscription);
+  }
+
+  ngOnDestroy() {
+    this._subscriptionManager.unsubscribeAll();
+  }
+
+  public onDeleteCardButtonClick(cardId: number) {
+    this._dialogRef = this.dialog.open(ConfirmDialog, {
+      data: DELETE_CARD_DIALOG_CONFIG_DATA,
+      disableClose: true,
+    });
+
+    const deleteCardSubscription = this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        mergeMap(() => this.deckService.deleteCard(this.deckId, cardId)),
+        tap((result) => console.log(`delete card backend result: ${result}`))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(deleteCardSubscription);
+  }
+
+  public onDeleteDeckButtonClick() {
+    this._dialogRef = this.dialog.open(ConfirmDialog, {
+      data: DELETE_DECK_DIALOG_CONFIG_DATA,
+      disableClose: true,
+    });
+
+    const deleteDeckSubscription = this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        mergeMap(() => this.deckService.deleteDeck(this.deckId)),
+        tap((result) => console.log(`delete deck backend result: ${result}`))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(deleteDeckSubscription);
   }
 }

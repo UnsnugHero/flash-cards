@@ -3,8 +3,15 @@ import {
   MenuOption,
   SelectOption,
 } from '@models/component.model';
+import { ConfirmDialogData } from '@models/dialog.model';
 
 export type CategoryTableAction = 'editCategory' | 'deleteCategory';
+
+export const DELETE_CATEGORY_DIALOG_CONFIGS_DATA: ConfirmDialogData = {
+  dialogTitle: 'Delete Category?',
+  bodyMessage: 'Deleting a category cannot be undone.',
+  confirmButtonText: 'Delete',
+};
 
 export const TABLE_MENU_OPTIONS: MenuOption[] = [
   { text: 'Edit', value: 'editCategory' },

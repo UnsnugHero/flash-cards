@@ -42,7 +42,7 @@ import { FlashTableComponent } from '@components/flash-table/flash-table.compone
 
 // Dialogs
 import { AddDeckDialog } from '@dialogs/add-deck/add-deck.dialog';
-import { DeleteCategoryDialog } from '@dialogs/delete-category/delete-category.dialog';
+import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
 
 // Pages
@@ -75,7 +75,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
 
     // Dialogs
     AddDeckDialog,
-    DeleteCategoryDialog,
+    ConfirmDialog,
     EditCategoryDialog,
 
     // Pages

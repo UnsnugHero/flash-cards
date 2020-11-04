@@ -12,19 +12,19 @@
         <h3 class="actions-list-title custom-header">Deck Actions</h3>
         <ul class="actions-list">
           <li class="add-card-action list-item">
-            <a class="list-item__link" href="">
+            <a class="list-item__link">
               <mat-icon class="action-icon">add</mat-icon>
               <span class="action-text">Add Card</span>
             </a>
           </li>
           <li class="test-action list-item">
-            <a class="list-item__link" href="">
+            <a class="list-item__link">
               <mat-icon class="action-icon">content_paste</mat-icon>
               <span class="action-text">Test</span></a
             >
           </li>
           <li class="delete-deck-action list-item">
-            <a class="list-item__link" href="">
+            <a class="list-item__link" (click)="onDeleteDeckButtonClick()">
               <mat-icon class="action-icon">delete</mat-icon>
               <span class="action-text">Delete Deck</span></a
             >
@@ -57,13 +57,14 @@
           <flash-button
             icon="edit"
             tooltip="Edit Card"
-            tooltipColor="primary-color"
             type="icon"
           ></flash-button>
+          <!-- TODO: get card id and put it in the method call there -->
           <flash-button
             icon="delete"
             tooltip="Delete Card"
             type="icon"
+            (onButtonClick)="onDeleteCardButtonClick(1)"
           ></flash-button>
         </div>
       </div>
