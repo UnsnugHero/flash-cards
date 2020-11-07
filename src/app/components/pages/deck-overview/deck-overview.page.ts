@@ -1,6 +1,6 @@
 // external
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 
 // models
@@ -38,17 +38,17 @@ export class DeckOverviewPage {
   constructor(
     public activatedRoute: ActivatedRoute,
     public deckService: DeckService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit() {
-    // maybe with this field, we can set it based on if they've been on this page before?
-    // and then we can have a button as part of the action to go back to the first card
     this.currentCardIndex = 1;
 
     const paramSubscription = this.activatedRoute.params
       .pipe(
         mergeMap((params) => {
+          this.deckId = params.id;
           return this.deckService.getDeck(parseInt(params.id));
         }),
         tap((deck: Deck) => (this.deck = deck))
@@ -61,6 +61,39 @@ export class DeckOverviewPage {
   ngOnDestroy() {
     this._subscriptionManager.unsubscribeAll();
   }
+
+  // Deck Action Handlers
+
+  public onAddCardsActionClick() {
+    // route to a card making page that has same layout as this page but the card is a form with a card prompty and answer input and a textarea input for
+    // a mnemonic if they choose to make one. Below the card on the right hand side are two buttons, one says 'finish' which finishes the adding card session
+    // and takes user back to the deck they were making cards for. The other button says 'Add Card' and will submit the form to the backend to add the card to
+    // the deck they were on when they hit 'Add Cards'. The button will also reset the form so the user can continue making cards without navigating back and
+    // forth between views/dialogs.
+    // on the left side there will be actions where the user can see how many cards they have made so far that will show up somehow... Maybe a dialog table?
+    // or just some simple list? showing the prompt and answer... no need to show the mnemonic. Maybe theres another mat component to make this easy.
+    this.router.navigateByUrl(`deck/add-cards/${this.deckId}`);
+  }
+
+  public onDeleteDeckActionClick() {
+    this._dialogRef = this.dialog.open(ConfirmDialog, {
+      data: DELETE_DECK_DIALOG_CONFIG_DATA,
+      disableClose: true,
+    });
+
+    const deleteDeckSubscription = this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        mergeMap(() => this.deckService.deleteDeck(this.deckId)),
+        tap((result) => console.log(`delete deck backend result: ${result}`))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(deleteDeckSubscription);
+  }
+
+  // Card button handlers
 
   public onDeleteCardButtonClick(cardId: number) {
     this._dialogRef = this.dialog.open(ConfirmDialog, {
@@ -80,21 +113,11 @@ export class DeckOverviewPage {
     this._subscriptionManager.addSubscription(deleteCardSubscription);
   }
 
-  public onDeleteDeckButtonClick() {
-    this._dialogRef = this.dialog.open(ConfirmDialog, {
-      data: DELETE_DECK_DIALOG_CONFIG_DATA,
-      disableClose: true,
-    });
+  public onEditCardButtonClick(cardId: number) {
+    // dialog or use the form card? ill lean towards the form card...
+  }
 
-    const deleteDeckSubscription = this._dialogRef
-      .afterClosed()
-      .pipe(
-        filter((result) => !!result),
-        mergeMap(() => this.deckService.deleteDeck(this.deckId)),
-        tap((result) => console.log(`delete deck backend result: ${result}`))
-      )
-      .subscribe();
-
-    this._subscriptionManager.addSubscription(deleteDeckSubscription);
+  public onShowMnemonicsButtonClick() {
+    this.showMnemonics = !this.showMnemonics;
   }
 }

@@ -46,6 +46,7 @@ import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
 
 // Pages
+import { AddCardsPage } from '@pages/add-cards/add-cards.page';
 import { CategoriesPage } from '@pages/categories/categories.page';
 import { DecksPage } from '@pages/decks/decks.page';
 import { DeckOverviewPage } from '@pages/deck-overview/deck-overview.page';
@@ -79,6 +80,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     EditCategoryDialog,
 
     // Pages
+    AddCardsPage,
     CategoriesPage,
     DecksPage,
     DeckOverviewPage,

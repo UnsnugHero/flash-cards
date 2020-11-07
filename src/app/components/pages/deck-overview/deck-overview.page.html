@@ -12,9 +12,10 @@
         <h3 class="actions-list-title custom-header">Deck Actions</h3>
         <ul class="actions-list">
           <li class="add-card-action list-item">
-            <a class="list-item__link">
+            <!-- coulda binded to routeLink, but I like the consistency with click handlers -->
+            <a class="list-item__link" (click)="onAddCardsActionClick()">
               <mat-icon class="action-icon">add</mat-icon>
-              <span class="action-text">Add Card</span>
+              <span class="action-text">Add Cards</span>
             </a>
           </li>
           <li class="test-action list-item">
@@ -24,7 +25,7 @@
             >
           </li>
           <li class="delete-deck-action list-item">
-            <a class="list-item__link" (click)="onDeleteDeckButtonClick()">
+            <a class="list-item__link" (click)="onDeleteDeckActionClick()">
               <mat-icon class="action-icon">delete</mat-icon>
               <span class="action-text">Delete Deck</span></a
             >
@@ -38,6 +39,7 @@
       <flash-card
         [answer]="'Hi, I am the answer'"
         [prompt]="'Hi, I am a card'"
+        [showMnemonic]="showMnemonics"
       ></flash-card>
       <div class="card-actions">
         <div class="card-paginator">
