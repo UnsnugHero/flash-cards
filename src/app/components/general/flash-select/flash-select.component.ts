@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@ngneat/reactive-forms';
 import { SelectOption } from '@models/component.model';
 
 @Component({

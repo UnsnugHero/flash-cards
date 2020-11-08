@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Deck } from '@models/deck.model';
+import { AddCardFormModel } from '@models/form.model';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { DeckService } from '@services/deck.service';
 import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
 import { mergeMap, tap } from 'rxjs/operators';
@@ -24,12 +26,6 @@ import { mergeMap, tap } from 'rxjs/operators';
  *
  */
 
-interface mmooddeell {
-  prompt: string;
-  answer: string;
-  mnemonic: string;
-}
-
 @Component({
   selector: 'add-card-page',
   templateUrl: './add-cards.page.html',
@@ -49,9 +45,11 @@ export class AddCardsPage {
   ) {}
 
   ngOnInit() {
-    // this.addCardFormGroup = new FormGroup<mmooddeell>({
-
-    // })
+    this.addCardFormGroup = new FormGroup<AddCardFormModel>({
+      prompt: new FormControl<string>('', Validators.required),
+      answer: new FormControl<string>('', Validators.required),
+      mnemonic: new FormControl<string>(''),
+    });
 
     const paramSubscription = this.activatedRoute.params
       .pipe(

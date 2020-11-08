@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@ngneat/reactive-forms';
 
 @Component({
   selector: 'flash-input',

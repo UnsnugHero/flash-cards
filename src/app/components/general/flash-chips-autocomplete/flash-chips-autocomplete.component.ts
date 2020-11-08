@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@ngneat/reactive-forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { AutocompleteOption } from '@models/component.model';
 
