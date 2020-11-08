@@ -1,20 +1,43 @@
 <div class="flash-card-container">
-  <div
-    class="flash-card"
-    [class.flipped]="isCardFlipped"
-    (click)="isCardFlipped = !isCardFlipped"
-  >
-    <div class="flash-card-face flash-card-face__front">
-      <mat-card class="card">
-        <p class="card__text-content">{{ prompt }}</p>
-      </mat-card>
+  <!-- can expand to ngSwitch if need be in the future... -->
+  <ng-container *ngIf="isFormCard; else flashCard">
+    <div class="flash-card">
+      <div class="flash-card-face flash-card-face__front">
+        <mat-card class="card">
+          <!-- card prompt - required -->
+          <flash-input
+            [formCtrl]="addCardFormGroup.controls['prompt']"
+          ></flash-input>
+          <!-- card answer - required -->
+          <flash-input
+            [formCtrl]="addCardFormGroup.controls['answer']"
+          ></flash-input>
+          <!-- mnemonic - optional -->
+          <flash-input
+            [formCtrl]="addCardFormGroup.controls['mnemonic']"
+          ></flash-input>
+        </mat-card>
+      </div>
     </div>
-    <div class="flash-card-face flash-card-face__back">
-      <mat-card class="card">
-        <p class="card__text-content">{{ answer }}</p>
-        <!-- heres dispalys mnemonic only when user hits show mnemonics for cards -->
-        <p *ngIf="showMnemonic">{{ mnemonic }}</p>
-      </mat-card>
+  </ng-container>
+  <ng-template #flashCard>
+    <div
+      class="flash-card clickable"
+      [class.flipped]="isCardFlipped"
+      (click)="isCardFlipped = !isCardFlipped"
+    >
+      <div class="flash-card-face flash-card-face__front">
+        <mat-card class="card">
+          <p class="card__text-content">{{ prompt }}</p>
+        </mat-card>
+      </div>
+      <div class="flash-card-face flash-card-face__back">
+        <mat-card class="card">
+          <p class="card__text-content">{{ answer }}</p>
+          <!-- heres dispalys mnemonic only when user hits show mnemonics for cards -->
+          <p *ngIf="showMnemonic">{{ mnemonic }}</p>
+        </mat-card>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>

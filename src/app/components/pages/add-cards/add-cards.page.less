@@ -1,0 +1,59 @@
+@import "variables";
+
+@add-cards-width: 730px;
+
+.add-cards-page {
+  padding-top: 25px;
+
+  .add-cards-title {
+    margin-right: auto;
+    max-width: @add-cards-width;
+  }
+
+  .columns-container {
+    display: flex;
+    margin-right: auto;
+    max-width: @add-cards-width;
+    padding-top: calc(25px + 16px); // 16 for the missing subheader
+
+    .add-card-stats-column {
+      flex: 25%;
+
+      .add-card-stats {
+        .stats-list-title {
+          margin: 0;
+          padding: 0;
+
+          .list-item {
+            list-style-type: none;
+            margin-top: 10px;
+            width: min-content;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    .form-card-column {
+      flex: 75%;
+
+      .form-card-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%;
+
+        .form-card-add-and-finish-buttons {
+          display: flex;
+          flex-direction: row;
+
+          // apply style to all children
+          & > * {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,21 @@
 <div class="input-container">
-  <input
-    #input
-    matInput
-    autocomplete="off"
-    type="text"
-    [formControl]="formCtrl"
-    [placeholder]="placeholder"
-  />
-  <button
-    *ngIf="clearable && input.value"
-    matSuffix
-    mat-flat-button
-    class="clear-button"
-    (click)="onClearClicked()"
-  >
-    <mat-icon class="clear-icon">close</mat-icon>
-  </button>
+  <mat-form-field>
+    <input
+      #input
+      matInput
+      autocomplete="off"
+      type="text"
+      [formControl]="formCtrl"
+      [placeholder]="placeholder"
+    />
+    <button
+      *ngIf="input.value"
+      matSuffix
+      mat-flat-button
+      class="clear-button"
+      (click)="onClearClicked()"
+    >
+      <mat-icon class="clear-icon">close</mat-icon>
+    </button>
+  </mat-form-field>
 </div>
