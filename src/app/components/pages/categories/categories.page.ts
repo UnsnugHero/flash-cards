@@ -31,6 +31,7 @@ import { CategoryService } from '@services/category.service';
 
 // util
 import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
+import { CategorySearchPayload } from '@models/payload.model';
 
 const SNACKBAR_DURATION: number = 5000;
 
@@ -57,7 +58,7 @@ export class CategoriesPage {
   ) {}
 
   ngOnInit() {
-    this.searchForm = new FormGroup({
+    this.searchForm = new FormGroup<CategorySearchPayload>({
       name: new FormControl(),
       sortBy: new FormControl(),
     });
@@ -67,7 +68,9 @@ export class CategoriesPage {
       .pipe(
         debounceTime(500),
         mergeMap(() => {
-          return this.categoryService.search(this.searchForm.value);
+          return this.categoryService.search(
+            this.searchForm.value as CategorySearchPayload
+          );
         }),
         tap((searchResults) => {
           this.categories = searchResults;

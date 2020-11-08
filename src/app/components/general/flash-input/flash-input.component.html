@@ -1,21 +1,30 @@
 <div class="input-container">
-  <mat-form-field>
-    <input
-      #input
-      matInput
-      autocomplete="off"
-      type="text"
-      [formControl]="formCtrl"
-      [placeholder]="placeholder"
-    />
-    <button
-      *ngIf="input.value"
-      matSuffix
-      mat-flat-button
-      class="clear-button"
-      (click)="onClearClicked()"
-    >
-      <mat-icon class="clear-icon">close</mat-icon>
-    </button>
-  </mat-form-field>
+  <ng-container *ngIf="isTextarea; else flashInput">
+    <mat-form-field class="flash-textarea common-input-style">
+      <mat-label>{{ placeholder }}</mat-label>
+      <textarea matInput rows="3" [formControl]="formCtrl"></textarea>
+    </mat-form-field>
+  </ng-container>
+  <ng-template #flashInput>
+    <mat-form-field class="flash-input common-input-style">
+      <input
+        #input
+        matInput
+        autocomplete="off"
+        type="text"
+        [formControl]="formCtrl"
+        [placeholder]="placeholder"
+      />
+      <button
+        *ngIf="input.value"
+        matSuffix
+        mat-button
+        mat-icon-button
+        class="clear-button"
+        (click)="onClearClicked()"
+      >
+        <mat-icon class="clear-icon">close</mat-icon>
+      </button>
+    </mat-form-field>
+  </ng-template>
 </div>

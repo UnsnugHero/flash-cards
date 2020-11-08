@@ -11,5 +11,6 @@
 ## Front End/ Back end
 
 - Implement service search methods so that the only required base payload is the input/query. This way it can be used to search for autocompletes. I can simply enforce page size and page on payloads when I need to. Calling search with just the input will query on the entirety of that option, and so for the case of an autocomplete, if the size of the response is biger than a certain threshold (as we said before, probably `100`), then the autocomplete will just show a this query is too big message and ask them to narrow the query.
+- category service search payload got messed up a bit with the ngneat form introduction. Just make sure to fix those models later in the service and in the categories.page.ts page when you call the search method from the categories service.
 
 ## Back end

@@ -7,18 +7,22 @@
           <div class="form-card-inputs">
             <!-- card prompt - required -->
             <flash-input
+              class="form-input"
               placeholder="Prompt"
               [formCtrl]="addCardFormGroup.controls.prompt"
             ></flash-input>
             <!-- card answer - required -->
             <flash-input
+              class="form-input"
               placeholder="Answer"
               [formCtrl]="addCardFormGroup.controls.answer"
             ></flash-input>
             <!-- mnemonic - optional -->
             <flash-input
+              class="form-input"
               placeholder="Mnemonic"
               [formCtrl]="addCardFormGroup.controls.mnemonic"
+              [isTextarea]="true"
             ></flash-input>
           </div>
         </mat-card>
