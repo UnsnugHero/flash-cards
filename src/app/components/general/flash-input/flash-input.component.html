@@ -25,6 +25,9 @@
       >
         <mat-icon class="clear-icon">close</mat-icon>
       </button>
+      <mat-error *ngIf="formCtrl.hasError('required')">
+        {{ requiredFieldName }} is required
+      </mat-error>
     </mat-form-field>
   </ng-template>
 </div>

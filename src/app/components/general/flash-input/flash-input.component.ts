@@ -14,6 +14,8 @@ export class FlashInputComponent {
   @Input() isTextarea: boolean = false;
   /** placeholder text that turns into the label on input click */
   @Input() placeholder: string;
+  /** text to display for field name in error message for required field */
+  @Input() requiredFieldName: string = 'This field';
 
   constructor() {}
 

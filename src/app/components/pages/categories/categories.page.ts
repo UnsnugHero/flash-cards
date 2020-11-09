@@ -30,7 +30,7 @@ import { Category } from '@models/deck.model';
 import { CategoryService } from '@services/category.service';
 
 // util
-import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
+import { SubscriptionManager } from '@utilities/subscription-manager.util';
 import { CategorySearchPayload } from '@models/payload.model';
 
 const SNACKBAR_DURATION: number = 5000;

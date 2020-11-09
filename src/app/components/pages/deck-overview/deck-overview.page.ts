@@ -10,7 +10,7 @@ import { Deck } from '@models/deck.model';
 import { DeckService } from '@services/deck.service';
 
 // util
-import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
+import { SubscriptionManager } from '@utilities/subscription-manager.util';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import {

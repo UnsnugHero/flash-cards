@@ -21,7 +21,7 @@ import { CategoryService } from '@services/category.service';
 import { DeckService } from '@services/deck.service';
 
 // util
-import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
+import { SubscriptionManager } from '@utilities/subscription-manager.util';
 
 @Component({
   selector: 'app-decks',

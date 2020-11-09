@@ -6,6 +6,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { Deck } from '@models/deck.model';
 import { handleError } from './services.helpers';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Card } from '@models/card.model';
+import { P } from '@angular/cdk/keycodes';
 
 const SNACKBAR_DURATION: number = 5000;
 
@@ -28,6 +30,19 @@ export class DeckService {
     return this.http
       .get<Deck[]>(this.decksUrl)
       .pipe(catchError(handleError('getDecks', [])));
+  }
+
+  public bulkAddCards(deckId: number, cardsToAdd: Card[]): Observable<string> {
+    return of('Cards Successfully Added to Deck!').pipe(
+      tap(() => {
+        this.snackbar.open('Cards Added to Deck!', 'Dismiss', {
+          duration: SNACKBAR_DURATION,
+        });
+      }),
+      catchError((error) => {
+        return of('error');
+      })
+    );
   }
 
   public deleteCard(deckId: number, cardId: number): Observable<string> {

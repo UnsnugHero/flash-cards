@@ -1,12 +1,24 @@
+// external
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Deck } from '@models/deck.model';
-import { AddCardFormModel } from '@models/form.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, mergeMap, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
+
+// services
 import { DeckService } from '@services/deck.service';
-import { SubscriptionManager } from '@utilities/subscription-manager/subscription-manager.util';
-import { mergeMap, tap } from 'rxjs/operators';
+
+// models
+import { Card } from '@models/card.model';
+import { Deck } from '@models/deck.model';
+
+// helpers
+import { getValueOfFormGroup } from '@utilities/helpers.util';
+import { SubscriptionManager } from '@utilities/subscription-manager.util';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
+import { FINISH_ADD_CARDS_DIALOG_CONFIGS } from './add-cards.constants';
 
 /**
  * this is a card making page that has same layout as the deck overview page but the card is a form with a card prompty and answer input and a textarea input for
@@ -32,20 +44,26 @@ import { mergeMap, tap } from 'rxjs/operators';
   styleUrls: ['./add-cards.page.less'],
 })
 export class AddCardsPage {
+  // TODO: show these in an (expandable?) list at the bottom of the page
+  public cardsToAdd: Card[] = [];
+
   public deckId: number;
   public deck: Deck;
 
   public addCardFormGroup: FormGroup;
 
+  private _dialogref: MatDialogRef<any>;
   private _subscriptionManager = new SubscriptionManager();
 
   constructor(
     public activatedRoute: ActivatedRoute,
-    public deckService: DeckService
+    public deckService: DeckService,
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit() {
-    this.addCardFormGroup = new FormGroup<AddCardFormModel>({
+    this.addCardFormGroup = new FormGroup<Card>({
       prompt: new FormControl<string>('', Validators.required),
       answer: new FormControl<string>('', Validators.required),
       mnemonic: new FormControl<string>(''),
@@ -64,9 +82,42 @@ export class AddCardsPage {
     this._subscriptionManager.addSubscription(paramSubscription);
   }
 
-  public onAddCardClick() {}
+  public onAddCardClick() {
+    if (this.addCardFormGroup.invalid) {
+      // TODO: a general utility function for this? in case any more forms come along?
+      this.addCardFormGroup.markAllAsTouched();
+      this.addCardFormGroup.markAllAsDirty();
+    } else {
+      const newCard: Card = getValueOfFormGroup(this.addCardFormGroup);
+      this.addCardFormGroup.reset();
+
+      this.cardsToAdd.push(newCard);
+    }
+  }
 
   public onCancelClick() {}
 
-  public onFinishClick() {}
+  public onFinishClick() {
+    this._dialogref = this.dialog.open(ConfirmDialog, {
+      data: FINISH_ADD_CARDS_DIALOG_CONFIGS,
+      disableClose: true,
+    });
+
+    const finishSubscription = this._dialogref
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        mergeMap(() =>
+          this.deckService.bulkAddCards(this.deckId, this.cardsToAdd)
+        ),
+        tap(() => this.router.navigateByUrl(`deck/${this.deckId}`))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(finishSubscription);
+  }
+
+  public showCards() {
+    console.log(this.cardsToAdd);
+  }
 }

@@ -28,19 +28,21 @@
         </div>
         <div class="form-card-add-and-finish-buttons">
           <flash-button
-            text="Finish"
-            type="text"
-            (onButtonClick)="onFinishClick()"
-          ></flash-button>
-          <flash-button
             text="Add Card"
             type="text"
             (onButtonClick)="onAddCardClick()"
+          ></flash-button>
+          <flash-button
+            text="Finish"
+            type="text"
+            [disabled]="cardsToAdd.length <= 0"
+            (onButtonClick)="onFinishClick()"
           ></flash-button>
         </div>
       </div>
     </div>
   </div>
+  <button (click)="showCards()"></button>
 </div>
 
 <ng-template #loader>

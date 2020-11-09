@@ -13,8 +13,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FlashButtonComponent {
-  /** Color of button */
-  @Input() color: string;
+  /** Color of button, primary by default */
+  @Input() color: string = 'primary';
+  /** Controls if button is disabled */
+  @Input() disabled: boolean = false;
   /** Disables the styling applied when hover over the button */
   @Input() disableHoverStyle: boolean = false;
   /** Disables the ripple animation on button click */
@@ -41,7 +43,10 @@ export class FlashButtonComponent {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.text);
+    console.log(this.disabled);
+  }
 
   // this seems like a stupid/unnecessary method but we'll roll with it lol
   public constructTooltipClass() {
