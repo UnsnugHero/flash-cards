@@ -12,13 +12,15 @@ import { DeckService } from '@services/deck.service';
 import { Card } from '@models/card.model';
 import { Deck } from '@models/deck.model';
 
-// helpers
+// helpers/constants
 import { getValueOfFormGroup } from '@utilities/helpers.util';
 import { SubscriptionManager } from '@utilities/subscription-manager.util';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
-import { FINISH_ADD_CARDS_DIALOG_CONFIGS } from './add-cards.constants';
+import {
+  CANCEL_ADD_CARDS_DIALOG_CONFIGS,
+  FINISH_ADD_CARDS_DIALOG_CONFIGS,
+} from './add-cards.constants';
 
 /**
  * this is a card making page that has same layout as the deck overview page but the card is a form with a card prompty and answer input and a textarea input for
@@ -82,6 +84,10 @@ export class AddCardsPage {
     this._subscriptionManager.addSubscription(paramSubscription);
   }
 
+  ngOnDestroy() {
+    this._subscriptionManager.unsubscribeAll();
+  }
+
   public onAddCardClick() {
     if (this.addCardFormGroup.invalid) {
       // TODO: a general utility function for this? in case any more forms come along?
@@ -95,7 +101,26 @@ export class AddCardsPage {
     }
   }
 
-  public onCancelClick() {}
+  public onCancelClick() {
+    if (this.cardsToAdd.length >= 1) {
+      this._dialogref = this.dialog.open(ConfirmDialog, {
+        data: CANCEL_ADD_CARDS_DIALOG_CONFIGS,
+        disableClose: true,
+      });
+
+      const cancelSubscription = this._dialogref
+        .afterClosed()
+        .pipe(
+          filter((result) => !!result),
+          tap(() => this.router.navigateByUrl(`deck/${this.deckId}`))
+        )
+        .subscribe();
+
+      this._subscriptionManager.addSubscription(cancelSubscription);
+    } else {
+      this.router.navigateByUrl(`deck/${this.deckId}`);
+    }
+  }
 
   public onFinishClick() {
     this._dialogref = this.dialog.open(ConfirmDialog, {
@@ -115,9 +140,5 @@ export class AddCardsPage {
       .subscribe();
 
     this._subscriptionManager.addSubscription(finishSubscription);
-  }
-
-  public showCards() {
-    console.log(this.cardsToAdd);
   }
 }

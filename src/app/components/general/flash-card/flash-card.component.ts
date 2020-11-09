@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AddCardFormModel } from '@models/form.model';
+import { Card } from '@models/card.model';
 import { FormGroup } from '@ngneat/reactive-forms';
 
 @Component({
@@ -11,7 +11,7 @@ export class FlashCardComponent {
   public isCardFlipped: boolean = false;
 
   /** form group for new card if form card */
-  @Input() addCardFormGroup: FormGroup<AddCardFormModel>;
+  @Input() addCardFormGroup: FormGroup<Card>;
   /** String displayed on the back side of the card */
   @Input() answer: string;
   /** boolean field to make card a form card vs a flash card */
