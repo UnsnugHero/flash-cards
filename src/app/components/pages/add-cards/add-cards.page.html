@@ -42,6 +42,21 @@
       </div>
     </div>
   </div>
+  <div *ngIf="cardsToAdd.length >= 1" class="cards-list-container">
+    <div class="cards-list-top-bar">
+      <h3 class="cards-list-header custom-header">
+        {{ cardsToAdd.length }} {{ cardsToAdd.length === 1 ? 'card' : 'cards' }}
+        to be added
+      </h3>
+      <!-- disable button if no cards selected. Maybe the tooltip says how many cards selected to be deleted? will also say in the confirm dialog -->
+      <flash-button icon="delete" type="icon" [disabled]=""></flash-button>
+    </div>
+
+    <flash-card-list
+      class="cards-list"
+      [listItems]="cardsToAdd"
+    ></flash-card-list>
+  </div>
 </div>
 
 <ng-template #loader>

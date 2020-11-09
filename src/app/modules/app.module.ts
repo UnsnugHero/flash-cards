@@ -13,8 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -31,6 +33,7 @@ import { FlashRoutingModule } from '@modules/flash-routing.module';
 import { FlashAutocompleteComponent } from '@components/flash-autocomplete/flash-autocomplete.component';
 import { FlashButtonComponent } from '@components/flash-button/flash-button.component';
 import { FlashCardComponent } from '@components/flash-card/flash-card.component';
+import { FlashCardListComponent } from '@components/flash-card-list/flash-card-list.component';
 import { FlashChipsAutocompleteComponent } from '@components/flash-chips-autocomplete/flash-chips-autocomplete.component';
 import { FlashDeckComponent } from '@components/flash-deck/flash-deck.component';
 import { FlashHeaderComponent } from '@components/flash-header/flash-header.component';
@@ -65,6 +68,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     FlashAutocompleteComponent,
     FlashButtonComponent,
     FlashCardComponent,
+    FlashCardListComponent,
     FlashChipsAutocompleteComponent,
     FlashDeckComponent,
     FlashHeaderComponent,
@@ -109,8 +113,10 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     MatCardModule,
     MatChipsModule,
     MatDialogModule,
+    MatDividerModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatPaginatorModule,
     MatSelectModule,
