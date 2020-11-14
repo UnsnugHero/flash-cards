@@ -33,7 +33,7 @@ import { FlashRoutingModule } from '@modules/flash-routing.module';
 import { FlashAutocompleteComponent } from '@components/flash-autocomplete/flash-autocomplete.component';
 import { FlashButtonComponent } from '@components/flash-button/flash-button.component';
 import { FlashCardComponent } from '@components/flash-card/flash-card.component';
-import { FlashCardListComponent } from '@components/flash-card-list/flash-card-list.component';
+import { FlashListComponent } from '@components/flash-card-list/flash-list.component';
 import { FlashChipsAutocompleteComponent } from '@components/flash-chips-autocomplete/flash-chips-autocomplete.component';
 import { FlashDeckComponent } from '@components/flash-deck/flash-deck.component';
 import { FlashHeaderComponent } from '@components/flash-header/flash-header.component';
@@ -68,7 +68,7 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     FlashAutocompleteComponent,
     FlashButtonComponent,
     FlashCardComponent,
-    FlashCardListComponent,
+    FlashListComponent,
     FlashChipsAutocompleteComponent,
     FlashDeckComponent,
     FlashHeaderComponent,
