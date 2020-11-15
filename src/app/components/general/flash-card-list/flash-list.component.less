@@ -14,15 +14,19 @@
     .list-item-row {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
 
-      .row-item {
-        flex: 50%;
-        min-width: 150px;
-        padding: 0 15px 0 15px;
-      }
+      .text-items {
+        .row-item {
+          flex: 50%;
+          min-width: 150px;
+          padding: 0 15px 0 15px;
+        }
 
-      .row-item:not(:last-child) {
-        border-right: 0.125rem solid #000000;
+        .row-item:not(:last-child) {
+          border-right: 0.125rem solid #000000;
+        }
       }
     }
   }

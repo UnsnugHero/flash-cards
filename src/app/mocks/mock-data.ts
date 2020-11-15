@@ -20,11 +20,29 @@ export const MOCK_CATEGORIES: Category[] = [
 ];
 
 export const MOCK_DECKS_JAPANESE: Deck[] = [
-  { id: 1, title: 'Kanji' },
-  { id: 2, title: 'Onyomi' },
-  { id: 3, title: 'Kunyomi' },
-  { id: 4, title: 'Vocabulary' },
-  { id: 5, title: 'Adjectives' },
-  { id: 6, title: 'Verbs' },
-  { id: 7, title: 'Nouns' },
+  {
+    id: 1,
+    title: 'Kanji',
+    cards: [
+      { prompt: 'no?', answer: 'yes', mnemonic: 'forget this' },
+      { prompt: 'yes?', answer: 'no', mnemonic: "don't forget this" },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Onyomi',
+    cards: [
+      { prompt: 'no?', answer: 'no', mnemonic: 'remember this plz' },
+      { prompt: 'wow?', answer: 'wow', mnemonic: '' },
+    ],
+  },
+  { id: 3, title: 'Kunyomi', cards: [] },
+  { id: 4, title: 'Vocabulary', cards: [] },
+  { id: 5, title: 'Adjectives', cards: [] },
+  { id: 6, title: 'Verbs', cards: [] },
+  {
+    id: 7,
+    title: 'Nouns',
+    cards: [{ prompt: 'noun', answer: 'yes', mnemonic: 'remember this' }],
+  },
 ];

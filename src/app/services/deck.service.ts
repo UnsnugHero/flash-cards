@@ -3,11 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Deck } from '@models/deck.model';
+import { Card, Deck } from '@models/deck.model';
 import { handleError } from './services.helpers';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Card } from '@models/card.model';
-import { P } from '@angular/cdk/keycodes';
 
 const SNACKBAR_DURATION: number = 5000;
 

@@ -27,12 +27,27 @@
           ></flash-button>
         </div>
         <div class="form-card-add-and-finish-buttons">
+          <ng-container *ngIf=" isEditingCard; else addCardButton">
+            <flash-button
+              text="Cancel Edit"
+              type="text"
+              (onButtonClick)="onCancelEditClick()"
+            ></flash-button>
+            <flash-button
+              text="Edit Card"
+              type="text"
+              (onButtonClick)="onEditCardClick()"
+            ></flash-button>
+          </ng-container>
+          <ng-template #addCardButton>
+            <flash-button
+              text="Add Card"
+              type="text"
+              (onButtonClick)="onAddCardClick()"
+            ></flash-button>
+          </ng-template>
           <flash-button
-            text="Add Card"
-            type="text"
-            (onButtonClick)="onAddCardClick()"
-          ></flash-button>
-          <flash-button
+            *ngIf="!isEditingCard"
             text="Finish"
             type="text"
             [disabled]="cardsToAdd.length <= 0"
@@ -48,6 +63,8 @@
       listSourceName="card"
       listSourceNamePlural="cards"
       [listItems]="cardsToAdd"
+      (onDeleteListItemClick)="onDeleteListItemClick()"
+      (onListItemClick)="onListItemClick($event)"
     ></flash-list>
   </div>
 </div>

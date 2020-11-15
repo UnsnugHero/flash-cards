@@ -4,7 +4,15 @@ export interface Category {
   associatedDecks: number;
 }
 
+export interface Card {
+  answer: string;
+  id?: number;
+  mnemonic?: string;
+  prompt: string;
+}
+
 export interface Deck {
   id: number;
   title: string;
+  cards: Card[];
 }

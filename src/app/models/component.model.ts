@@ -20,6 +20,11 @@ export interface HeaderItem {
   text: string;
 }
 
+export interface ListItem {
+  listItem: any;
+  listItemIndex: number;
+}
+
 export interface MenuOption {
   text: string;
   value: string;

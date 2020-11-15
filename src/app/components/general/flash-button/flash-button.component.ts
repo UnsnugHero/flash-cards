@@ -43,10 +43,7 @@ export class FlashButtonComponent {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.text);
-    console.log(this.disabled);
-  }
+  ngOnInit() {}
 
   // this seems like a stupid/unnecessary method but we'll roll with it lol
   public constructTooltipClass() {

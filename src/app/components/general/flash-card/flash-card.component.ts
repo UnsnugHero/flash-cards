@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Card } from '@models/card.model';
+import { Card } from '@models/deck.model';
 import { FormGroup } from '@ngneat/reactive-forms';
 
 @Component({

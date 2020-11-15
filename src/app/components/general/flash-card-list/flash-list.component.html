@@ -5,14 +5,23 @@
       {{ listItems.length === 1 ? listSourceName : listSourceNamePlural }}
       to be added
     </h3>
-    <!-- disable button if no item selected. Maybe the tooltip says how many items selected to be deleted? will also say in the confirm dialog so maybe not -->
-    <flash-button icon="delete" type="icon" [disabled]=""></flash-button>
   </div>
-  <mat-selection-list #flashList>
-    <mat-list-option *ngFor="let item of listItems" class="mat-list-option">
+  <mat-selection-list [multiple]="false" #flashList>
+    <mat-list-option
+      *ngFor="let item of listItems; let i = index"
+      class="mat-list-option"
+      (click)="handleListItemClick(i)"
+    >
       <div class="list-item-row">
-        <span class="row-item">{{ item.prompt }}</span>
-        <span class="row-item">{{ item.answer }}</span>
+        <div class="text-items">
+          <span class="row-item">{{ item.prompt }}</span>
+          <span class="row-item">{{ item.answer }}</span>
+        </div>
+        <flash-button
+          icon="delete"
+          type="icon"
+          (onButtonClick)="handleDeleteListItemClick(i)"
+        ></flash-button>
         <!-- enable clicking on an item to edit it??? -->
       </div>
     </mat-list-option>

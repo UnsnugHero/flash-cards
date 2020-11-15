@@ -1,6 +1,6 @@
 // external
 import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { AbstractControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
@@ -9,8 +9,7 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { DeckService } from '@services/deck.service';
 
 // models
-import { Card } from '@models/card.model';
-import { Deck } from '@models/deck.model';
+import { Card, Deck } from '@models/deck.model';
 
 // helpers/constants
 import { getValueOfFormGroup } from '@utilities/helpers.util';
@@ -21,24 +20,7 @@ import {
   CANCEL_ADD_CARDS_DIALOG_CONFIGS,
   FINISH_ADD_CARDS_DIALOG_CONFIGS,
 } from './add-cards.constants';
-
-/**
- * this is a card making page that has same layout as the deck overview page but the card is a form with a card prompty and answer input and a textarea input for
- * a mnemonic if they choose to make one. Below the card on the right hand side are two buttons, one says 'finish' which finishes the adding card session
- * and takes user back to the deck they were making cards for. The other button says 'Add Card' and will submit the form to the backend to add the card to
- * the deck they were on when they hit 'Add Cards'. The button will also reset the form so the user can continue making cards without navigating back and
- * forth between views/dialogs.
- * on the left side there will be actions where the user can see how many cards they have made so far that will show up somehow... Maybe a dialog table?
- * or just some simple list? showing the prompt and answer... no need to show the mnemonic. Maybe theres another mat component to make this easy.
- *
- * or maybe on the left side there will be stats. maybe just one that says how many cards
- * the user has added for that session. below the cards is a list that show what cards the user
- * has added so far and they have the option to remove them from the list of cards to be added.
- * or should we add them when the user presses the button? or when they press finish? for the
- * case of the bulk adding cards, need a cancel button. thinking bulk is better...
- *
- *
- */
+import { ListItem } from '@models/component.model';
 
 @Component({
   selector: 'add-card-page',
@@ -46,7 +28,9 @@ import {
   styleUrls: ['./add-cards.page.less'],
 })
 export class AddCardsPage {
-  // TODO: show these in an (expandable?) list at the bottom of the page
+  public isEditingCard: boolean = false;
+  // the index in cards to add array of currently editing card, -1 when not editing
+  public editCardIndex: number = -1;
   public cardsToAdd: Card[] = [];
 
   public deckId: number;
@@ -88,6 +72,8 @@ export class AddCardsPage {
     this._subscriptionManager.unsubscribeAll();
   }
 
+  // TODO: this method should also check if the card prompt already exists in the deck of
+  // to be added cards or in the deck of cards itself and show a proper error message
   public onAddCardClick() {
     if (this.addCardFormGroup.invalid) {
       // TODO: a general utility function for this? in case any more forms come along?
@@ -140,5 +126,45 @@ export class AddCardsPage {
       .subscribe();
 
     this._subscriptionManager.addSubscription(finishSubscription);
+  }
+
+  /** Edit Card Button Handlers */
+  public onCancelEditClick() {
+    this._resetEdit();
+  }
+
+  public onEditCardClick() {
+    if (this.addCardFormGroup.valid) {
+      this.cardsToAdd[this.editCardIndex] = getValueOfFormGroup(
+        this.addCardFormGroup
+      );
+
+      this._resetEdit();
+    }
+  }
+
+  /** List Component Output Bindings */
+  public onDeleteListItemClick() {
+    this._resetEdit();
+  }
+
+  public onListItemClick(listItemObj: ListItem) {
+    this.isEditingCard = true;
+
+    this.addCardFormGroup.setValue({
+      prompt: listItemObj.listItem.prompt,
+      answer: listItemObj.listItem.answer,
+      mnemonic: listItemObj.listItem.mnemonic,
+    });
+
+    this.editCardIndex = listItemObj.listItemIndex;
+  }
+
+  /** private methods */
+  // just reset the form and cancel edit if list is altered, easier this way
+  private _resetEdit() {
+    this.isEditingCard = false;
+    this.editCardIndex = -1;
+    this.addCardFormGroup.reset();
   }
 }
