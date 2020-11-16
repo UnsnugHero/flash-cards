@@ -10,18 +10,26 @@
     <div class="deck-cards-column">
       <!-- Here we want the card with buttons to go back and forth between cards underneath and icon buttons to the right -->
       <flash-card
-        [answer]="'Hi, I am the answer'"
-        [prompt]="'Hi, I am a card'"
+        [answer]="deck.cards[currentCardIndex].answer"
+        [prompt]="deck.cards[currentCardIndex].prompt"
         [showMnemonic]="showMnemonics"
       ></flash-card>
       <div class="card-actions">
         <div class="card-paginator">
           <!-- disable this card if it is the first card of the deck, or cycle to the end of deck? -->
-          <flash-button icon="west" type="icon"></flash-button>
+          <flash-button
+            icon="west"
+            type="icon"
+            (onButtonClick)="onPaginateLeft()"
+          ></flash-button>
           <span class="card-paginator__position-numbers">
-            {{ currentCardIndex }} of {{ deck.cards.length }}
+            {{ currentCardIndex + 1 }} of {{ deck.cards.length }}
           </span>
-          <flash-button icon="east" type="icon"></flash-button>
+          <flash-button
+            icon="east"
+            type="icon"
+            (onButtonClick)="onPaginateRight()"
+          ></flash-button>
         </div>
         <div class="card-buttons">
           <flash-button

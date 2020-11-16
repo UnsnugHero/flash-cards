@@ -46,7 +46,7 @@ export class DeckOverviewPage {
   ) {}
 
   ngOnInit() {
-    this.currentCardIndex = 1;
+    this.currentCardIndex = 0;
 
     const paramSubscription = this.activatedRoute.params
       .pipe(
@@ -63,6 +63,22 @@ export class DeckOverviewPage {
 
   ngOnDestroy() {
     this._subscriptionManager.unsubscribeAll();
+  }
+
+  // paginate button handlers
+  public onPaginateLeft() {
+    if (this.currentCardIndex === 0) {
+      return;
+    }
+    this.currentCardIndex--;
+  }
+
+  public onPaginateRight() {
+    if (this.currentCardIndex === this.deck.cards.length - 1) {
+      return;
+    }
+    this.currentCardIndex++;
+    console.log(this.currentCardIndex);
   }
 
   // Card button handlers
