@@ -10,53 +10,19 @@ good when the screensize/window gets smaller
   padding-top: 25px;
 
   .deck-title {
-    margin-right: auto;
+    margin: 0 auto;
     max-width: @deck-overview-width;
+
+    & > * {
+      text-align: center;
+    }
   }
 
   .columns-container {
     display: flex;
-    margin-right: auto;
+    margin: 0 auto;
     max-width: @deck-overview-width;
     padding-top: 25px;
-
-    .deck-actions-column {
-      flex: 25%;
-
-      .deck-actions {
-        .actions-list {
-          margin: 0;
-          padding: 0;
-
-          .list-item {
-            list-style-type: none;
-            margin-top: 10px;
-            width: min-content;
-            white-space: nowrap;
-
-            &__link {
-              align-items: center;
-              color: black;
-              display: flex;
-              text-decoration: none;
-
-              .action-icon {
-                margin-right: 10px;
-              }
-
-              .action-text {
-                font-weight: bold;
-              }
-            }
-
-            &__link:hover {
-              color: @primary-color;
-              cursor: pointer;
-            }
-          }
-        }
-      }
-    }
 
     .deck-cards-column {
       flex: 75%;
@@ -65,7 +31,9 @@ good when the screensize/window gets smaller
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin: 0 auto;
         margin-top: 10px;
+        max-width: 565px;
         width: 100%;
 
         .card-paginator {

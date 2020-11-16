@@ -1,15 +1,10 @@
 <div *ngIf="deck; else loader" class="add-cards-page page">
-  <div class="add-cards-title">
-    <h1 class="add-cards-text custom-header">
+  <div class="add-cards-header-container">
+    <h1 class="add-cards-header custom-header">
       Adding Cards to {{ deck.title }}
     </h1>
   </div>
   <div class="columns-container">
-    <div class="add-card-stats-column column">
-      <div class="add-card-stats">
-        <h3 class="stats-list-title custom-header">What goes here?</h3>
-      </div>
-    </div>
     <div class="form-card-column">
       <!-- Here we want the card with buttons to go back and forth between cards underneath and icon buttons to the right -->
       <flash-card

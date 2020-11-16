@@ -2,38 +2,10 @@
   <div class="deck-title">
     <h1 class="deck-title-text custom-header">{{ deck.title }}</h1>
     <h5 class="sub-header custom-header">
-      This deck is home to {{ cards.length }} cards
+      This deck is home to {{ deck.cards.length }} cards
     </h5>
   </div>
   <div class="columns-container">
-    <div class="deck-actions-column column">
-      <div class="deck-actions">
-        <!-- buttons/actions for Adding card, practice, test, view all cards to nav to all cards view... -->
-        <h3 class="actions-list-title custom-header">Deck Actions</h3>
-        <ul class="actions-list">
-          <li class="add-card-action list-item">
-            <!-- coulda binded to routeLink, but I like the consistency with click handlers -->
-            <a class="list-item__link" (click)="onAddCardsActionClick()">
-              <mat-icon class="action-icon">add</mat-icon>
-              <span class="action-text">Add Cards</span>
-            </a>
-          </li>
-          <li class="test-action list-item">
-            <a class="list-item__link">
-              <mat-icon class="action-icon">content_paste</mat-icon>
-              <span class="action-text">Test</span></a
-            >
-          </li>
-          <li class="delete-deck-action list-item">
-            <a class="list-item__link" (click)="onDeleteDeckActionClick()">
-              <mat-icon class="action-icon">delete</mat-icon>
-              <span class="action-text">Delete Deck</span></a
-            >
-          </li>
-          <!-- view all cards ? opens up menu at bottom of page -->
-        </ul>
-      </div>
-    </div>
     <!-- All these cards will be lost in time, like tears in rain -->
     <div class="deck-cards-column">
       <!-- Here we want the card with buttons to go back and forth between cards underneath and icon buttons to the right -->
@@ -47,11 +19,22 @@
           <!-- disable this card if it is the first card of the deck, or cycle to the end of deck? -->
           <flash-button icon="west" type="icon"></flash-button>
           <span class="card-paginator__position-numbers">
-            {{ currentCardIndex }} of {{ cards.length }}
+            {{ currentCardIndex }} of {{ deck.cards.length }}
           </span>
           <flash-button icon="east" type="icon"></flash-button>
         </div>
         <div class="card-buttons">
+          <flash-button
+            icon="add"
+            tooltip="Add Cards"
+            type="icon"
+            (onButtonClick)="onAddCardsButtonClick()"
+          ></flash-button>
+          <flash-button
+            icon="content_paste"
+            tooltip="Test"
+            type="icon"
+          ></flash-button>
           <flash-button
             icon="visibility"
             tooltip="Show Mnemonics"
@@ -63,12 +46,12 @@
             type="icon"
           ></flash-button>
           <!-- TODO: get card id and put it in the method call there -->
-          <flash-button
+          <flash-menu
+            buttonType="icon"
             icon="delete"
-            tooltip="Delete Card"
-            type="icon"
-            (onButtonClick)="onDeleteCardButtonClick(1)"
-          ></flash-button>
+            [menuOptions]="deleteButtonMenuOptions"
+            (onMenuItemClick)="onActionClicked($event)"
+          ></flash-menu>
         </div>
       </div>
     </div>

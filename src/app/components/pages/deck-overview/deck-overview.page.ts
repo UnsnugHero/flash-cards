@@ -16,7 +16,9 @@ import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import {
   DELETE_CARD_DIALOG_CONFIG_DATA,
   DELETE_DECK_DIALOG_CONFIG_DATA,
+  DELETE_MENU_OPTIONS,
 } from './deck-overview.constants';
+import { MenuOption } from '@models/component.model';
 
 @Component({
   selector: 'deck-overview-page',
@@ -24,12 +26,13 @@ import {
   styleUrls: ['./deck-overview.page.less'],
 })
 export class DeckOverviewPage {
-  public cards = [1, 2, 3, 4, 5];
   public currentCardIndex: number;
   public deckId: number;
   public deck: Deck;
 
   public showMnemonics: boolean = false;
+
+  public deleteButtonMenuOptions: MenuOption[] = DELETE_MENU_OPTIONS;
 
   private _dialogRef: MatDialogRef<any>;
 
@@ -62,13 +65,36 @@ export class DeckOverviewPage {
     this._subscriptionManager.unsubscribeAll();
   }
 
-  // Deck Action Handlers
+  // Card button handlers
 
-  public onAddCardsActionClick() {
+  public onActionClicked(action: string) {
+    switch (action) {
+      case 'deleteCurrentCard':
+        // TODO: get the id of the currently shown card
+        this._openDeleteCurrentCardDialog(1);
+        break;
+      case 'deleteDeck':
+        this._openDeleteDeckDialog();
+        break;
+      default:
+        console.warn('Action unsupported. Oh No!!');
+        break;
+    }
+  }
+
+  public onAddCardsButtonClick() {
     this.router.navigateByUrl(`deck/add-cards/${this.deckId}`);
   }
 
-  public onDeleteDeckActionClick() {
+  public onEditCardButtonClick(cardId: number) {
+    // dialog or use the form card? ill lean towards the form card...
+  }
+
+  public onShowMnemonicsButtonClick() {
+    this.showMnemonics = !this.showMnemonics;
+  }
+
+  private _openDeleteDeckDialog() {
     this._dialogRef = this.dialog.open(ConfirmDialog, {
       data: DELETE_DECK_DIALOG_CONFIG_DATA,
       disableClose: true,
@@ -86,9 +112,7 @@ export class DeckOverviewPage {
     this._subscriptionManager.addSubscription(deleteDeckSubscription);
   }
 
-  // Card button handlers
-
-  public onDeleteCardButtonClick(cardId: number) {
+  private _openDeleteCurrentCardDialog(cardId: number) {
     this._dialogRef = this.dialog.open(ConfirmDialog, {
       data: DELETE_CARD_DIALOG_CONFIG_DATA,
       disableClose: true,
@@ -104,13 +128,5 @@ export class DeckOverviewPage {
       .subscribe();
 
     this._subscriptionManager.addSubscription(deleteCardSubscription);
-  }
-
-  public onEditCardButtonClick(cardId: number) {
-    // dialog or use the form card? ill lean towards the form card...
-  }
-
-  public onShowMnemonicsButtonClick() {
-    this.showMnemonics = !this.showMnemonics;
   }
 }

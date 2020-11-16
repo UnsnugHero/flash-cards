@@ -5,14 +5,18 @@
 .add-cards-page {
   padding-top: 25px;
 
-  .add-cards-title {
-    margin-right: auto;
+  .add-cards-header-container {
+    margin: 0 auto;
     max-width: @add-cards-width;
+
+    .add-cards-header {
+      text-align: center;
+    }
   }
 
   .columns-container {
     display: flex;
-    margin-right: auto;
+    margin: 0 auto;
     max-width: @add-cards-width;
     padding-top: calc(25px + 16px); // 16 for the missing subheader
 
@@ -41,7 +45,9 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin: 0 auto;
         margin-top: 10px;
+        max-width: 565px;
         width: 100%;
 
         .form-card-add-and-finish-buttons {
