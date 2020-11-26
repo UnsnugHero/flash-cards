@@ -1,2 +1,2 @@
 server:
-	go run http/main.go
+	go run main.go
