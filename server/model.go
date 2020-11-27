@@ -2,24 +2,24 @@ package main
 
 // Card Model
 type Card struct {
-	ID       int
-	DeckID   int
-	Prompt   string
-	Answer   string
-	Mnemonic string
+	ID       int    `json:"id"`
+	DeckID   int    `json:"deckId"`
+	Prompt   string `json:"prompt"`
+	Answer   string `json:"answer"`
+	Mnemonic string `json:"mnemonic"`
 }
 
 // Deck Model
 type Deck struct {
-	ID       int
-	Title    string
-	Cards    []Card
-	Category []Category
+	ID         int        `json:"id"`
+	Title      string     `json:"title"`
+	Cards      []Card     `json:"cards"`
+	Categories []Category `json:"categories"`
 }
 
 // Category Model
 type Category struct {
-	ID              int
-	CategoryName    string
-	AssociatedDecks int
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	AssociatedDecks int    `json:"associatedDecks"`
 }

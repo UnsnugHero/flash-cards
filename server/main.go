@@ -10,10 +10,8 @@ func main() {
 	// Default() attaches Logger and Recovery middleware whereas New() has no middlewhere
 	router := gin.Default()
 
-	// GET routes
+	// Deck routes
 	router.GET("/decks/:id", GetDeck)
-
-	// POST routes
 	router.POST("/decks", AddDeck)
 
 	// listen and serve on port 8080 default

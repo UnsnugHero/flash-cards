@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,12 +19,32 @@ DECK HANDLERS
 
 // AddDeck adds a deck with title and optional categories
 func AddDeck(ctx *gin.Context) {
-	deckToAdd := Deck{}
 
-	ctx.Bind(&deckToAdd)
+	// declare a new deck to bind body to
+	newDeck := Deck{}
 
-	fmt.Println(deckToAdd)
-	ctx.JSON(http.StatusOK, deckToAdd)
+	// bind the request body to the Deck struct
+	err := ctx.Bind(&newDeck)
+
+	// check for error
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, "Error while parsing new deck data: "+err.Error())
+		return
+	}
+
+	// check if missing title, as title is necessary.
+	if strings.TrimSpace(newDeck.Title) == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Deck title is a required field for adding a deck.",
+		})
+		return
+	}
+
+	// good request, insert in storage
+	//storage here, JSON and DB implementations
+
+	// Send response back of inserted data
+	ctx.JSON(http.StatusOK, newDeck)
 }
 
 // GetDeck gets a single deck by its ID
