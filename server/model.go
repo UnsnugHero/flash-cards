@@ -1,5 +1,6 @@
 package main
 
+// Card Model
 type Card struct {
 	ID       int
 	DeckID   int
@@ -8,12 +9,14 @@ type Card struct {
 	Mnemonic string
 }
 
+// Deck Model
 type Deck struct {
 	ID    int
 	Title string
 	Cards []*Card
 }
 
+// Category Model
 type Category struct {
 	ID              int
 	CategoryName    string
