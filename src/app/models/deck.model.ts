@@ -1,7 +1,7 @@
 export interface Category {
-  id: number;
+  id?: number;
   categoryName: string;
-  associatedDecks: number;
+  associatedDecks?: number;
 }
 
 export interface Card {
@@ -12,7 +12,8 @@ export interface Card {
 }
 
 export interface Deck {
-  id: number;
+  id?: number;
   title: string;
   cards: Card[];
+  categories?: Category[];
 }

@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
 // constants
 import { SORT_BY_MENU_OPTIONS } from './decks.constants';
@@ -70,7 +70,7 @@ export class DecksPage {
       .afterClosed()
       .pipe(
         filter((result) => !!result),
-        tap((res) => console.log(res))
+        mergeMap((res) => this.deckService.addDeck(res))
       )
       .subscribe();
 

@@ -1,11 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -58,7 +55,6 @@ import { TemplatesPageComponent } from '@pages/templates/templates.component.pag
 
 // Services
 import { DeckService } from '@services/deck.service';
-import { InMemoryDataService } from '@services/in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -97,15 +93,6 @@ import { InMemoryDataService } from '@services/in-memory-data.service';
     FlashRoutingModule,
     FormsModule,
     HttpClientModule,
-
-    // external
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false,
-    }),
-    InfiniteScrollModule,
 
     // Material
     MatAutocompleteModule,

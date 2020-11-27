@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Card, Deck } from '@models/deck.model';
-import { handleError } from './services.helpers';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Card, Category, Deck } from '@models/deck.model';
+import { handleError } from './services.helpers';
 
 const SNACKBAR_DURATION: number = 5000;
 
@@ -16,6 +16,15 @@ export class DeckService {
   private decksUrl: string = 'api/decks';
 
   constructor(private http: HttpClient, private snackbar: MatSnackBar) {}
+
+  public addDeck(payload: {
+    title: string;
+    categories?: Category[];
+  }): Observable<any> {
+    return this.http
+      .post('http://localhost:8080/decks', payload)
+      .pipe(catchError(handleError('addDeck', null)));
+  }
 
   // Gets a single deck by id
   public getDeck(deckId: number): Observable<Deck> {

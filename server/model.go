@@ -11,14 +11,15 @@ type Card struct {
 
 // Deck Model
 type Deck struct {
-	ID    int
-	Title string
-	Cards []*Card
+	ID       int
+	Title    string
+	Cards    []Card
+	Category []Category
 }
 
 // Category Model
 type Category struct {
 	ID              int
 	CategoryName    string
-	AssociatedDecks int // this might be a slice of decks instead? flesh out more
+	AssociatedDecks int
 }

@@ -11,8 +11,11 @@ func main() {
 	router := gin.Default()
 
 	// GET routes
-	router.GET("/deck/:id", GetDeck)
+	router.GET("/decks/:id", GetDeck)
+
+	// POST routes
+	router.POST("/decks", AddDeck)
 
 	// listen and serve on port 8080 default
-	router.Run(":8080")
+	router.Run()
 }

@@ -16,6 +16,16 @@ CARD HANDLERS
 DECK HANDLERS
 ****************/
 
+// AddDeck adds a deck with title and optional categories
+func AddDeck(ctx *gin.Context) {
+	deckToAdd := Deck{}
+
+	ctx.Bind(&deckToAdd)
+
+	fmt.Println(deckToAdd)
+	ctx.JSON(http.StatusOK, deckToAdd)
+}
+
 // GetDeck gets a single deck by its ID
 func GetDeck(ctx *gin.Context) {
 	// get deck id via path param
