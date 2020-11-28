@@ -17,9 +17,9 @@ const (
 // Storage declares method signatures to be implemented by storage type
 type Storage interface {
 	// Deck actions
-	AddDeck() error
-	GetDeck() (Deck, error)
-	GetDecks() ([]Deck, error)
+	// StoreDeck() error
+	FindDeck() (Deck, error)
+	FindDecks() ([]Deck, error)
 
 	// Card Actions
 
@@ -34,7 +34,8 @@ func NewStorage(storageType StorageType) (Storage, error) {
 
 	switch storageType {
 	case JSON:
-		// initialize json memory storage here
+		// initialize json memory storage
+		storage, err = NewJSONStorage(jsonStorageLocation)
 	case Database:
 		// initialize database storage here
 	}

@@ -64,9 +64,31 @@ func GetDeck(ctx *gin.Context) {
 
 	// return deck data as JSON
 	ctx.JSON(http.StatusOK, gin.H{
-		"id": deckID,
+		// return deck
+		"data":    deckID,
+		"message": "Deck retrieved!",
 	})
 	return
+}
+
+// GetDecks returns all decks based of search query (returns all decks for now)
+// planning to evolve this to take in a query body to do a deck search
+// should deck search be a separate method?
+func GetDecks(ctx *gin.Context) {
+
+	decks, err := database.FindDecks()
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error retrieving decks: %s.", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"records": decks,
+		"message": "Decks retrieved!",
+	})
 }
 
 /****************
