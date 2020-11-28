@@ -2,9 +2,12 @@ package main
 
 // this json db implementation runs off of the golang module golang-scribble
 import (
+	"encoding/json"
 	"fmt"
+	"strconv"
 
 	scribble "github.com/nanobox-io/golang-scribble"
+	"github.com/pkg/errors"
 )
 
 const (
@@ -44,7 +47,18 @@ func (storage *JSONStorage) StoreDeck(newDeck Deck) error {
 		return err
 	}
 
-	fmt.Println(allDecks)
+	for _, deck := range allDecks {
+		if newDeck.Title == deck.Title {
+			return fmt.Errorf("A deck with this title already exists")
+		}
+	}
+
+	// TODO: come up with id assignment solution when implementing delete
+	newDeck.ID = len(allDecks) + 1
+
+	if err := storage.db.Write(CollectionDeck, strconv.Itoa(newDeck.ID), newDeck); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -59,6 +73,8 @@ func (storage *JSONStorage) FindDeck() (Deck, error) {
 // FindDecks retrieves all decks matching search query in payload
 // TODO: though for now, it will just get them ALL, so empty arguments
 func (storage *JSONStorage) FindDecks() ([]Deck, error) {
+	var decks []Deck
+
 	records, err := storage.db.ReadAll(CollectionDeck)
 
 	if err != nil {
@@ -67,5 +83,15 @@ func (storage *JSONStorage) FindDecks() ([]Deck, error) {
 
 	fmt.Println(records)
 
-	return []Deck{Deck{ID: 1, Title: "Deck 1", Categories: []Category{}, Cards: []Card{}}}, nil
+	for _, d := range records {
+		var deck Deck
+
+		if err := json.Unmarshal([]byte(d), &deck); err != nil {
+			return decks, errors.Errorf("Failed to parse deck data from JSON: %s. Data: %s", err.Error(), d)
+		}
+
+		decks = append(decks, deck)
+	}
+
+	return decks, nil
 }

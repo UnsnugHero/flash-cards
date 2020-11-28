@@ -7,7 +7,7 @@ import (
 )
 
 // package available database
-var database Storage
+var storage Storage
 
 func main() {
 
@@ -15,7 +15,7 @@ func main() {
 
 	// declare our storage
 	// for now, using json to store, later mongo
-	database, err = NewStorage(JSON)
+	storage, err = NewStorage(JSON)
 
 	if err != nil {
 		log.Fatal(err)

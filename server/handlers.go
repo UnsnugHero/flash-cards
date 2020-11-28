@@ -42,6 +42,14 @@ func AddDeck(ctx *gin.Context) {
 
 	// good request, insert in storage
 	//storage here, JSON and DB implementations
+	err = storage.StoreDeck(newDeck)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": "An error occured saving this deck.",
+		})
+		return
+	}
 
 	// Send response back of inserted data
 	ctx.JSON(http.StatusOK, newDeck)
@@ -76,7 +84,7 @@ func GetDeck(ctx *gin.Context) {
 // should deck search be a separate method?
 func GetDecks(ctx *gin.Context) {
 
-	decks, err := database.FindDecks()
+	decks, err := storage.FindDecks()
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{

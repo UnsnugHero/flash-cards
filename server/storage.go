@@ -17,7 +17,7 @@ const (
 // Storage declares method signatures to be implemented by storage type
 type Storage interface {
 	// Deck actions
-	// StoreDeck() error
+	StoreDeck(newDeck Deck) error
 	FindDeck() (Deck, error)
 	FindDecks() ([]Deck, error)
 
