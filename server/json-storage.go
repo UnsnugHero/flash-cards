@@ -81,8 +81,6 @@ func (storage *JSONStorage) FindDecks() ([]Deck, error) {
 		return nil, err
 	}
 
-	fmt.Println(records)
-
 	for _, d := range records {
 		var deck Deck
 
