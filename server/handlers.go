@@ -68,11 +68,19 @@ func GetDeck(ctx *gin.Context) {
 	}
 
 	// retrieve deck from DB via ID
+	deck, err := storage.FindDeck(deckID)
+
+	// error retrieving deck from storage\
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error retrieving deck with id %d from storage", deckID),
+		})
+		return
+	}
 
 	// return deck data as JSON
 	ctx.JSON(http.StatusOK, gin.H{
-		// return deck
-		"data":    deckID,
+		"data":    deck,
 		"message": "Deck retrieved!",
 	})
 }

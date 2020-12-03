@@ -64,10 +64,12 @@ func (storage *JSONStorage) StoreDeck(newDeck Deck) error {
 }
 
 // FindDeck retrieves a deck by ID
-func (storage *JSONStorage) FindDeck() (Deck, error) {
-	var err error
+func (storage *JSONStorage) FindDeck(deckID int) (Deck, error) {
 
-	return Deck{}, err
+	deck := Deck{}
+	err := storage.db.Read(CollectionDeck, strconv.Itoa(deckID), &deck)
+
+	return deck, err
 }
 
 // FindDecks retrieves all decks matching search query in payload

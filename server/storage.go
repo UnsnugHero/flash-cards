@@ -18,7 +18,7 @@ const (
 type Storage interface {
 	// Deck actions
 	StoreDeck(newDeck Deck) error
-	FindDeck() (Deck, error)
+	FindDeck(deckID int) (Deck, error)
 	FindDecks() ([]Deck, error)
 
 	// Card Actions
