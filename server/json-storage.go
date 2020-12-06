@@ -10,11 +10,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-const (
-	// CollectionDeck identifier for Deck JSON key
-	CollectionDeck = "decks"
-)
-
 // JSONStorage is a struct containing our JSON db driver
 // and implements the Storage interface for storing data
 type JSONStorage struct {

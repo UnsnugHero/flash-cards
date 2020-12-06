@@ -6,12 +6,16 @@ type StorageType int
 const (
 	jsonStorageLocation = "./json-storage"
 
-	// iota will enumerate for our constants, so JSON = 0, Database = 1...
+	// DatabaseFlashCards identifier for Flash Cards db
+	DatabaseFlashCards = "flashcards"
+
+	// CollectionDeck identifier for Deck JSON key
+	CollectionDeck = "decks"
 
 	// JSON StorageType def
 	JSON StorageType = iota
-	// Database StorageType def
-	Database
+	// Mongo StorageType def
+	Mongo
 )
 
 // Storage declares method signatures to be implemented by storage type
@@ -36,8 +40,9 @@ func NewStorage(storageType StorageType) (Storage, error) {
 	case JSON:
 		// initialize json memory storage
 		storage, err = NewJSONStorage(jsonStorageLocation)
-	case Database:
-		// initialize database storage here
+	case Mongo:
+		// initialize database storage
+		storage, err = NewMongoStorage()
 	}
 
 	return storage, err

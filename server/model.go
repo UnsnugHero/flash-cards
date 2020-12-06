@@ -1,5 +1,9 @@
 package main
 
+//
+// INCOMING REQUEST MODELS
+//
+
 // Card Model
 type Card struct {
 	ID       int    `json:"id"`
@@ -23,3 +27,7 @@ type Category struct {
 	Name            string `json:"name"`
 	AssociatedDecks int    `json:"associatedDecks"`
 }
+
+//
+// DATABASE MODELS
+//

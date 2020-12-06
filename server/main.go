@@ -15,10 +15,11 @@ func main() {
 
 	// declare our storage
 	// for now, using json to store, later mongo
-	storage, err = NewStorage(JSON)
+	storage, err = NewStorage(Mongo)
 
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
 	// declare our router. Default() returns a new Engine instance. As opposed to using New(),
