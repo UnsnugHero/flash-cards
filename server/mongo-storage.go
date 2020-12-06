@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -81,7 +82,7 @@ func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
 	newDeck.ID = rand.Int()
 
 	// get database collection
-	collection := getDatabase(storage).Collection(CollectionDeck)
+	collection := getCollection(storage, CollectionDeck)
 
 	insertResult, err := collection.InsertOne(context.TODO(), newDeck)
 
@@ -102,12 +103,40 @@ func (storage *MongoStorage) FindDeck(deckID int) (Deck, error) {
 // FindDecks retrieves all decks matching search query in payload
 // TODO: though for now, it will just get them ALL, so empty arguments
 func (storage *MongoStorage) FindDecks() ([]Deck, error) {
-	return nil, nil
+	var decks []Deck
+
+	// get our necessary collection
+	collection := getCollection(storage, CollectionDeck)
+
+	// here we pass bson.D{} to search all, ideally later on
+	// it will be whatever filter we need and defaults to bson.D{}
+	// if there is no filter specified
+	records, err := collection.Find(context.TODO(), bson.D{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	// the return value is of type Cursor, which contains the BSON bytes
+	// of the retrieves document, we need to decode it to send back on response
+	for records.Next(context.TODO()) {
+		var deck Deck
+		err = records.Decode(&deck)
+
+		if err != nil {
+			log.Fatal("Error decoding decument", err)
+			return nil, err
+		}
+
+		decks = append(decks, deck)
+	}
+
+	return decks, nil
 }
 
-// gets which database to use from cluster
-// hardcoded to flashcard db for now, dont think
+// gets which collection to use from database
+// hardcoded db in cluster for now, dont think
 // itll be using any others
-func getDatabase(storage *MongoStorage) *mongo.Database {
-	return storage.db.Database(DatabaseFlashCards)
+func getCollection(storage *MongoStorage, collection string) *mongo.Collection {
+	return storage.db.Database(DatabaseFlashCards).Collection(collection)
 }
