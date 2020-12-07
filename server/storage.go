@@ -22,7 +22,7 @@ const (
 type Storage interface {
 	// Deck actions
 	StoreDeck(newDeck Deck) error
-	FindDeck(deckID int) (Deck, error)
+	FindDeck(deckID string) (Deck, error)
 	FindDecks() ([]Deck, error)
 
 	// Card Actions
@@ -39,7 +39,7 @@ func NewStorage(storageType StorageType) (Storage, error) {
 	switch storageType {
 	case JSON:
 		// initialize json memory storage
-		storage, err = NewJSONStorage(jsonStorageLocation)
+		// storage, err = NewJSONStorage(jsonStorageLocation)
 	case Mongo:
 		// initialize database storage
 		storage, err = NewMongoStorage()

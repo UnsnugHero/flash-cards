@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -57,12 +56,12 @@ func AddDeck(ctx *gin.Context) {
 // GetDeck gets a single deck by its ID
 func GetDeck(ctx *gin.Context) {
 	// get deck id via path param
-	deckID, err := strconv.Atoi(ctx.Param("id"))
+	deckID := ctx.Param("id")
 
 	// handle bad ID request error
-	if err != nil {
+	if deckID == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": fmt.Sprintf("%s is not a valid Deck ID, it must be a number.", ctx.Param("id")),
+			"message": fmt.Sprintf("Request does not contain a deck ID!"),
 		})
 		return
 	}
@@ -73,7 +72,7 @@ func GetDeck(ctx *gin.Context) {
 	// error retrieving deck from storage\
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"message": fmt.Sprintf("Error retrieving deck with id %d from storage", deckID),
+			"message": fmt.Sprintf("Error retrieving deck with id %s from storage: %s", deckID, err),
 		})
 		return
 	}

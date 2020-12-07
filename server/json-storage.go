@@ -49,11 +49,11 @@ func (storage *JSONStorage) StoreDeck(newDeck Deck) error {
 	}
 
 	// TODO: come up with id assignment solution when implementing delete
-	newDeck.ID = len(allDecks) + 1
+	// newDeck.ID = len(allDecks) + 1
 
-	if err := storage.db.Write(CollectionDeck, strconv.Itoa(newDeck.ID), newDeck); err != nil {
-		return err
-	}
+	// if err := storage.db.Write(CollectionDeck, strconv.Itoa(newDeck.ID), newDeck); err != nil {
+	// 	return err
+	// }
 
 	return nil
 }

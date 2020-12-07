@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"math/rand"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -76,11 +76,6 @@ func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
 	// 	}
 	// }
 
-	// Come up with better solution when delete implemented
-	// TODO: fix when implementing FindDecks
-	// newDeck.ID = len(allDecks) + 1
-	newDeck.ID = rand.Int()
-
 	// get database collection
 	collection := getCollection(storage, CollectionDeck)
 
@@ -96,8 +91,21 @@ func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
 }
 
 // FindDeck retrieves a deck by ID
-func (storage *MongoStorage) FindDeck(deckID int) (Deck, error) {
-	return Deck{}, nil
+func (storage *MongoStorage) FindDeck(deckID string) (Deck, error) {
+
+	deck := Deck{}
+
+	collection := getCollection(storage, CollectionDeck)
+
+	// find by mongo assigned object id
+	objID, _ := primitive.ObjectIDFromHex(deckID)
+	cursorDeck := collection.FindOne(context.TODO(), bson.M{"_id": objID})
+
+	// attempt decode
+	err := cursorDeck.Decode(&deck)
+	deck.ID = deckID
+
+	return deck, err
 }
 
 // FindDecks retrieves all decks matching search query in payload
