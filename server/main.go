@@ -33,6 +33,7 @@ func main() {
 	// Card routes
 
 	// Category routes
+	router.GET("/categories/:id", GetCategory)
 	router.POST("/categories", AddCategory)
 
 	// listen and serve on port 8080 default

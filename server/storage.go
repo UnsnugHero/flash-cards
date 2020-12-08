@@ -22,7 +22,7 @@ const (
 // Storage declares method signatures to be implemented by storage type
 type Storage interface {
 	// Deck actions
-	StoreDeck(newDeck Deck) error
+	StoreDeck(newDeck *Deck) (string, error)
 	FindDeck(deckID string) (Deck, error)
 	FindDecks() ([]Deck, error)
 
@@ -30,7 +30,7 @@ type Storage interface {
 
 	// Category Actions
 	StoreCategory(newCategory *Category) (string, error)
-	// FindCategory(categoryID string) (Category, error)
+	FindCategory(categoryID string) (Category, error)
 	// FindCategories() ([]Category, error)
 }
 

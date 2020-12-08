@@ -36,7 +36,7 @@ func AddDeck(ctx *gin.Context) {
 	}
 
 	// good request, try saving in storage
-	err = storage.StoreDeck(newDeck)
+	objectID, err := storage.StoreDeck(&newDeck)
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
@@ -44,6 +44,9 @@ func AddDeck(ctx *gin.Context) {
 		})
 		return
 	}
+
+	// attach ID onto response object
+	newDeck.ID = objectID
 
 	// Send response back of inserted data
 	ctx.JSON(http.StatusOK, newDeck)
@@ -143,7 +146,38 @@ func AddCategory(ctx *gin.Context) {
 
 	newCategory.ID = objectID
 
+	ctx.JSON(http.StatusOK, newCategory)
+}
+
+// GetCategory retrieves a single category by ID from the database
+// TODO: obviously alot of repeated code here, maybe could make a function that is a base Get function template
+// and you pass in a string of type you are getting and maybe storage function?
+func GetCategory(ctx *gin.Context) {
+	// get category id via path param
+	categoryID := ctx.Param("id")
+
+	// handle bad ID request error
+	if categoryID == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Request does not contain a category ID!"),
+		})
+		return
+	}
+
+	// retrieve category from DB via ID
+	category, err := storage.FindCategory(categoryID)
+
+	// error retrieving category from storage\
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error retrieving category with id %s from storage: %s", categoryID, err),
+		})
+		return
+	}
+
+	// return deck data as JSON
 	ctx.JSON(http.StatusOK, gin.H{
-		"data": newCategory,
+		"data":    category,
+		"message": "Category retrieved!",
 	})
 }

@@ -66,32 +66,33 @@ func NewMongoStorage() (*MongoStorage, error) {
 //
 
 // StoreDeck stores a new deck into the database
-func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
+func (storage *MongoStorage) StoreDeck(newDeck *Deck) (string, error) {
 	// check storage to see if a deck with this title already exists
 	allDecks, err := storage.FindDecks()
 
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	for _, deck := range allDecks {
 		if newDeck.Title == deck.Title {
-			return fmt.Errorf("A decks with this title already exists")
+			return "", fmt.Errorf("A decks with this title already exists")
 		}
 	}
 
 	// get database collection
 	collection := getCollection(storage, CollectionDeck)
 
-	insertResult, err := collection.InsertOne(context.TODO(), newDeck)
+	insertResult, err := collection.InsertOne(context.TODO(), *newDeck)
 
 	if err != nil {
-		return fmt.Errorf("Error inserting deck into the database")
+		return "", fmt.Errorf("Error inserting deck into the database")
 	}
 
-	fmt.Println(insertResult)
+	// get the object id of the item inserted into the database
+	oid := insertResult.InsertedID.(primitive.ObjectID)
 
-	return nil
+	return oid.Hex(), nil
 }
 
 // FindDeck retrieves a deck by ID
@@ -171,6 +172,30 @@ func (storage *MongoStorage) StoreCategory(newCategory *Category) (string, error
 
 	return oid.Hex(), nil
 }
+
+// FindCategory finds a category by ID
+func (storage *MongoStorage) FindCategory(categoryID string) (Category, error) {
+
+	// declare a new category to populate
+	category := Category{}
+
+	// get our collection
+	collection := getCollection(storage, CollectionCategory)
+
+	// get a mongo compatible id
+	objID, _ := primitive.ObjectIDFromHex(categoryID)
+	findResult := collection.FindOne(context.TODO(), bson.M{"_id": objID})
+
+	// attempt decode and store in category variable
+	err := findResult.Decode(&category)
+	category.ID = categoryID
+
+	return category, err
+}
+
+//
+// HELPERS
+//
 
 // gets which collection to use from database
 // hardcoded db in cluster for now, dont think
