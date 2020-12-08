@@ -61,6 +61,10 @@ func NewMongoStorage() (*MongoStorage, error) {
 	return storage, nil
 }
 
+//
+// DECK METHODS
+//
+
 // StoreDeck stores a new deck into the database
 func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
 	// check storage to see if a deck with this title already exists
@@ -140,6 +144,32 @@ func (storage *MongoStorage) FindDecks() ([]Deck, error) {
 	}
 
 	return decks, nil
+}
+
+//
+//  CARD METHODS
+//
+
+//
+// CATEGORY METHODS
+//
+
+// StoreCategory handles storing a new category into the database
+func (storage *MongoStorage) StoreCategory(newCategory *Category) (string, error) {
+	// TODO: implement find category to do a check to see if a category
+	// with this name already exists in the database as no duplicates allowed
+
+	collection := getCollection(storage, CollectionCategory)
+
+	insertResult, err := collection.InsertOne(context.TODO(), *newCategory)
+
+	if err != nil {
+		return "", fmt.Errorf("Error inserting category into the database")
+	}
+
+	oid := (insertResult.InsertedID.(primitive.ObjectID))
+
+	return oid.Hex(), nil
 }
 
 // gets which collection to use from database

@@ -30,6 +30,11 @@ func main() {
 	router.GET("/decks/:id", GetDeck)
 	router.POST("/decks", AddDeck)
 
+	// Card routes
+
+	// Category routes
+	router.POST("/categories", AddCategory)
+
 	// listen and serve on port 8080 default
 	router.Run()
 }

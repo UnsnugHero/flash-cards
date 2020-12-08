@@ -10,7 +10,8 @@ const (
 	DatabaseFlashCards = "flashcards"
 
 	// CollectionDeck identifier for Deck JSON key
-	CollectionDeck = "decks"
+	CollectionDeck     = "decks"
+	CollectionCategory = "categories"
 
 	// JSON StorageType def
 	JSON StorageType = iota
@@ -28,6 +29,9 @@ type Storage interface {
 	// Card Actions
 
 	// Category Actions
+	StoreCategory(newCategory *Category) (string, error)
+	// FindCategory(categoryID string) (Category, error)
+	// FindCategories() ([]Category, error)
 }
 
 // NewStorage takes in a storage type and returns a storage client instance of StorageType
