@@ -12,6 +12,11 @@
       [formCtrl]="searchForm.controls['sortBy']"
       [selectOptions]="searchSortSelectOptions"
     ></flash-select>
+    <flash-button
+      icon="add"
+      type="icon"
+      (onButtonClick)="onAddCategoryButtonClick()"
+    ></flash-button>
   </div>
   <div class="table-container">
     <flash-table

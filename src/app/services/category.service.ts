@@ -24,7 +24,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
-  public createCategory(payload): Observable<any> {
+  public addCategory(payload): Observable<any> {
     return of('');
   }
 

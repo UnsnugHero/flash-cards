@@ -15,6 +15,7 @@ import {
 } from './categories.constants';
 
 // dialogs
+import { AddCategoryDialog } from '@dialogs/add-category/add-category.dialog';
 import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
 
@@ -104,6 +105,24 @@ export class CategoriesPage {
         console.warn('Action unsupported. Oh No!!');
         break;
     }
+  }
+
+  public onAddCategoryButtonClick() {
+    this._dialogRef = this.dialog.open(AddCategoryDialog, {
+      disableClose: true,
+    });
+
+    const addCategorySubscription = this._dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result) => !!result),
+        tap((result) => console.log(`confirming add action: ${result}`)),
+        // TODO: Add Category call to backend with name input
+        mergeMap((result) => this.categoryService.addCategory(result))
+      )
+      .subscribe();
+
+    this._subscriptionManager.addSubscription(addCategorySubscription);
   }
 
   public onPaginate(pageEvent: PageEvent) {

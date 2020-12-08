@@ -41,6 +41,7 @@ import { FlashSelectComponent } from '@components/flash-select/flash-select.comp
 import { FlashTableComponent } from '@components/flash-table/flash-table.component';
 
 // Dialogs
+import { AddCategoryDialog } from '@dialogs/add-category/add-category.dialog';
 import { AddDeckDialog } from '@dialogs/add-deck/add-deck.dialog';
 import { ConfirmDialog } from '@dialogs/confirm/confirm.dialog';
 import { EditCategoryDialog } from '@dialogs/edit-category/edit-category.dialog';
@@ -75,6 +76,7 @@ import { DeckService } from '@services/deck.service';
     FlashTableComponent,
 
     // Dialogs
+    AddCategoryDialog,
     AddDeckDialog,
     ConfirmDialog,
     EditCategoryDialog,

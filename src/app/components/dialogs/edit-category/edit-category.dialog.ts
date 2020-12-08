@@ -3,12 +3,11 @@ import { FormControl } from '@ngneat/reactive-forms';
 import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { SNACKBAR_DURATION } from '@utilities/common.constants';
 
 interface EditDialogData {
   categoryName: string;
 }
-
-const SNACKBAR_DURATION: number = 5000;
 
 @Component({
   selector: 'edit-category-dialog',
