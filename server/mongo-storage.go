@@ -64,17 +64,17 @@ func NewMongoStorage() (*MongoStorage, error) {
 // StoreDeck stores a new deck into the database
 func (storage *MongoStorage) StoreDeck(newDeck Deck) error {
 	// check storage to see if a deck with this title already exists
-	// allDecks, err := storage.FindDecks()
+	allDecks, err := storage.FindDecks()
 
-	// if err != nil {
-	// 	return err
-	// }
+	if err != nil {
+		return err
+	}
 
-	// for _, deck := range allDecks {
-	// 	if newDeck.Title == deck.Title {
-	// 		return fmt.Errorf("A decks with this title already exists")
-	// 	}
-	// }
+	for _, deck := range allDecks {
+		if newDeck.Title == deck.Title {
+			return fmt.Errorf("A decks with this title already exists")
+		}
+	}
 
 	// get database collection
 	collection := getCollection(storage, CollectionDeck)

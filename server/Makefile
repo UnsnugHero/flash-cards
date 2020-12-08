@@ -1,2 +1,2 @@
 server:
-	go run main.go handlers.go model.go storage.go json-storage.go mongo-storage.go
+	go run main.go handlers.go model.go storage.go mongo-storage.go

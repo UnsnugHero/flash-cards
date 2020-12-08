@@ -14,7 +14,6 @@ func main() {
 	var err error
 
 	// declare our storage
-	// for now, using json to store, later mongo
 	storage, err = NewStorage(Mongo)
 
 	if err != nil {
