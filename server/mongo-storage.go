@@ -1,3 +1,6 @@
+// TODO: I see an opportunity in this file to write generic CRUD methods where you can just pass in
+// the data type you want (Deck, Category, etc ...) to save on all the repitition
+
 package main
 
 import (
@@ -191,6 +194,33 @@ func (storage *MongoStorage) FindCategory(categoryID string) (Category, error) {
 	category.ID = categoryID
 
 	return category, err
+}
+
+// FindCategories finds all categories, later support finding by a given filter
+func (storage *MongoStorage) FindCategories() ([]Category, error) {
+	var categories []Category
+
+	collection := getCollection(storage, CollectionCategory)
+
+	records, err := collection.Find(context.TODO(), bson.D{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	for records.Next(context.TODO()) {
+		var category Category
+		err = records.Decode(&category)
+
+		if err != nil {
+			log.Fatal("Error decoding decument", err)
+			return nil, err
+		}
+
+		categories = append(categories, category)
+	}
+
+	return categories, nil
 }
 
 //

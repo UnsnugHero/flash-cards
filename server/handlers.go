@@ -117,8 +117,12 @@ func AddCategory(ctx *gin.Context) {
 	// declare a new deck to bind body to
 	newCategory := Category{}
 
+	fmt.Println(newCategory)
+
 	// bind the request body to the Deck struct
 	err := ctx.Bind(&newCategory)
+
+	fmt.Println(newCategory)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -179,5 +183,22 @@ func GetCategory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"data":    category,
 		"message": "Category retrieved!",
+	})
+}
+
+// GetCategories retrieves all categories from database, in future to support searching by filter
+func GetCategories(ctx *gin.Context) {
+	categories, err := storage.FindCategories()
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error retrieving categories: %s.", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"records": categories,
+		"message": "Categories retrieved!",
 	})
 }

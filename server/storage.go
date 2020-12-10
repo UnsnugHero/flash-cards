@@ -9,8 +9,9 @@ const (
 	// DatabaseFlashCards identifier for Flash Cards db
 	DatabaseFlashCards = "flashcards"
 
-	// CollectionDeck identifier for Deck JSON key
-	CollectionDeck     = "decks"
+	// CollectionDeck identifier for Deck collection key
+	CollectionDeck = "decks"
+	// CollectionCategory identifier for Category collection key
 	CollectionCategory = "categories"
 
 	// JSON StorageType def
@@ -31,7 +32,7 @@ type Storage interface {
 	// Category Actions
 	StoreCategory(newCategory *Category) (string, error)
 	FindCategory(categoryID string) (Category, error)
-	// FindCategories() ([]Category, error)
+	FindCategories() ([]Category, error)
 }
 
 // NewStorage takes in a storage type and returns a storage client instance of StorageType

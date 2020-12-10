@@ -16,7 +16,7 @@ type Card struct {
 // Deck Model
 // ID is mongo assigned Object ID
 type Deck struct {
-	ID         string     `json:"id"`
+	ID         string     `json:"id,omitempty" bson:"_id,omitempty"`
 	Title      string     `json:"title"`
 	Cards      []Card     `json:"cards"`
 	Categories []Category `json:"categories"`
@@ -24,7 +24,7 @@ type Deck struct {
 
 // Category Model
 type Category struct {
-	ID              string `json:"id"`
+	ID              string `json:"id,omitempty" bson:"_id,omitempty"`
 	Name            string `json:"name"`
 	AssociatedDecks int    `json:"associatedDecks"`
 }
