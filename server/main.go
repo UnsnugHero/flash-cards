@@ -29,6 +29,7 @@ func main() {
 	router.GET("/decks/:id", GetDeck)
 	router.GET("/decks", GetDecks)
 	router.POST("/decks", AddDeck)
+	// router.DELETE("/decks/:id", DeleteDeck)
 
 	// Card routes
 
@@ -36,6 +37,7 @@ func main() {
 	router.GET("/categories/:id", GetCategory)
 	router.GET("/categories", GetCategories)
 	router.POST("/categories", AddCategory)
+	router.DELETE("/categories/:id", DeleteCategory)
 
 	// listen and serve on port 8080 default
 	router.Run()

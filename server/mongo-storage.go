@@ -223,6 +223,24 @@ func (storage *MongoStorage) FindCategories() ([]Category, error) {
 	return categories, nil
 }
 
+// EraseCategory storage method for deleting category from database
+func (storage *MongoStorage) EraseCategory(categoryID string) error {
+	// get our collection
+	collection := getCollection(storage, CollectionCategory)
+
+	// get a mongo compatible id
+	objID, _ := primitive.ObjectIDFromHex(categoryID)
+
+	// delete category matching ID
+	deleteResult, err := collection.DeleteOne(context.TODO(), bson.M{"_id": objID})
+
+	if deleteResult.DeletedCount == 0 {
+		err = fmt.Errorf("No category matched the given ID")
+	}
+
+	return err
+}
+
 //
 // HELPERS
 //

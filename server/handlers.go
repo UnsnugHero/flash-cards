@@ -117,12 +117,8 @@ func AddCategory(ctx *gin.Context) {
 	// declare a new deck to bind body to
 	newCategory := Category{}
 
-	fmt.Println(newCategory)
-
 	// bind the request body to the Deck struct
 	err := ctx.Bind(&newCategory)
-
-	fmt.Println(newCategory)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -200,5 +196,34 @@ func GetCategories(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"records": categories,
 		"message": "Categories retrieved!",
+	})
+}
+
+// DeleteCategory deletes a category from the database by ID
+func DeleteCategory(ctx *gin.Context) {
+
+	// get id from param
+	categoryID := ctx.Param("id")
+
+	// handle bad ID request error
+	if categoryID == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Request does not contain a category ID!"),
+		})
+		return
+	}
+
+	// try to delete category with id from db
+	err := storage.EraseCategory(categoryID)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Error deleting category: %s", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Category successfully deleted!",
 	})
 }
