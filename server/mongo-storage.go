@@ -15,6 +15,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+const (
+	// string constants
+	errorCheckingDuplicate = "Error checking if %s %s already exists"
+	errorDuplicateExists   = "A %s with this %s already exists"
+)
+
 // MongoStorage is a struct containing our mongo db client
 // and implements the Storage interface for storing data
 type MongoStorage struct {
@@ -71,21 +77,17 @@ func NewMongoStorage() (*MongoStorage, error) {
 
 // StoreDeck stores a new deck into the database
 func (storage *MongoStorage) StoreDeck(newDeck *Deck) (string, error) {
-	// check storage to see if a deck with this title already exists
-	allDecks, err := storage.FindDecks()
-
-	if err != nil {
-		return "", err
-	}
-
-	for _, deck := range allDecks {
-		if newDeck.Title == deck.Title {
-			return "", fmt.Errorf("A decks with this title already exists")
-		}
-	}
 
 	// get database collection
 	collection := getCollection(storage, CollectionDeck)
+
+	// check if deck with given name name already exists
+	if doesRecordExist, err := doesRecordExistByField(collection, "name", newDeck.Name); err != nil {
+		return "", fmt.Errorf(errorCheckingDuplicate, "deck", "name")
+	} else if doesRecordExist {
+		// category already exists
+		return "", fmt.Errorf(errorDuplicateExists, "deck", "name")
+	}
 
 	insertResult, err := collection.InsertOne(context.TODO(), *newDeck)
 
@@ -177,12 +179,18 @@ func (storage *MongoStorage) EraseDeck(deckID string) error {
 // CATEGORY METHODS
 //
 
-// StoreCategory handles storing a new category into the database
+// StoreCategory handles storing a new category into the database, returns id of stored category
 func (storage *MongoStorage) StoreCategory(newCategory *Category) (string, error) {
-	// TODO: implement find category to do a check to see if a category
-	// with this name already exists in the database as no duplicates allowed
 
 	collection := getCollection(storage, CollectionCategory)
+
+	// check if category with given name name already exists
+	if doesRecordExist, err := doesRecordExistByField(collection, "name", newCategory.Name); err != nil {
+		return "", fmt.Errorf("Error checking if category name already exists")
+	} else if doesRecordExist {
+		// category already exists
+		return "", fmt.Errorf("A category with this name already exists")
+	}
 
 	insertResult, err := collection.InsertOne(context.TODO(), *newCategory)
 

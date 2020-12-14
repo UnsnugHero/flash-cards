@@ -12,7 +12,7 @@ import (
 DECK HANDLERS
 ****************/
 
-// AddDeck adds a deck with title and optional categories
+// AddDeck adds a deck with name and optional categories
 func AddDeck(ctx *gin.Context) {
 
 	// declare a new deck to bind body to
@@ -27,10 +27,10 @@ func AddDeck(ctx *gin.Context) {
 		return
 	}
 
-	// check if missing title, as title is necessary.
-	if strings.TrimSpace(newDeck.Title) == "" {
+	// check if missing name, as name is necessary.
+	if strings.TrimSpace(newDeck.Name) == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "Deck title is a required field for adding a deck.",
+			"message": "Deck name is a required field for adding a deck.",
 		})
 		return
 	}

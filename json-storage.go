@@ -35,7 +35,7 @@ func NewJSONStorage(storageLocation string) (*JSONStorage, error) {
 
 // StoreDeck stores a new deck in storage
 func (storage *JSONStorage) StoreDeck(newDeck Deck) error {
-	// first, we should check in our storage if a deck with this title exists
+	// first, we should check in our storage if a deck with this name exists
 	allDecks, err := storage.FindDecks()
 
 	if err != nil {
@@ -43,8 +43,8 @@ func (storage *JSONStorage) StoreDeck(newDeck Deck) error {
 	}
 
 	for _, deck := range allDecks {
-		if newDeck.Title == deck.Title {
-			return fmt.Errorf("A deck with this title already exists")
+		if newDeck.Name == deck.Name {
+			return fmt.Errorf("A deck with this name already exists")
 		}
 	}
 
