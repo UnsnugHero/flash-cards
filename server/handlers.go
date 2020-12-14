@@ -52,6 +52,34 @@ func AddDeck(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, newDeck)
 }
 
+// DeleteDeck deletes deck by id
+func DeleteDeck(ctx *gin.Context) {
+
+	// get id from param
+	deckID := ctx.Param("id")
+
+	// check if id empty
+	if deckID == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Request does not contain a deck ID!"),
+		})
+		return
+	}
+
+	err := storage.EraseDeck(deckID)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Errordeleting deck: %s", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Deck successfully deleted!",
+	})
+}
+
 // GetDeck gets a single deck by its ID
 func GetDeck(ctx *gin.Context) {
 	// get deck id via path param
@@ -149,6 +177,35 @@ func AddCategory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, newCategory)
 }
 
+// DeleteCategory deletes a category from the database by ID
+func DeleteCategory(ctx *gin.Context) {
+
+	// get id from param
+	categoryID := ctx.Param("id")
+
+	// handle bad ID request error
+	if categoryID == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Request does not contain a category ID!"),
+		})
+		return
+	}
+
+	// try to delete category with id from db
+	err := storage.EraseCategory(categoryID)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": fmt.Sprintf("Error deleting category: %s", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Category successfully deleted!",
+	})
+}
+
 // GetCategory retrieves a single category by ID from the database
 // TODO: obviously alot of repeated code here, maybe could make a function that is a base Get function template
 // and you pass in a string of type you are getting and maybe storage function?
@@ -196,34 +253,5 @@ func GetCategories(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"records": categories,
 		"message": "Categories retrieved!",
-	})
-}
-
-// DeleteCategory deletes a category from the database by ID
-func DeleteCategory(ctx *gin.Context) {
-
-	// get id from param
-	categoryID := ctx.Param("id")
-
-	// handle bad ID request error
-	if categoryID == "" {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": fmt.Sprintf("Request does not contain a category ID!"),
-		})
-		return
-	}
-
-	// try to delete category with id from db
-	err := storage.EraseCategory(categoryID)
-
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": fmt.Sprintf("Error deleting category: %s", err),
-		})
-		return
-	}
-
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "Category successfully deleted!",
 	})
 }

@@ -150,6 +150,24 @@ func (storage *MongoStorage) FindDecks() ([]Deck, error) {
 	return decks, nil
 }
 
+// EraseDeck deletes a deck by id
+func (storage *MongoStorage) EraseDeck(deckID string) error {
+
+	//get collection
+	collection := getCollection(storage, CollectionDeck)
+
+	// get mongo compatible id
+	objID, _ := primitive.ObjectIDFromHex(deckID)
+
+	deleteResult, err := collection.DeleteOne(context.TODO(), bson.M{"_id": objID})
+
+	if deleteResult.DeletedCount == 0 {
+		err = fmt.Errorf("No deck matched the given ID")
+	}
+
+	return err
+}
+
 //
 //  CARD METHODS
 //
