@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"reflect"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -268,4 +269,39 @@ func (storage *MongoStorage) EraseCategory(categoryID string) error {
 // itll be using any others
 func getCollection(storage *MongoStorage, collection string) *mongo.Collection {
 	return storage.db.Database(DatabaseFlashCards).Collection(collection)
+}
+
+// checks if records in collection have a field with given string value
+func doesRecordExistByField(collection *mongo.Collection, fieldKey string, fieldValue string) (bool, error) {
+
+	records, err := collection.Find(context.TODO(), bson.D{})
+
+	if err != nil {
+		return false, err
+	}
+
+	for records.Next(context.TODO()) {
+
+		// primitive.D is an unordered representation of a BSON document. If order did matter here, we would use primitive.D which is ordered.
+		// this type is handled as a regular map when encoding and decoding
+		var record primitive.M
+		err = records.Decode(&record)
+
+		if err != nil {
+			log.Fatal("Error decoding document while checking for pre-existing field", err)
+			return false, err
+		}
+
+		// fieldValue must be type string, check if value at fieldKey in object is string, if its not, err out
+		if record[fieldKey] != nil && reflect.TypeOf(record[fieldKey]) != reflect.TypeOf(fieldValue) {
+			err = fmt.Errorf("Incompatible types detected while checking for pre-existing record using key: %s", fieldKey)
+			return false, err
+		}
+
+		if record[fieldKey] == fieldValue {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
