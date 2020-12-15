@@ -180,6 +180,42 @@ func (storage *MongoStorage) EraseDeck(deckID string) error {
 	return err
 }
 
+// AmendDeck updates a record with category in request given non-empty name and matching ID
+func (storage *MongoStorage) AmendDeck(updatedDeck *Deck) error {
+
+	// get collection
+	collection := getCollection(storage, CollectionDeck)
+
+	// get a mongo compatible id
+	objID, _ := primitive.ObjectIDFromHex(updatedDeck.ID)
+
+	// filter used to match a document. If filter matches no documents, the results will contain a MatchedCount of 0
+	// E represents a BSON element for a D. It is usually used inside a D.
+	filter := bson.D{primitive.E{Key: "_id", Value: objID}}
+
+	// set document update data
+	update := bson.D{{Key: "$set",
+		Value: bson.D{
+			{Key: "name", Value: updatedDeck.Name},
+			{Key: "cards", Value: updatedDeck.Cards},
+			{Key: "categories", Value: updatedDeck.Categories},
+		},
+	}}
+
+	// try updating the document with deck sent on request
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.MatchedCount == 0 {
+		err = fmt.Errorf(errorUpdatingNoMatch, "decks")
+	}
+
+	return err
+}
+
 //
 //  CARD METHODS
 //
@@ -200,8 +236,6 @@ func (storage *MongoStorage) StoreCategory(newCategory *Category) (string, error
 		// category already exists
 		return "", fmt.Errorf("A category with this name already exists")
 	}
-
-	fmt.Println(*newCategory)
 
 	insertResult, err := collection.InsertOne(context.TODO(), *newCategory)
 

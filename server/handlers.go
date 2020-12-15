@@ -27,6 +27,14 @@ func AddDeck(ctx *gin.Context) {
 		return
 	}
 
+	// make sure request does not include an ID
+	if strings.TrimSpace(newDeck.ID) != "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Add request should not include an ID",
+		})
+		return
+	}
+
 	// check if missing name, as name is necessary.
 	if strings.TrimSpace(newDeck.Name) == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -131,6 +139,44 @@ func GetDecks(ctx *gin.Context) {
 	})
 }
 
+// UpdateDeck handler for updating a deck
+func UpdateDeck(ctx *gin.Context) {
+	// declare a new deck to bind body to
+	updatedDeck := Deck{}
+
+	// bind the request body to the Deck struct
+	err := ctx.Bind(&updatedDeck)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error parsing request body",
+		})
+		return
+	}
+
+	if strings.TrimSpace(updatedDeck.Name) == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error: Name is required for updating a deck.",
+		})
+		return
+	}
+
+	// good request, attempt update
+	err = storage.AmendDeck(&updatedDeck)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error updating deck: %s", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"data":    updatedDeck,
+		"message": "Deck succesfully updated!",
+	})
+}
+
 /****************
 CARD HANDLERS
 ****************/
@@ -152,6 +198,12 @@ func AddCategory(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Error parsing request body",
 		})
+		return
+	}
+
+	// make sure request does not include an ID
+	if strings.TrimSpace(newCategory.ID) != "" {
+		ctx.JSON(http.StatusBadRequest, "Add request should not include an ID")
 		return
 	}
 
@@ -273,7 +325,7 @@ func UpdateCategory(ctx *gin.Context) {
 
 	if strings.TrimSpace(updatedCategory.Name) == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "Error: Name is required for new category.",
+			"message": "Add request should not include an ID",
 		})
 		return
 	}

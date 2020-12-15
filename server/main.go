@@ -29,6 +29,7 @@ func main() {
 	router.GET("/decks/:id", GetDeck)
 	router.GET("/decks", GetDecks)
 	router.POST("/decks", AddDeck)
+	router.PUT("/decks", UpdateDeck)
 	router.DELETE("/decks/:id", DeleteDeck)
 
 	// Card routes

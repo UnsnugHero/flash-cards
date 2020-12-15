@@ -27,6 +27,7 @@ type Storage interface {
 	FindDeck(deckID string) (Deck, error)
 	FindDecks() ([]Deck, error)
 	EraseDeck(deckID string) error
+	AmendDeck(updatedDeck *Deck) error
 
 	// Card Actions
 
