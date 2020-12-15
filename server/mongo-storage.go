@@ -1,6 +1,16 @@
 // TODO: I see an opportunity in this file to write generic CRUD methods where you can just pass in
 // the data type you want (Deck, Category, etc ...) to save on all the repitition
 
+/**
+
+ERROR CAES FOR UPDATE REQUEST
+
+name is empty
+id doesnt match a pre-existing one
+
+
+*/
+
 package main
 
 import (
@@ -19,6 +29,7 @@ const (
 	// string constants
 	errorCheckingDuplicate = "Error checking if %s %s already exists"
 	errorDuplicateExists   = "A %s with this %s already exists"
+	errorUpdatingNoMatch   = "No %s matched the ID in update query"
 )
 
 // MongoStorage is a struct containing our mongo db client
@@ -63,8 +74,6 @@ func NewMongoStorage() (*MongoStorage, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	// ping check?
 
 	storage.db = dbClient
 
@@ -192,6 +201,8 @@ func (storage *MongoStorage) StoreCategory(newCategory *Category) (string, error
 		return "", fmt.Errorf("A category with this name already exists")
 	}
 
+	fmt.Println(*newCategory)
+
 	insertResult, err := collection.InsertOne(context.TODO(), *newCategory)
 
 	if err != nil {
@@ -263,6 +274,41 @@ func (storage *MongoStorage) EraseCategory(categoryID string) error {
 
 	if deleteResult.DeletedCount == 0 {
 		err = fmt.Errorf("No category matched the given ID")
+	}
+
+	return err
+}
+
+// AmendCategory updates a record with category in request given non-empty name and matching ID
+func (storage *MongoStorage) AmendCategory(updatedCategory *Category) error {
+
+	// get collection
+	collection := getCollection(storage, CollectionCategory)
+
+	// get a mongo compatible id
+	objID, _ := primitive.ObjectIDFromHex(updatedCategory.ID)
+
+	// filter used to match a document. If filter matches no documents, the results will contain a MatchedCount of 0
+	// E represents a BSON element for a D. It is usually used inside a D.
+	filter := bson.D{primitive.E{Key: "_id", Value: objID}}
+
+	// set document update data
+	update := bson.D{{Key: "$set",
+		Value: bson.D{
+			{Key: "name", Value: updatedCategory.Name},
+			{Key: "associatedDecks", Value: updatedCategory.AssociatedDecks},
+		},
+	}}
+
+	// try updating the document with category sent on request
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
+		return err
+	}
+
+	if updateResult.MatchedCount == 0 {
+		err = fmt.Errorf(errorUpdatingNoMatch, "categories")
 	}
 
 	return err

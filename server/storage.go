@@ -35,6 +35,7 @@ type Storage interface {
 	FindCategory(categoryID string) (Category, error)
 	FindCategories() ([]Category, error)
 	EraseCategory(categoryID string) error
+	AmendCategory(updatedCategory *Category) error
 }
 
 // NewStorage takes in a storage type and returns a storage client instance of StorageType

@@ -37,6 +37,7 @@ func main() {
 	router.GET("/categories/:id", GetCategory)
 	router.GET("/categories", GetCategories)
 	router.POST("/categories", AddCategory)
+	router.PUT("/categories", UpdateCategory)
 	router.DELETE("/categories/:id", DeleteCategory)
 
 	// listen and serve on port 8080 default

@@ -142,10 +142,10 @@ CATEGORY HANDLERS
 // AddCategory is the handler for the AddCategory route that handles incoming add card request and adds new card to database
 func AddCategory(ctx *gin.Context) {
 
-	// declare a new deck to bind body to
+	// declare a new category to bind body to
 	newCategory := Category{}
 
-	// bind the request body to the Deck struct
+	// bind the request body to the Category struct
 	err := ctx.Bind(&newCategory)
 
 	if err != nil {
@@ -253,5 +253,43 @@ func GetCategories(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"records": categories,
 		"message": "Categories retrieved!",
+	})
+}
+
+// UpdateCategory updates a single catgory
+func UpdateCategory(ctx *gin.Context) {
+	// declare a new category to bind body to
+	updatedCategory := Category{}
+
+	// bind the request body to the Category struct
+	err := ctx.Bind(&updatedCategory)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error parsing request body",
+		})
+		return
+	}
+
+	if strings.TrimSpace(updatedCategory.Name) == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error: Name is required for new category.",
+		})
+		return
+	}
+
+	// good request, attempt update
+	err = storage.AmendCategory(&updatedCategory)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Error updating category: %s", err),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"data":    updatedCategory,
+		"message": "Category succesfully updated!",
 	})
 }
