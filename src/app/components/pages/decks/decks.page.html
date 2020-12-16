@@ -4,7 +4,6 @@
       <flash-input
         placeholder="Search"
         class="search-bar-item"
-        [clearable]="true"
         [formCtrl]="deckSearchForm.controls['name']"
       ></flash-input>
       <flash-autocomplete
@@ -36,7 +35,7 @@
           type="text"
           width="100%"
           [disableRipple]="true"
-          [text]="deck.title"
+          [text]="deck.name"
           (onButtonClick)="onDeckClick(deck.id)"
         >
         </flash-button>

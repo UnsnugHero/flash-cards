@@ -6,7 +6,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { SNACKBAR_DURATION } from '@utilities/common.constants';
 
 interface EditDialogData {
-  categoryName: string;
+  name: string;
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class EditCategoryDialog {
 
   ngOnInit() {
     this.editCategoryControl = new FormControl(
-      this.data.categoryName || '',
+      this.data.name || '',
       Validators.required
     );
   }

@@ -56,8 +56,8 @@ export class CategoryService {
         .pipe(catchError(handleError('getCategories', [])));
     }
     const mockCategories: Category[] = [
-      { id: 1, categoryName: 'mockCategory1', associatedDecks: 0 },
-      { id: 2, categoryName: 'mockCategory2', associatedDecks: 1 },
+      { id: 1, name: 'mockCategory1', associatedDecks: 0 },
+      { id: 2, name: 'mockCategory2', associatedDecks: 1 },
     ];
     return of(mockCategories);
   }

@@ -131,7 +131,7 @@ export class CategoriesPage {
 
   private _openEditCategoryDialog(category: Category) {
     this._dialogRef = this.dialog.open(EditCategoryDialog, {
-      data: { categoryName: category.categoryName },
+      data: { name: category.name },
       disableClose: true,
     });
 

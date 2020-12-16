@@ -33,7 +33,7 @@ export class AddDeckDialog {
 
   ngOnInit() {
     this.addDeckFormGroup = new FormGroup({
-      deckName: new FormControl(null, Validators.required),
+      name: new FormControl(null, Validators.required),
       categories: new FormControl(null),
     });
 
@@ -41,7 +41,7 @@ export class AddDeckDialog {
       map((categories: Category[]) => {
         return categories.map((category: Category) => {
           const autocompleteOption: AutocompleteOption = {
-            text: category.categoryName,
+            text: category.name,
             id: category.id,
           };
           return autocompleteOption;

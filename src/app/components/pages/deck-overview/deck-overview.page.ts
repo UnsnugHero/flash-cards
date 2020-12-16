@@ -52,7 +52,7 @@ export class DeckOverviewPage {
       .pipe(
         mergeMap((params) => {
           this.deckId = params.id;
-          return this.deckService.getDeck(parseInt(params.id));
+          return this.deckService.getDeck(params.id);
         }),
         tap((deck: Deck) => (this.deck = deck))
       )

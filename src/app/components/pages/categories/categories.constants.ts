@@ -19,14 +19,14 @@ export const TABLE_MENU_OPTIONS: MenuOption[] = [
 ];
 
 export const CATEGORY_SEARCH_SORT_MENU_OPTIONS: SelectOption[] = [
-  { text: 'Category Name (A - Z)', sortDir: 'ASC', value: 'categoryName' },
-  { text: 'Category Name (Z - A)', sortDir: 'DESC', value: 'categoryName' },
+  { text: 'Category Name (A - Z)', sortDir: 'ASC', value: 'name' },
+  { text: 'Category Name (Z - A)', sortDir: 'DESC', value: 'name' },
   { text: 'Associated Decks Asc', sortDir: 'ASC', value: 'associatedDecks' },
   { text: 'Associated Decks Desc', sortDir: 'DESC', value: 'associatedDecks' },
 ];
 
 export const DISPLAYED_COLUMNS: DisplayedColumn[] = [
-  { key: 'categoryName', columnHeader: 'Category Name', columnWidth: '45%' },
+  { key: 'name', columnHeader: 'Category Name', columnWidth: '45%' },
   {
     key: 'associatedDecks',
     columnHeader: 'Associated Decks',

@@ -9,7 +9,7 @@ export class FlashDeckComponent {
   // id of this deck to redirect to deck view
   @Input() deckId: number;
   // text displayed on the card
-  @Input() deckTitle: string;
+  @Input() deckName: string;
 
   // event emitter that emits deckId so decks view can handle url navigation
   @Output() onDeckClick = new EventEmitter<number>();
