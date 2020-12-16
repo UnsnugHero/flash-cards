@@ -117,9 +117,7 @@ func (storage *MongoStorage) FindDeck(deckID string) (Deck, error) {
 
 	collection := getCollection(storage, CollectionDeck)
 
-	// find by mongo assigned object id
-	objID, _ := primitive.ObjectIDFromHex(deckID)
-	cursorDeck := collection.FindOne(context.TODO(), bson.M{"_id": objID})
+	cursorDeck := getDocumentByID(collection, deckID)
 
 	// attempt decode
 	err := cursorDeck.Decode(&deck)
@@ -219,6 +217,11 @@ func (storage *MongoStorage) AmendDeck(updatedDeck *Deck) error {
 //
 //  CARD METHODS
 //
+
+// AddCardToDeck will update an existing decks card array, appending the new one
+func (storage *MongoStorage) AddCardToDeck(newCard *Card, deckID string) (string, error) {
+	return "", nil
+}
 
 //
 // CATEGORY METHODS
@@ -392,4 +395,13 @@ func doesRecordExistByField(collection *mongo.Collection, fieldKey string, field
 	}
 
 	return false, nil
+}
+
+// helper to get a document by id, returns cursor
+func getDocumentByID(collection *mongo.Collection, ID string) *mongo.SingleResult {
+	// find by mongo assigned object id
+	objID, _ := primitive.ObjectIDFromHex(ID)
+	cursorDeck := collection.FindOne(context.TODO(), bson.M{"_id": objID})
+
+	return cursorDeck
 }

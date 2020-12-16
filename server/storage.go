@@ -30,6 +30,10 @@ type Storage interface {
 	AmendDeck(updatedDeck *Deck) error
 
 	// Card Actions
+	AddCardToDeck(newCard *Card, deckID string) (string, error)
+	// AddCardsToDeck(newCards *[]Card, deckID string) error // should return anything else here?
+	// EraseCard(cardID string, deckID string) error
+	// AmendCard(updatedCard *Card, deckID string) error
 
 	// Category Actions
 	StoreCategory(newCategory *Category) (string, error)

@@ -6,11 +6,10 @@ package main
 
 // Card Model
 type Card struct {
-	ID       int    `json:"id"`
-	DeckID   int    `json:"deckId"`
-	Prompt   string `json:"prompt"`
-	Answer   string `json:"answer"`
-	Mnemonic string `json:"mnemonic"`
+	ID       string `json:"id" bson:"_id,omitempty"`
+	Prompt   string `json:"prompt" bson:"prompty"`
+	Answer   string `json:"answer" bson:"answer"`
+	Mnemonic string `json:"mnemonic" bson:"mnemonic"`
 }
 
 // Deck Model

@@ -33,6 +33,13 @@ func main() {
 	router.DELETE("/decks/:id", DeleteDeck)
 
 	// Card routes
+	// card routes will have the base /decks prepended
+	// as well as the deck id necessary as cards are
+	// associated to decks
+	router.POST("decks/:id/cards", AddCard)
+	router.POST("decks/:id/bulkAddCards", AddCards)
+	router.PUT("decks/:id/cards/:cardId", UpdateCard)
+	router.DELETE("decks/:id/cards", DeleteCard)
 
 	// Category routes
 	router.GET("/categories/:id", GetCategory)

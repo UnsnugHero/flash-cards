@@ -21,6 +21,10 @@ func AddDeck(ctx *gin.Context) {
 	// bind the request body to the Deck struct
 	err := ctx.Bind(&newDeck)
 
+	// set categories and cards as empty arrays since they wont be sent on this request anyway
+	newDeck.Categories = []Category{}
+	newDeck.Cards = []Card{}
+
 	// check for error
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, "Error while parsing new deck data: "+err.Error())
@@ -180,6 +184,62 @@ func UpdateDeck(ctx *gin.Context) {
 /****************
 CARD HANDLERS
 ****************/
+
+// AddCard adds a single card to a deck
+func AddCard(ctx *gin.Context) {
+
+	deckID := ctx.Param("id")
+
+	newCard := Card{}
+
+	err := ctx.Bind(&newCard)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error parsing request body",
+		})
+		return
+	}
+
+	// make sure request does not include an ID and ensure it has an answer + prompt
+	if strings.TrimSpace(newCard.ID) != "" {
+		ctx.JSON(http.StatusBadRequest, "Add request should not include an ID")
+		return
+	} else if strings.TrimSpace(newCard.Answer) == "" || strings.TrimSpace(newCard.Prompt) == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Error: Answer and/or Prompt are required for new card",
+		})
+		return
+	}
+
+	objID, err := storage.AddCardToDeck(&newCard, deckID)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Errorf("Error adding new card: %s", err),
+		})
+		return
+	}
+
+	newCard.ID = objID
+
+	ctx.JSON(http.StatusOK, newCard)
+}
+
+// AddCards adds a bulk number of cards to a deck
+func AddCards(ctx *gin.Context) {
+
+}
+
+// UpdateCard updates a single card for a deck
+func UpdateCard(ctx *gin.Context) {
+
+}
+
+// DeleteCard deletes a single card for a deck
+func DeleteCard(ctx *gin.Context) {
+
+}
 
 /****************
 CATEGORY HANDLERS
