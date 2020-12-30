@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "run-server": "cd server/ && make server"
+    "go-server": "cd go-server/ && make server"
   },
   "private": true,
   "dependencies": {
