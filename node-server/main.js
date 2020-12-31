@@ -1,5 +1,9 @@
 // external imports
 const express = require('express')
+const bodyParser = require('body-parser')
+
+// internal imports
+const Deck = require('./models/deck')
 
 const PORT = process.env.PORT || 8080;
 
@@ -16,10 +20,21 @@ app.use((req, res, next) => {
   next()
 })
 
-// attach middleware function
-app.use('/neenis', (req, res, next) => {
-  res.send('Neenis Kareneenis');
-});
+// middleware for parsing request bodies
+// adds a field 'body; to 'req' objects
+app.use(bodyParser.json())
+
+// mock post endpoint for testing
+app.post('/mockpost', (req, res, next) => {
+  const deck = new Deck({
+    name: req.body.name
+  })
+
+  res.status(201).json({
+    message: 'Nice!!!',
+    data: deck
+  })
+})
 
 // set the port to listen on
 app.listen(PORT);
