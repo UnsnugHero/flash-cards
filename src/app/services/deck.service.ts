@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, pluck, tap } from 'rxjs/operators';
+import { catchError, map, pluck, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Card, Category, Deck } from '@models/deck.model';
@@ -34,9 +34,20 @@ export class DeckService {
   }
 
   public getDecks(): Observable<any> {
-    return this.http
-      .get<Deck[]>(this.decksUrl)
-      .pipe(pluck('records'), catchError(handleError('getDecks', [])));
+    return this.http.get<Deck[]>(this.decksUrl).pipe(
+      pluck('data'),
+      map((decks: any) => {
+        return decks.map((deck) => {
+          return {
+            name: deck.name,
+            cards: deck.cards,
+            categories: deck.categories,
+            id: deck._id,
+          };
+        });
+      }),
+      catchError(handleError('getDecks', []))
+    );
   }
 
   public bulkAddCards(deckId: number, cardsToAdd: Card[]): Observable<string> {
