@@ -41,17 +41,22 @@ async function GetDecks(req, res) {
 }
 
 // adds a single deck, does not expect anything on body besides the deck name
-function AddDeck(req, res) {
+async function AddDeck(req, res) {
   const deck = new Deck({
     name: req.body.name,
   });
 
-  deck.save();
-
-  res.status(201).json({
-    message: "Deck succesfully created",
-    data: deck,
-  });
+  try {
+    const deckCreated = await deck.save();
+    res.status(201).json({
+      message: "Deck succesfully created",
+      data: deckCreated,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error creating deck",
+    });
+  }
 }
 
 // deletes a deck by id

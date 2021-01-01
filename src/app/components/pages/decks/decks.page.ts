@@ -60,7 +60,12 @@ export class DecksPage {
           categories.map((category: Category) => category.name)
         )
       );
-    this.decks$ = this.deckService.getDecks();
+
+    this._subscriptionManager.addSubscription(
+      this.deckService.getDecks().subscribe()
+    );
+
+    this.decks$ = this.deckService.getDecksSubject();
   }
 
   public onAddDeckClick() {

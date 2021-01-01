@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, map, pluck, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -13,17 +13,35 @@ const SNACKBAR_DURATION: number = 5000;
   providedIn: 'root',
 })
 export class DeckService {
+  private decks: Deck[] = [];
+  private decks$ = new BehaviorSubject<Deck[]>(this.decks);
   private decksUrl: string = 'http://localhost:8080/decks';
 
   constructor(private http: HttpClient, private snackbar: MatSnackBar) {}
+
+  public getDecksSubject(): Observable<Deck[]> {
+    return this.decks$.asObservable();
+  }
 
   public addDeck(payload: {
     name: string;
     categories?: Category[];
   }): Observable<any> {
-    return this.http
-      .post(this.decksUrl, payload)
-      .pipe(catchError(handleError('addDeck', null)));
+    return this.http.post(this.decksUrl, payload).pipe(
+      pluck('data'),
+      map((deckCreated: any) => {
+        return {
+          id: deckCreated._id,
+          name: deckCreated.name,
+          categories: deckCreated.categories,
+          cards: deckCreated.cards,
+        };
+      }),
+      tap((deck: Deck) => {
+        this.decks$.next([...this.decks, deck]);
+      }),
+      catchError(handleError('addDeck', null))
+    );
   }
 
   // Gets a single deck by id
@@ -45,6 +63,10 @@ export class DeckService {
             id: deck._id,
           };
         });
+      }),
+      tap((decks) => {
+        this.decks = decks;
+        this.decks$.next(decks);
       }),
       catchError(handleError('getDecks', []))
     );
