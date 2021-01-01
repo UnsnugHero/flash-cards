@@ -78,7 +78,6 @@ export class DeckOverviewPage {
       return;
     }
     this.currentCardIndex++;
-    console.log(this.currentCardIndex);
   }
 
   // Card button handlers
@@ -86,7 +85,10 @@ export class DeckOverviewPage {
   public onActionClicked(action: string) {
     switch (action) {
       case 'deleteCurrentCard':
-        // TODO: get the id of the currently shown card
+        if (this.deck.cards.length === 0) {
+          // TODO: snackbar here saying no cards to delete
+          return;
+        }
         this._openDeleteCurrentCardDialog(1);
         break;
       case 'deleteDeck':
@@ -121,7 +123,9 @@ export class DeckOverviewPage {
       .pipe(
         filter((result) => !!result),
         mergeMap(() => this.deckService.deleteDeck(this.deckId)),
-        tap((result) => console.log(`delete deck backend result: ${result}`))
+        tap(() => {
+          this.router.navigateByUrl('/decks');
+        })
       )
       .subscribe();
 

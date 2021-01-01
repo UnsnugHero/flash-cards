@@ -4,6 +4,7 @@
       <button
         mat-icon-button
         class="flash-icon-button"
+        [disabled]="disabled"
         [matTooltip]="tooltip"
         [matTooltipClass]="constructTooltipClass()"
         (click)="handleButtonClick($event)"

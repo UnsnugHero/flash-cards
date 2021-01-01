@@ -10,24 +10,33 @@
     <div class="deck-cards-column">
       <!-- Here we want the card with buttons to go back and forth between cards underneath and icon buttons to the right -->
       <flash-card
+        *ngIf="deck.cards.length > 0; else noCardsPlaceholder"
         [answer]="deck.cards[currentCardIndex].answer"
         [prompt]="deck.cards[currentCardIndex].prompt"
         [showMnemonic]="showMnemonics"
       ></flash-card>
+      <ng-template #noCardsPlaceholder>
+        <div class="card-placeholder">
+          <span class="card-placeholder-text">Add cards!</span>
+        </div>
+      </ng-template>
       <div class="card-actions">
         <div class="card-paginator">
           <!-- disable this card if it is the first card of the deck, or cycle to the end of deck? -->
           <flash-button
             icon="west"
             type="icon"
+            [disabled]="deck.cards.length === 0"
             (onButtonClick)="onPaginateLeft()"
           ></flash-button>
           <span class="card-paginator__position-numbers">
-            {{ currentCardIndex + 1 }} of {{ deck.cards.length }}
+            {{ deck.cards.length === 0 ? 0 : currentCardIndex + 1 }} of {{
+            deck.cards.length }}
           </span>
           <flash-button
             icon="east"
             type="icon"
+            [disabled]="deck.cards.length === 0"
             (onButtonClick)="onPaginateRight()"
           ></flash-button>
         </div>
@@ -42,16 +51,19 @@
             icon="content_paste"
             tooltip="Test"
             type="icon"
+            [disabled]="deck.cards.length === 0"
           ></flash-button>
           <flash-button
             icon="visibility"
             tooltip="Show Mnemonics"
             type="icon"
+            [disabled]="deck.cards.length === 0"
           ></flash-button>
           <flash-button
             icon="edit"
             tooltip="Edit Card"
             type="icon"
+            [disabled]="deck.cards.length === 0"
           ></flash-button>
           <!-- TODO: get card id and put it in the method call there -->
           <flash-menu

@@ -102,15 +102,8 @@ export class DeckService {
   // maybe a deleteCards method for bulk deleting?
 
   public deleteDeck(deckId: number) {
-    return of('Deck Deleted!').pipe(
-      tap(() =>
-        this.snackbar.open('Deck Deleted!', 'Dismiss', {
-          duration: SNACKBAR_DURATION,
-        })
-      ),
-      catchError((error) => {
-        return of('error');
-      })
-    );
+    return this.http
+      .delete(`${this.decksUrl}/${deckId}`)
+      .pipe(catchError(handleError('deleteDeck', [])));
   }
 }
