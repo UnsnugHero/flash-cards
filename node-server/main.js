@@ -1,4 +1,5 @@
 // external imports
+const chalk = require("chalk");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,6 +10,8 @@ const DeckHandlers = require("./handlers/deck.handlers");
 // constants
 const PORT = process.env.PORT || 8080;
 
+console.log(chalk.yellow("\n---------[Starting server]---------\n"));
+
 // create the express app
 const app = express();
 
@@ -18,11 +21,15 @@ const uri =
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("Database connection established");
+    console.log(
+      chalk.green("---------[Database connection established]---------\n")
+    );
   })
   .catch(() => {
     // TODO: error handling here?
-    console.error("Error connecting to database");
+    console.error(
+      chalk.red("---------[Error connecting to database]---------\n")
+    );
   });
 
 // handle CORS policy
@@ -46,8 +53,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // DECK ROUTES
+app.get("/decks/:deckId", DeckHandlers.GetDeck);
 app.get("/decks", DeckHandlers.GetDecks);
 app.post("/decks", DeckHandlers.AddDeck);
+app.delete("/decks/:deckId", DeckHandlers.DeleteDeck);
 
 // CATEGORY ROUTES
 
