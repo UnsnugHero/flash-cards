@@ -56,6 +56,7 @@ app.use(bodyParser.json());
 app.get("/decks/:deckId", DeckHandlers.GetDeck);
 app.get("/decks", DeckHandlers.GetDecks);
 app.post("/decks", DeckHandlers.AddDeck);
+app.put("/decks", DeckHandlers.EditDeck);
 app.delete("/decks/:deckId", DeckHandlers.DeleteDeck);
 
 // CATEGORY ROUTES
