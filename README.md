@@ -8,4 +8,8 @@ Run `npm start` for the angular frontend dev server. Navigate to `http://localho
 
 ## Backend Development Server
 
-Run `npm start run-server` to run the go backend dev server. The server will be hosted on `http://localhost:8080/`
+There are two server, one I gave up on (the Go server) and a node server (WIP)
+
+Run `npm start node-server` to run the Node backend dev server. The server will be hosted on `http://localhost:8080/`
+
+Run `npm start run-server` to run the Go backend dev server. The server will be hosted on `http://localhost:8080/`
