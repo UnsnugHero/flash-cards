@@ -42,7 +42,7 @@ func getClient() (*mongo.Client, error) {
 
 	// configure database client to use our databse URI
 	// the cluster's name is practice with databases inside it
-	clientURI := "mongodb+srv://mjc578:phhpVUaYoQ5Yl2Du@practice.ah9yt.mongodb.net/flashcards?retryWrites=true&w=majority"
+	clientURI := ""
 	clientOptions := options.Client().ApplyURI(clientURI)
 	client, err := mongo.NewClient(clientOptions)
 
